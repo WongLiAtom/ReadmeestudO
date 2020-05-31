@@ -217,4 +217,121 @@ implements java.io.Serializable</pre>
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;ja
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="DateRangeUtils--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>DateRangeUtils</h4>
+<pre>public&nbsp;DateRangeUtils&#8203;()</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getDates-java.util.Date-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDates</h4>
+<pre>public static&nbsp;java.util.Collection&lt;java.util.Date&gt;&nbsp;getDates&#8203;(java.util.Date&nbsp;endDate,
+                                                            int&nbsp;days)</pre>
+<div class="block">Returns a collection of dates up to the end date starting at the inidicated
+ number of days from the end date</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>endDate</code> - End date</dd>
+<dd><code>days</code> - number of days in the result collection</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Collection of dates</dd>
+</dl>
+</li>
+</ul>
+<a name="getDateRange-java.util.List-java.util.Date-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDateRange</h4>
+<pre>public static&nbsp;<a href="../../../ch/pschatzmann/dates/DateRange.html" title="class in ch.pschatzmann.dates">DateRange</a>&nbsp;getDateRange&#8203;(java.util.List&lt;<a href="../../../ch/pschatzmann/dates/DateRange.html" title="class in ch.pschatzmann.dates">DateRange</a>&gt;&nbsp;dates,
+                                     java.util.Date&nbsp;date,
+                                     int&nbsp;offset)</pre>
+</li>
+</ul>
+<a name="getDateRange-java.util.Date-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDateRange</h4>
+<pre>public static&nbsp;<a href="../../../ch/pschatzmann/dates/DateRange.html" title="class in ch.pschatzmann.dates">DateRange</a>&nbsp;getDateRange&#8203;(java.util.Date&nbsp;date,
+                                     int&nbsp;offset)
+                              throws <a href="../../../ch/pschatzmann/stocks/errors/DateException.html" title="class in ch.pschatzmann.stocks.errors">DateException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../../ch/pschatzmann/stocks/errors/DateException.html" title="class in ch.pschatzmann.stocks.errors">DateException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getMonthlyDateRanges--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getMonthlyDateRanges</h4>
+<pre>public static&nbsp;java.util.List&lt;<a href="../../../ch/pschatzmann/dates/DateRange.html" title="class in ch.pschatzmann.dates">DateRange</a>&gt;&nbsp;getMonthlyDateRanges&#8203;()
+                                                      throws <a href="../../../ch/pschatzmann/stocks/errors/DateException.html" title="class in ch.pschatzmann.stocks.errors">DateException</a></pre>
+<div class="block">Returns a date range for each month up to today starting from 2007-01-01</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../../ch/pschatzmann/stocks/errors/DateException.html" title="class in ch.pschatzmann.stocks.errors">DateException</a></code></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<div class="bottomNav"><a name="navbar.bottom">
+<!--   -->
+</a>
+<div class="skipNav"><a href="#skip.navbar.bottom" title="Skip navigation links">Skip navigation links</a></div>
+<a name="navbar.bottom.firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/DateRangeUtils.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../inde
