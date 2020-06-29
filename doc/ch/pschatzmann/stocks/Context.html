@@ -237,4 +237,66 @@ implements java.io.Serializable</pre>
 <div class="block">Provides date ranges which are defined by the indicated start dates</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor"
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>static java.util.List&lt;<a href="../../../ch/pschatzmann/dates/DateRange.html" title="class in ch.pschatzmann.dates">DateRange</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#getDates--">getDates</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the supported periods</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>static java.util.Date</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#getDateWithOffsetDays-java.util.Date-int-">getDateWithOffsetDays</a></span>&#8203;(java.util.Date&nbsp;date,
+                     int&nbsp;offsetDays)</code></th>
+<td class="colLast">
+<div class="block">Determines the date starting from today adding the indicated number of days</div>
+</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>static java.util.Date</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#getDateWithOffsetMonths-java.util.Date-int-">getDateWithOffsetMonths</a></span>&#8203;(java.util.Date&nbsp;date,
+                       int&nbsp;offsetMonts)</code></th>
+<td class="colLast">
+<div class="block">Determines the date starting from today adding the indicated number of months</div>
+</td>
+</tr>
+<tr id="i12" class="altColor">
+<td class="colFirst"><code>static <a href="../../../ch/pschatzmann/stocks/input/IReader.html" title="interface in ch.pschatzmann.stocks.input">IReader</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#getDefaultReader--">getDefaultReader</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the default stock reader</div>
+</td>
+</tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>static java.util.Map&lt;java.lang.String,java.lang.Object&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#getMap-ch.pschatzmann.stocks.IStockID-ch.pschatzmann.stocks.parameters.State-">getMap</a></span>&#8203;(<a href="../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id,
+      <a href="../../../ch/pschatzmann/stocks/parameters/State.html" title="class in ch.pschatzmann.stocks.parameters">State</a>&nbsp;state)</code></th>
+<td class="colLast">
+<div class="block">Provides the state of the stock as map</div>
+</td>
+</tr>
+<tr id="i14" class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#getProperty-java.lang.String-">getProperty</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
+<td class="colLast">
+<div class="block">Determines a the value of a system property or environment property</div>
+</td>
+</tr>
+<tr id="i15" class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#getProperty-java.lang.String-java.lang.String-">getProperty</a></span>&#8203;(java.lang.String&nbsp;name,
+           java.lang.String&nbsp;defaultValue)</code></th>
+<td class="colLast">
+<div class="block">Determines a the value of a system property or environment property.</div>
+</td>
+</tr>
+<tr id="i16" class="altColor">
+<td class="colFirst"><code>static <a href="../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#getStockData-ch.pschatzmann.stocks.IStockID-">getStockData</a></span>&#8203;(<a href="../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</code></th>
+<td class="colLast">
+<div class="block">Returns the stock from the default reader (market archive)</div>
+</td>
+</tr>
+<tr id="i17" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a></code></td>
+<th class="co
