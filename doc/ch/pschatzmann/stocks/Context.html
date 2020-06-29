@@ -299,4 +299,70 @@ implements java.io.Serializable</pre>
 </tr>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a></code></td>
-<th class="co
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#getStockData-ch.pschatzmann.stocks.IStockID-ch.pschatzmann.stocks.input.IReader-">getStockData</a></span>&#8203;(<a href="../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id,
+            <a href="../../../ch/pschatzmann/stocks/input/IReader.html" title="interface in ch.pschatzmann.stocks.input">IReader</a>&nbsp;reader)</code></th>
+<td class="colLast">
+<div class="block">Returns the stock from the default reader (market archive)</div>
+</td>
+</tr>
+<tr id="i18" class="altColor">
+<td class="colFirst"><code>static <a href="../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#getStockData-java.lang.String-ch.pschatzmann.stocks.input.IReader-">getStockData</a></span>&#8203;(java.lang.String&nbsp;id,
+            <a href="../../../ch/pschatzmann/stocks/input/IReader.html" title="interface in ch.pschatzmann.stocks.input">IReader</a>&nbsp;r)</code></th>
+<td class="colLast">
+<div class="block">Load the stock data via the cache</div>
+</td>
+</tr>
+<tr id="i19" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#getStockData-java.lang.String-java.lang.String-">getStockData</a></span>&#8203;(java.lang.String&nbsp;symbol,
+            java.lang.String&nbsp;exchange)</code></th>
+<td class="colLast">
+<div class="block">Returns the stock from the default reader (market archive)</div>
+</td>
+</tr>
+<tr id="i20" class="altColor">
+<td class="colFirst"><code>static org.ta4j.core.Decimal</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#getValue-org.ta4j.core.Indicator-int-">getValue</a></span>&#8203;(org.ta4j.core.Indicator&nbsp;ind,
+        int&nbsp;index)</code></th>
+<td class="colLast">
+<div class="block">Determines a value from a Indicator.</div>
+</td>
+</tr>
+<tr id="i21" class="rowColor">
+<td class="colFirst"><code>static java.util.List</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#head-java.util.Collection-int-">head</a></span>&#8203;(java.util.Collection&nbsp;c,
+    int&nbsp;len)</code></th>
+<td class="colLast">
+<div class="block">Returns the head of a list</div>
+</td>
+</tr>
+<tr id="i22" class="altColor">
+<td class="colFirst"><code>static boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#isCachingActive--">isCachingActive</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Checks if caching is active</div>
+</td>
+</tr>
+<tr id="i23" class="rowColor">
+<td class="colFirst"><code>static boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#isEmpty-java.lang.String-">isEmpty</a></span>&#8203;(java.lang.String&nbsp;str)</code></th>
+<td class="colLast">
+<div class="block">Checks if a string is null or empty</div>
+</td>
+</tr>
+<tr id="i24" class="altColor">
+<td class="colFirst"><code>static void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#resetCache--">resetCache</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i25" class="rowColor">
+<td class="colFirst"><code>static void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#setCachingActive-boolean-">setCachingActive</a></span>&#8203;(boolean&nbsp;active)</code></th>
+<td class="colLast">
+<div class="block">Activate or deactivate caching</div>
+</td>
+</tr>
+<tr id="i26" class="altColor">
+<td class="colFirst"><code>static void</code></td>
+<th class="colSecond" scope="row"><c
