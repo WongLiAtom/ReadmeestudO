@@ -469,4 +469,115 @@ implements java.io.Serializable</pre>
 </dl>
 </li>
 </ul>
-<a name="getStockData-ch.pschatzmann.stocks.IStockID-ch.pschatzman
+<a name="getStockData-ch.pschatzmann.stocks.IStockID-ch.pschatzmann.stocks.input.IReader-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getStockData</h4>
+<pre>public static&nbsp;<a href="../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a>&nbsp;getStockData&#8203;(<a href="../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id,
+                                     <a href="../../../ch/pschatzmann/stocks/input/IReader.html" title="interface in ch.pschatzmann.stocks.input">IReader</a>&nbsp;reader)</pre>
+<div class="block">Returns the stock from the default reader (market archive)</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getStockData-java.lang.String-ch.pschatzmann.stocks.input.IReader-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getStockData</h4>
+<pre>public static&nbsp;<a href="../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a>&nbsp;getStockData&#8203;(java.lang.String&nbsp;id,
+                                     <a href="../../../ch/pschatzmann/stocks/input/IReader.html" title="interface in ch.pschatzmann.stocks.input">IReader</a>&nbsp;r)</pre>
+<div class="block">Load the stock data via the cache</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="date-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>date</h4>
+<pre>public static&nbsp;java.util.Date&nbsp;date&#8203;(java.lang.String&nbsp;str)</pre>
+</li>
+</ul>
+<a name="date-java.time.ZonedDateTime-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>date</h4>
+<pre>public static&nbsp;java.util.Date&nbsp;date&#8203;(java.time.ZonedDateTime&nbsp;date)</pre>
+</li>
+</ul>
+<a name="format-java.util.Date-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>format</h4>
+<pre>public static&nbsp;java.lang.String&nbsp;format&#8203;(java.util.Date&nbsp;date)</pre>
+</li>
+</ul>
+<a name="format-org.ta4j.core.Decimal-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>format</h4>
+<pre>public static&nbsp;java.lang.String&nbsp;format&#8203;(org.ta4j.core.Decimal&nbsp;d)</pre>
+</li>
+</ul>
+<a name="format-java.lang.Number-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>format</h4>
+<pre>public static&nbsp;java.lang.String&nbsp;format&#8203;(java.lang.Number&nbsp;d)</pre>
+</li>
+</ul>
+<a name="cashID--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>cashID</h4>
+<pre>public static&nbsp;<a href="../../../ch/pschatzmann/stocks/StockID.html" title="class in ch.pschatzmann.stocks">StockID</a>&nbsp;cashID&#8203;()</pre>
+</li>
+</ul>
+<a name="resetCache--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>resetCache</h4>
+<pre>public static&nbsp;void&nbsp;resetCache&#8203;()
+                       throws <a href="../../../ch/pschatzmann/stocks/errors/SystemException.html" title="class in ch.pschatzmann.stocks.errors">SystemException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../../ch/pschatzmann/stocks/errors/SystemException.html" title="class in ch.pschatzmann.stocks.errors">SystemException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getMap-ch.pschatzmann.stocks.IStockID-ch.pschatzmann.stocks.parameters.State-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMap</h4>
+<pre>public static&nbsp;java.util.Map&lt;java.lang.String,java.lang.Object&gt;&nbsp;getMap&#8203;(<a href="../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id,
+                                                                      <a href="../../../ch/pschatzmann/stocks/parameters/State.html" title="class in ch.pschatzmann.stocks.parameters">State</a>&nbsp;state)</pre>
+<div class="block">Provides the state of the stock as map</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id</code> - </dd>
