@@ -365,4 +365,108 @@ implements java.io.Serializable</pre>
 </tr>
 <tr id="i26" class="altColor">
 <td class="colFirst"><code>static void</code></td>
-<th class="colSecond" scope="row"><c
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#setDefaultReader-ch.pschatzmann.stocks.input.IReader-">setDefaultReader</a></span>&#8203;(<a href="../../../ch/pschatzmann/stocks/input/IReader.html" title="interface in ch.pschatzmann.stocks.input">IReader</a>&nbsp;defaultReader)</code></th>
+<td class="colLast">
+<div class="block">Defines the default stock reader</div>
+</td>
+</tr>
+<tr id="i27" class="rowColor">
+<td class="colFirst"><code>static java.util.List</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#tail-java.util.Collection-int-">tail</a></span>&#8203;(java.util.Collection&nbsp;c,
+    int&nbsp;len)</code></th>
+<td class="colLast">
+<div class="block">Returns the tail of a list</div>
+</td>
+</tr>
+<tr id="i28" class="altColor">
+<td class="colFirst"><code>static java.lang.Number</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#toDouble-org.ta4j.core.Decimal-">toDouble</a></span>&#8203;(org.ta4j.core.Decimal&nbsp;volume)</code></th>
+<td class="colLast">
+<div class="block">Converts a decimal to a Number</div>
+</td>
+</tr>
+<tr id="i29" class="rowColor">
+<td class="colFirst"><code>static java.util.List&lt;java.util.Map&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#toListOfMap-java.util.Collection-">toListOfMap</a></span>&#8203;(java.util.Collection&nbsp;c)</code></th>
+<td class="colLast">
+<div class="block">Converts a collection of object to a list of maps</div>
+</td>
+</tr>
+<tr id="i30" class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/Context.html#toString-java.lang.Object-">toString</a></span>&#8203;(java.lang.Object&nbsp;obj)</code></th>
+<td class="colLast">
+<div class="block">Converts an object to a string</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="Context--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>Context</h4>
+<pre>public&nbsp;Context&#8203;()</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getStockData-java.lang.String-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getStockData</h4>
+<pre>public static&nbsp;<a href="../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a>&nbsp;getStockData&#8203;(java.lang.String&nbsp;symbol,
+                                     java.lang.String&nbsp;exchange)</pre>
+<div class="block">Returns the stock from the default reader (market archive)</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getStockData-ch.pschatzmann.stocks.IStockID-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getStockData</h4>
+<pre>public static&nbsp;<a href="../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a>&nbsp;getStockData&#8203;(<a href="../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</pre>
+<div class="block">Returns the stock from the default reader (market archive)</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getStockData-ch.pschatzmann.stocks.IStockID-ch.pschatzman
