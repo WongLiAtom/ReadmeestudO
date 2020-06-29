@@ -581,3 +581,131 @@ implements java.io.Serializable</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>id</code> - </dd>
+<dd><code>state</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getDateFormat--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDateFormat</h4>
+<pre>public static&nbsp;java.text.SimpleDateFormat&nbsp;getDateFormat&#8203;()</pre>
+<div class="block">Returns a closed date format</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getDates--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDates</h4>
+<pre>public static&nbsp;java.util.List&lt;<a href="../../../ch/pschatzmann/dates/DateRange.html" title="class in ch.pschatzmann.dates">DateRange</a>&gt;&nbsp;getDates&#8203;()
+                                          throws <a href="../../../ch/pschatzmann/stocks/errors/DateException.html" title="class in ch.pschatzmann.stocks.errors">DateException</a></pre>
+<div class="block">Returns the supported periods</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../../ch/pschatzmann/stocks/errors/DateException.html" title="class in ch.pschatzmann.stocks.errors">DateException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getDateWithOffsetDays-java.util.Date-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDateWithOffsetDays</h4>
+<pre>public static&nbsp;java.util.Date&nbsp;getDateWithOffsetDays&#8203;(java.util.Date&nbsp;date,
+                                                   int&nbsp;offsetDays)</pre>
+<div class="block">Determines the date starting from today adding the indicated number of days</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>offsetDays</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getDateWithOffsetMonths-java.util.Date-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDateWithOffsetMonths</h4>
+<pre>public static&nbsp;java.util.Date&nbsp;getDateWithOffsetMonths&#8203;(java.util.Date&nbsp;date,
+                                                     int&nbsp;offsetMonts)</pre>
+<div class="block">Determines the date starting from today adding the indicated number of months</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>offsetMonts</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="setCachingActive-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setCachingActive</h4>
+<pre>public static&nbsp;void&nbsp;setCachingActive&#8203;(boolean&nbsp;active)</pre>
+<div class="block">Activate or deactivate caching</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>active</code> - </dd>
+</dl>
+</li>
+</ul>
+<a name="isCachingActive--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isCachingActive</h4>
+<pre>public static&nbsp;boolean&nbsp;isCachingActive&#8203;()</pre>
+<div class="block">Checks if caching is active</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getDefaultReader--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDefaultReader</h4>
+<pre>public static&nbsp;<a href="../../../ch/pschatzmann/stocks/input/IReader.html" title="interface in ch.pschatzmann.stocks.input">IReader</a>&nbsp;getDefaultReader&#8203;()</pre>
+<div class="block">Returns the default stock reader</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="setDefaultReader-ch.pschatzmann.stocks.input.IReader-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setDefaultReader</h4>
+<pre>public static&nbsp;void&nbsp;setDefaultReader&#8203;(<a href="../../../ch/pschatzmann/stocks/input/IReader.html" title="interface in ch.pschatzmann.stocks.input">IReader</a>&nbsp;defaultReader)</pre>
+<div class="block">Defines the default stock reader</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>defaultReader</code> - </dd>
+</dl>
+</li>
+</ul>
+<a name="isEmpty-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isEmpty</h4>
+<pre>public static&nbsp;boolean&nbsp;isEmpty&#8203;(java.lang.String&nbsp;str)</pre>
+<div class="block">Checks if a string is null or emp
