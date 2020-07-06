@@ -131,4 +131,96 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">IStockTarget</span></pre>
-<div class="block">Interface
+<div class="block">Interface to add stock data</div>
+<dl>
+<dt><span class="simpleTagLabel">Author:</span></dt>
+<dd>pschatzmann</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="memberSummary" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/IStockTarget.html#addRecord-ch.pschatzmann.stocks.IStockRecord-">addRecord</a></span>&#8203;(<a href="../../../ch/pschatzmann/stocks/IStockRecord.html" title="interface in ch.pschatzmann.stocks">IStockRecord</a>&nbsp;stockRecord)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../ch/pschatzmann/dates/DateRange.html" title="class in ch.pschatzmann.dates">DateRange</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/IStockTarget.html#getDateRange--">getDateRange</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/IStockTarget.html#getStockID--">getStockID</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../ch/pschatzmann/stocks/IStockRecord.html" title="interface in ch.pschatzmann.stocks">IStockRecord</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/IStockTarget.html#getValue--">getValue</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../../../ch/pschatzmann/stocks/IStockRecord.html" title="interface in ch.pschatzmann.stocks">IStockRecord</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../ch/pschatzmann/stocks/IStockTarget.html#getValue-java.util.Date-ch.pschatzmann.stocks.StockData.DateMatching-">getValue</a></span>&#8203;(java.util.Date&nbsp;date,
+        <a href="../../../ch/pschatzmann/stocks/StockData.DateMatching.html" title="enum in ch.pschatzmann.stocks">StockData.DateMatching</a>&nbsp;dateMatching)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getStockID--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getStockID</h4>
+<pre><a href="../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;getStockID&#8203;()</pre>
+</li>
+</ul>
+<a name="getDateRange--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDateRange</h4>
+<pre><a href="../../../ch/pschatzmann/dates/DateRange.html" title="class in ch.pschatzmann.dates">DateRange</a>&nbsp;getDateRange&#8203;()</pre>
+</li>
+</ul>
+<a name="getValue--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getValue</h4>
+<pre><a href="../../../ch/pschatzmann/stocks/IStockRecord.html" title="interface in ch.pschatzmann.stocks">IStockRecord</a>&nbsp;getValue&#8203;()</pre>
+</li>
+</ul>
+<a name="getValue-java.util.Date-ch.p
