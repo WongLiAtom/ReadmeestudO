@@ -211,4 +211,61 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span 
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#collectKPIValues-java.util.Collection-">collectKPIValues</a></span>&#8203;(java.util.Collection&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/kpi/KPIValue.html" title="class in ch.pschatzmann.stocks.accounting.kpi">KPIValue</a>&gt;&nbsp;result)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getAccount--">getAccount</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>java.util.Date</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getAccountCloseDate--">getAccountCloseDate</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the date up to which we allow trading</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getActualValue--">getActualValue</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the value of all available stocks valuated at the market price</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getActualValue-java.util.Date-ch.pschatzmann.stocks.IStockID-">getActualValue</a></span>&#8203;(java.util.Date&nbsp;date,
+              <a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getActualValueHistory--">getActualValueHistory</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the evolution of the actual value over time</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getActualValueHistory-ch.pschatzmann.stocks.IStockID-">getActualValueHistory</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</code></th>
+<td class="colLast">
+<div class="block">Returns the historic values for the indicated stock</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;java.util.Date&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getAllDates--">getAllDates</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Determines the all the dates on which the stock that we have aor had was
+ traded starting from the account opening date</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getCash--">getCash</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the amout of cash which is currently available</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
