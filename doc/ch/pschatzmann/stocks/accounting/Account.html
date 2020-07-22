@@ -134,4 +134,81 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKP
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollector.html" title="interface in ch.pschatzmann.stocks.accounting.kpi">IKPICollector</a></code>, <code>java.io.Serializable</code></dd>
+</dl>
+<hr>
+<br>
+<pre>public class <span class="typeNameLabel">Account</span>
+extends java.lang.Object
+implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollector.html" title="interface in ch.pschatzmann.stocks.accounting.kpi">IKPICollector</a>, <a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a>, java.io.Serializable</pre>
+<div class="block">Implementation of Account KPIs for any basic Account.</div>
+<dl>
+<dt><span class="simpleTagLabel">Author:</span></dt>
+<dd>pschatzmann</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../serialized-form.html#ch.pschatzmann.stocks.accounting.Account">Serialized Form</a></dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="memberSummary" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Constructor</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#Account--">Account</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">No Arg Constructor for Serialization</div>
+</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#Account-ch.pschatzmann.stocks.accounting.IBasicAccount-">Account</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a>&nbsp;account)</code></th>
+<td class="colLast">
+<div class="block">Create new Account based on IBasicAccount</div>
+</td>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#Account-java.lang.String-java.lang.String-java.lang.Double-java.util.Date-ch.pschatzmann.stocks.execution.fees.IFeesModel-">Account</a></span>&#8203;(java.lang.String&nbsp;id,
+       java.lang.String&nbsp;currency,
+       java.lang.Double&nbsp;cash,
+       java.util.Date&nbsp;openDate,
+       <a href="../../../../ch/pschatzmann/stocks/execution/fees/IFeesModel.html" title="interface in ch.pschatzmann.stocks.execution.fees">IFeesModel</a>&nbsp;fees)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="memberSummary" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#addTransaction-ch.pschatzmann.stocks.accounting.Transaction-">addTransaction</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/accounting/Transaction.html" title="class in ch.pschatzmann.stocks.accounting">Transaction</a>&nbsp;order)</code></th>
+<td class="colLast">
+<div class="block">Adds a new transaction for execution.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span 
