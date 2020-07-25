@@ -384,4 +384,62 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 </td>
 </tr>
 <tr id="i27" class="rowColor">
-<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/Portfolio.html" title="class in ch.pschatzmann.stocks.accounting">Portfolio</a>
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/Portfolio.html" title="class in ch.pschatzmann.stocks.accounting">Portfolio</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getPortfolioHistory--">getPortfolioHistory</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Gets the portfolio history over all dates</div>
+</td>
+</tr>
+<tr id="i28" class="altColor">
+<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/accounting/PortfolioStockInfo.html" title="class in ch.pschatzmann.stocks.accounting">PortfolioStockInfo</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getPortfolioStockInfo-ch.pschatzmann.stocks.IStockID-">getPortfolioStockInfo</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</code></th>
+<td class="colLast">
+<div class="block">Returns the current stock portfolio information of an indicated stock</div>
+</td>
+</tr>
+<tr id="i29" class="rowColor">
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/PortfolioStockInfo.html" title="class in ch.pschatzmann.stocks.accounting">PortfolioStockInfo</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getPortfolioStockInfoHistory-ch.pschatzmann.stocks.IStockID-">getPortfolioStockInfoHistory</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</code></th>
+<td class="colLast">
+<div class="block">Returns the portfolio history for a single stock</div>
+</td>
+</tr>
+<tr id="i30" class="altColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getPurchasedValue--">getPurchasedValue</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the value of all available stocks valuated at purchasing price</div>
+</td>
+</tr>
+<tr id="i31" class="rowColor">
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getPurchasedValueHistory--">getPurchasedValueHistory</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the evolution of the value (at purchased prices) and cash over time</div>
+</td>
+</tr>
+<tr id="i32" class="altColor">
+<td class="colFirst"><code>java.lang.Long</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getQuantity-ch.pschatzmann.stocks.IStockID-">getQuantity</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</code></th>
+<td class="colLast">
+<div class="block">Determines the quantity of the stocks which are in our possision for the
+ indicated stock id</div>
+</td>
+</tr>
+<tr id="i33" class="rowColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getRealizedGain--">getRealizedGain</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the realized gain.</div>
+</td>
+</tr>
+<tr id="i34" class="altColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getRiskFreeReturnInPercent--">getRiskFreeReturnInPercent</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the risk free return (in percent) which is used to calculate the
+ Sharp Ratio</div>
+</td>
+</tr>
+<tr id="i35" class="rowColor">
+<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.st
