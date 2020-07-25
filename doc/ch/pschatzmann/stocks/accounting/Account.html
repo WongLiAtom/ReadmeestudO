@@ -506,4 +506,64 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getTotalValue-java.util.Date-">getTotalValue</a></span>&#8203;(java.util.Date&nbsp;date)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i44" class="alt
+<tr id="i44" class="altColor">
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getTotalValueHistory--">getTotalValueHistory</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the evolution of the actual value over time</div>
+</td>
+</tr>
+<tr id="i45" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;java.util.Date&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getTradingDates--">getTradingDates</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Determines the list of all dates on which some stocks were traded on the
+ market and therefore there was a change in the valuation starting from the
+ opening date of the account</div>
+</td>
+</tr>
+<tr id="i46" class="altColor">
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/Portfolio.html" title="class in ch.pschatzmann.stocks.accounting">Portfolio</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getTradingPortfolioHistory--">getTradingPortfolioHistory</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the portfolio history for all transaction dates</div>
+</td>
+</tr>
+<tr id="i47" class="rowColor">
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/Transaction.html" title="class in ch.pschatzmann.stocks.accounting">Transaction</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getTransactions--">getTransactions</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns all orders</div>
+</td>
+</tr>
+<tr id="i48" class="altColor">
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/Transaction.html" title="class in ch.pschatzmann.stocks.accounting">Transaction</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getTransactions-ch.pschatzmann.stocks.IStockID-">getTransactions</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</code></th>
+<td class="colLast">
+<div class="block">Returns all orders related to the indicated stock</div>
+</td>
+</tr>
+<tr id="i49" class="rowColor">
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/Transaction.html" title="class in ch.pschatzmann.stocks.accounting">Transaction</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getTransactionsForDate-java.util.Date-">getTransactionsForDate</a></span>&#8203;(java.util.Date&nbsp;forDate)</code></th>
+<td class="colLast">
+<div class="block">Returns all transactions for the indicated date</div>
+</td>
+</tr>
+<tr id="i50" class="altColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getUnrealizedGain--">getUnrealizedGain</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the unrealized gains</div>
+</td>
+</tr>
+<tr id="i51" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#isMargin--">isMargin</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">If we support buys w/o having corresponging cash</div>
+</td>
+</tr>
+<tr id="i52" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><spa
