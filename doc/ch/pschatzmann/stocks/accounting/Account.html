@@ -327,4 +327,61 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 </tr>
 <tr id="i19" class="rowColor">
 <td class="colFirst"><code>java.lang.Double</code></td>
-<th class="colSecond" scope="row"><code><span class="me
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getKPIValue-ch.pschatzmann.stocks.accounting.kpi.KPI-">getKPIValue</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/accounting/kpi/KPI.html" title="enum in ch.pschatzmann.stocks.accounting.kpi">KPI</a>&nbsp;kpi)</code></th>
+<td class="colLast">
+<div class="block">Retrieves the requested KPI double value from the list</div>
+</td>
+</tr>
+<tr id="i20" class="altColor">
+<td class="colFirst"><code>java.lang.Double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getKPIValue-ch.pschatzmann.stocks.accounting.kpi.KPI-java.util.List-">getKPIValue</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/accounting/kpi/KPI.html" title="enum in ch.pschatzmann.stocks.accounting.kpi">KPI</a>&nbsp;kpi,
+           java.util.List&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/kpi/KPIValue.html" title="class in ch.pschatzmann.stocks.accounting.kpi">KPIValue</a>&gt;&nbsp;values)</code></th>
+<td class="colLast">
+<div class="block">Retrieves the requested KPI double value from the list</div>
+</td>
+</tr>
+<tr id="i21" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/kpi/KPIValue.html" title="class in ch.pschatzmann.stocks.accounting.kpi">KPIValue</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getKPIValues--">getKPIValues</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Determines all KPIs to evaluate the history of the account</div>
+</td>
+</tr>
+<tr id="i22" class="altColor">
+<td class="colFirst"><code>long</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getNumberOfTrades--">getNumberOfTrades</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Determines the total number of trades</div>
+</td>
+</tr>
+<tr id="i23" class="rowColor">
+<td class="colFirst"><code>java.util.Date</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getOpenDate--">getOpenDate</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Date on which the account was opened and from which we start the kpi
+ calculations</div>
+</td>
+</tr>
+<tr id="i24" class="altColor">
+<td class="colFirst"><code>java.util.Set&lt;java.util.Date&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getOrderDates--">getOrderDates</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns all dates on which we executed orders sorted ascending</div>
+</td>
+</tr>
+<tr id="i25" class="rowColor">
+<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/accounting/Portfolio.html" title="class in ch.pschatzmann.stocks.accounting">Portfolio</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getPortfolio--">getPortfolio</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the information on the portfolio which with the latest information</div>
+</td>
+</tr>
+<tr id="i26" class="altColor">
+<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/accounting/Portfolio.html" title="class in ch.pschatzmann.stocks.accounting">Portfolio</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getPortfolio-java.util.Date-">getPortfolio</a></span>&#8203;(java.util.Date&nbsp;forDate)</code></th>
+<td class="colLast">
+<div class="block">Returns the stock portfolio information which was valid at the indicated date</div>
+</td>
+</tr>
+<tr id="i27" class="rowColor">
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/Portfolio.html" title="class in ch.pschatzmann.stocks.accounting">Portfolio</a>
