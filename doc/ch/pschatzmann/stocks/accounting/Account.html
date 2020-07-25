@@ -442,4 +442,68 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 </td>
 </tr>
 <tr id="i35" class="rowColor">
-<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.st
+<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getStockData-ch.pschatzmann.stocks.IStockID-">getStockData</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id2)</code></th>
+<td class="colLast">
+<div class="block">Determines the cached StockData for the indicated StockIID.</div>
+</td>
+</tr>
+<tr id="i36" class="altColor">
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getStockHistoryReturns-ch.pschatzmann.stocks.StockID-double-">getStockHistoryReturns</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/StockID.html" title="class in ch.pschatzmann.stocks">StockID</a>&nbsp;id,
+                      double&nbsp;adjument)</code></th>
+<td class="colLast">
+<div class="block">Determines the history of the % returns for the indicated stock.</div>
+</td>
+</tr>
+<tr id="i37" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getStockIDs--">getStockIDs</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns a list of all stock ID which were traded via this account</div>
+</td>
+</tr>
+<tr id="i38" class="altColor">
+<td class="colFirst"><code>java.lang.Double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getStockPrice-ch.pschatzmann.stocks.IStockID-java.util.Date-">getStockPrice</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id2,
+             java.util.Date&nbsp;date)</code></th>
+<td class="colLast">
+<div class="block">Determines the stock price of the indicated stock at the indicated date.</div>
+</td>
+</tr>
+<tr id="i39" class="rowColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getTotalFees--">getTotalFees</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the total of all fees</div>
+</td>
+</tr>
+<tr id="i40" class="altColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getTotalProfit--">getTotalProfit</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the total profit</div>
+</td>
+</tr>
+<tr id="i41" class="rowColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getTotalPurchasedValue--">getTotalPurchasedValue</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the total of the values of the account ( stocks valuated at
+ purchasing price and cash)</div>
+</td>
+</tr>
+<tr id="i42" class="altColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getTotalValue--">getTotalValue</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the total value of the account (stocks valuated at the market price
+ and cash)</div>
+</td>
+</tr>
+<tr id="i43" class="rowColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#getTotalValue-java.util.Date-">getTotalValue</a></span>&#8203;(java.util.Date&nbsp;date)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i44" class="alt
