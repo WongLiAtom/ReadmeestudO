@@ -566,4 +566,96 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 </tr>
 <tr id="i52" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><spa
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#putReader-ch.pschatzmann.stocks.input.IReader-">putReader</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/input/IReader.html" title="interface in ch.pschatzmann.stocks.input">IReader</a>&nbsp;reader)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i53" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#putReader-ch.pschatzmann.stocks.StockID-ch.pschatzmann.stocks.input.IReader-">putReader</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/StockID.html" title="class in ch.pschatzmann.stocks">StockID</a>&nbsp;id,
+         <a href="../../../../ch/pschatzmann/stocks/input/IReader.html" title="interface in ch.pschatzmann.stocks.input">IReader</a>&nbsp;reader)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i54" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#putStockData-ch.pschatzmann.stocks.IStockData-">putStockData</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;sd)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i55" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#reset--">reset</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Deletes all transactions and restores the initial cash</div>
+</td>
+</tr>
+<tr id="i56" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/accounting/Account.html#setRiskFreeReturnInPercent-double-">setRiskFreeReturnInPercent</a></span>&#8203;(double&nbsp;riskFreeReturnInPercent)</code></th>
+<td class="colLast">
+<div class="block">Defines the risk free return (in percent) which is used to calculate the
+ Sharp Ratio</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="Account--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>Account</h4>
+<pre>public&nbsp;Account&#8203;()</pre>
+<div class="block">No Arg Constructor for Serialization</div>
+</li>
+</ul>
+<a name="Account-ch.pschatzmann.stocks.accounting.IBasicAccount-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>Account</h4>
+<pre>public&nbsp;Account&#8203;(<a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a>&nbsp;account)</pre>
+<div class="block">Create new Account based on IBasicAccount</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>account</code> - </dd>
+</dl>
+</li>
+</ul>
+<a name="Account-java.lang.String-java.lang.String-java.lang.Double-java.util.Date-ch.pschatzmann.stocks.execution.fees.IFeesModel-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>Account</h4>
+<pre>public&nbsp;Account&#8203;(java.lang.String&nbsp;id,
+               java.lang.String&nbsp;currency,
+               java.lang.Double&nbsp;cash,
+               java.util.Date&nbsp;openDate,
+               <a href="../../../../ch/pschatzmann/stocks/execution/fees/IFeesModel.html" title="interface in ch.pschatzmann.stocks.execution.fees">IFeesModel</a>&nbsp;fees)</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail
