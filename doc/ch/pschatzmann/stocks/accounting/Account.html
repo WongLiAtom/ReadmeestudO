@@ -658,4 +658,103 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 </ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
-<li class="blockList"><a name="method.detail
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getTransactions--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTransactions</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/Transaction.html" title="class in ch.pschatzmann.stocks.accounting">Transaction</a>&gt;&nbsp;getTransactions&#8203;()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#getTransactions--">IBasicAccount</a></code></span></div>
+<div class="block">Returns all orders</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#getTransactions--">getTransactions</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="collectKPIValues-java.util.Collection-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>collectKPIValues</h4>
+<pre>public&nbsp;void&nbsp;collectKPIValues&#8203;(java.util.Collection&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/kpi/KPIValue.html" title="class in ch.pschatzmann.stocks.accounting.kpi">KPIValue</a>&gt;&nbsp;result)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollector.html#collectKPIValues-java.util.Collection-">collectKPIValues</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollector.html" title="interface in ch.pschatzmann.stocks.accounting.kpi">IKPICollector</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getCash--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCash</h4>
+<pre>public&nbsp;double&nbsp;getCash&#8203;()</pre>
+<div class="block">Returns the amout of cash which is currently available</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#getCash--">getCash</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getCash-java.util.Date-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCash</h4>
+<pre>public&nbsp;double&nbsp;getCash&#8203;(java.util.Date&nbsp;date)</pre>
+<div class="block">Returns the amout of cash which is available at the indicated date</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#getCash-java.util.Date-">getCash</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>date</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getActualValue--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getActualValue</h4>
+<pre>public&nbsp;double&nbsp;getActualValue&#8203;()</pre>
+<div class="block">Returns the value of all available stocks valuated at the market price</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getPurchasedValue--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPurchasedValue</h4>
+<pre>public&nbsp;double&nbsp;getPurchasedValue&#8203;()</pre>
+<div class="block">Returns the value of all available stocks valuated at purchasing price</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getTotalValue--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTotalValue</h4>
+<pre>public&nbsp;double&nbsp;getTotalValue&#8203;()</pre>
+<div class="block">Returns the total value of the account (stocks valuated at the market price
+ and
