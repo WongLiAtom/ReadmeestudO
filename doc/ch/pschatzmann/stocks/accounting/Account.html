@@ -1267,4 +1267,89 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 <ul class="blockList">
 <li class="blockList">
 <h4>getActualValueHistory</h4>
-<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;&nbsp;getActualValueHist
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;&nbsp;getActualValueHistory&#8203;()</pre>
+<div class="block">Returns the evolution of the actual value over time</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getActualValueHistory-ch.pschatzmann.stocks.IStockID-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getActualValueHistory</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;&nbsp;getActualValueHistory&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</pre>
+<div class="block">Returns the historic values for the indicated stock</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getTotalValueHistory--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTotalValueHistory</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;&nbsp;getTotalValueHistory&#8203;()</pre>
+<div class="block">Returns the evolution of the actual value over time</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getPurchasedValueHistory--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPurchasedValueHistory</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;&nbsp;getPurchasedValueHistory&#8203;()</pre>
+<div class="block">Returns the evolution of the value (at purchased prices) and cash over time</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="addTransaction-ch.pschatzmann.stocks.accounting.Transaction-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>addTransaction</h4>
+<pre>public&nbsp;void&nbsp;addTransaction&#8203;(<a href="../../../../ch/pschatzmann/stocks/accounting/Transaction.html" title="class in ch.pschatzmann.stocks.accounting">Transaction</a>&nbsp;order)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#addTransaction-ch.pschatzmann.stocks.accounting.Transaction-">IBasicAccount</a></code></span></div>
+<div class="block">Adds a new transaction for execution.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#addTransaction-ch.pschatzmann.stocks.accounting.Transaction-">addTransaction</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getFeesModel--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFeesModel</h4>
+<pre>public&nbsp;<a href="../../../../ch/pschatzmann/stocks/execution/fees/IFeesModel.html" title="interface in ch.pschatzmann.stocks.execution.fees">IFeesModel</a>&nbsp;getFeesModel&#8203;()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#getFeesModel--">IBasicAccount</a></code></span></div>
+<div class="block">Returns the model to determine trading fees</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#getFeesModel--">getFeesModel</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getOpenDate--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getOpenDate</h4>
+<pre>public&nbsp;java.uti
