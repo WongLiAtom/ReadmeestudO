@@ -757,4 +757,134 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 <h4>getTotalValue</h4>
 <pre>public&nbsp;double&nbsp;getTotalValue&#8203;()</pre>
 <div class="block">Returns the total value of the account (stocks valuated at the market price
- and
+ and cash)</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getTotalPurchasedValue--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTotalPurchasedValue</h4>
+<pre>public&nbsp;double&nbsp;getTotalPurchasedValue&#8203;()</pre>
+<div class="block">Returns the total of the values of the account ( stocks valuated at
+ purchasing price and cash)</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getTotalFees--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTotalFees</h4>
+<pre>public&nbsp;double&nbsp;getTotalFees&#8203;()</pre>
+<div class="block">Returns the total of all fees</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getRealizedGain--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getRealizedGain</h4>
+<pre>public&nbsp;double&nbsp;getRealizedGain&#8203;()</pre>
+<div class="block">Returns the realized gain. We do not consider trading fees!</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getUnrealizedGain--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getUnrealizedGain</h4>
+<pre>public&nbsp;double&nbsp;getUnrealizedGain&#8203;()</pre>
+<div class="block">Returns the unrealized gains</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getTotalProfit--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTotalProfit</h4>
+<pre>public&nbsp;double&nbsp;getTotalProfit&#8203;()</pre>
+<div class="block">Returns the total profit</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getNumberOfTrades--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getNumberOfTrades</h4>
+<pre>public&nbsp;long&nbsp;getNumberOfTrades&#8203;()</pre>
+<div class="block">Determines the total number of trades</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getTradingPortfolioHistory--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTradingPortfolioHistory</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/Portfolio.html" title="class in ch.pschatzmann.stocks.accounting">Portfolio</a>&gt;&nbsp;getTradingPortfolioHistory&#8203;()</pre>
+<div class="block">Returns the portfolio history for all transaction dates</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getPortfolioHistory--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPortfolioHistory</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/Portfolio.html" title="class in ch.pschatzmann.stocks.accounting">Portfolio</a>&gt;&nbsp;getPortfolioHistory&#8203;()</pre>
+<div class="block">Gets the portfolio history over all dates</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getPortfolioStockInfoHistory-ch.pschatzmann.stocks.IStockID-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPortfolioStockInfoHistory</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/PortfolioStockInfo.html" title="class in ch.pschatzmann.stocks.accounting">PortfolioStockInfo</a>&gt;&nbsp;getPortfolioStockInfoHistory&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</pre>
+<div class="block">Returns the portfolio history for a single stock</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getStockHistoryReturns-ch.pschatzmann.stocks.StockID-double-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getStockHistoryReturns</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;&nbsp;getStockHistoryReturns&#8203;(<a href="../../
