@@ -1352,4 +1352,74 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 <ul class="blockList">
 <li class="blockList">
 <h4>getOpenDate</h4>
-<pre>public&nbsp;java.uti
+<pre>public&nbsp;java.util.Date&nbsp;getOpenDate&#8203;()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#getOpenDate--">IBasicAccount</a></code></span></div>
+<div class="block">Date on which the account was opened and from which we start the kpi
+ calculations</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#getOpenDate--">getOpenDate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getInitialCash--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getInitialCash</h4>
+<pre>public&nbsp;double&nbsp;getInitialCash&#8203;()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#getInitialCash--">IBasicAccount</a></code></span></div>
+<div class="block">Inital opening cash which will be available for trading</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#getInitialCash--">getInitialCash</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="isMargin--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isMargin</h4>
+<pre>public&nbsp;boolean&nbsp;isMargin&#8203;()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#isMargin--">IBasicAccount</a></code></span></div>
+<div class="block">If we support buys w/o having corresponging cash</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#isMargin--">isMargin</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="reset--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>reset</h4>
+<pre>public&nbsp;void&nbsp;reset&#8203;()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#reset--">IBasicAccount</a></code></span></div>
+<div class="block">Deletes all transactions and restores the initial cash</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#reset--">reset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getAccountCloseDate--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAccountCloseDate</h4>
+<pre>public&nbsp;java.util.Date&nbsp;getAccountCloseDate&#8203;()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#getAccountCloseDate--">IBasicAccount</a></code></span></div>
+<div class="block">Returns the date up to which we allow trading</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html#getAccountCloseDate--">getAccountCloseDate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a></code></dd>
+<dt><span class="returnLabel">Returns:
