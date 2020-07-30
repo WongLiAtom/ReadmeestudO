@@ -1071,4 +1071,110 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 <ul class="blockList">
 <li class="blockList">
 <h4>putReader</h4>
-<pre>public&nbsp;void&nbsp;
+<pre>public&nbsp;void&nbsp;putReader&#8203;(<a href="../../../../ch/pschatzmann/stocks/input/IReader.html" title="interface in ch.pschatzmann.stocks.input">IReader</a>&nbsp;reader)</pre>
+</li>
+</ul>
+<a name="getTradingDates--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTradingDates</h4>
+<pre>public&nbsp;java.util.List&lt;java.util.Date&gt;&nbsp;getTradingDates&#8203;()</pre>
+<div class="block">Determines the list of all dates on which some stocks were traded on the
+ market and therefore there was a change in the valuation starting from the
+ opening date of the account</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getDateRange--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDateRange</h4>
+<pre>public&nbsp;<a href="../../../../ch/pschatzmann/dates/DateRange.html" title="class in ch.pschatzmann.dates">DateRange</a>&nbsp;getDateRange&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#getDateRange--">getDateRange</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getStockIDs--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getStockIDs</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&gt;&nbsp;getStockIDs&#8203;()</pre>
+<div class="block">Returns a list of all stock ID which were traded via this account</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getRiskFreeReturnInPercent--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getRiskFreeReturnInPercent</h4>
+<pre>public&nbsp;double&nbsp;getRiskFreeReturnInPercent&#8203;()</pre>
+<div class="block">Returns the risk free return (in percent) which is used to calculate the
+ Sharp Ratio</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="setRiskFreeReturnInPercent-double-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setRiskFreeReturnInPercent</h4>
+<pre>public&nbsp;void&nbsp;setRiskFreeReturnInPercent&#8203;(double&nbsp;riskFreeReturnInPercent)</pre>
+<div class="block">Defines the risk free return (in percent) which is used to calculate the
+ Sharp Ratio</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>riskFreeReturnInPercent</code> - </dd>
+</dl>
+</li>
+</ul>
+<a name="getKPIValues--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getKPIValues</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/kpi/KPIValue.html" title="class in ch.pschatzmann.stocks.accounting.kpi">KPIValue</a>&gt;&nbsp;getKPIValues&#8203;()</pre>
+<div class="block">Determines all KPIs to evaluate the history of the account</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#getKPIValues--">getKPIValues</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getAccount--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAccount</h4>
+<pre>public&nbsp;<a href="../../../../ch/pschatzmann/stocks/accounting/IBasicAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IBasicAccount</a>&nbsp;getAccount&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#getAccount--">getAccount</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getKPIValue-ch.pschatzmann.stocks.accounting.kpi.KPI-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getKPIVal
