@@ -1177,4 +1177,94 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getKPIVal
+<h4>getKPIValue</h4>
+<pre>public&nbsp;java.lang.Double&nbsp;getKPIValue&#8203;(<a href="../../../../ch/pschatzmann/stocks/accounting/kpi/KPI.html" title="enum in ch.pschatzmann.stocks.accounting.kpi">KPI</a>&nbsp;kpi)</pre>
+<div class="block">Retrieves the requested KPI double value from the list</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>kpi</code> - </dd>
+<dd><code>values</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getKPIValue-ch.pschatzmann.stocks.accounting.kpi.KPI-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getKPIValue</h4>
+<pre>public&nbsp;java.lang.Double&nbsp;getKPIValue&#8203;(<a href="../../../../ch/pschatzmann/stocks/accounting/kpi/KPI.html" title="enum in ch.pschatzmann.stocks.accounting.kpi">KPI</a>&nbsp;kpi,
+                                    java.util.List&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/kpi/KPIValue.html" title="class in ch.pschatzmann.stocks.accounting.kpi">KPIValue</a>&gt;&nbsp;values)</pre>
+<div class="block">Retrieves the requested KPI double value from the list</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>kpi</code> - </dd>
+<dd><code>values</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getTransactions-ch.pschatzmann.stocks.IStockID-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTransactions</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/Transaction.html" title="class in ch.pschatzmann.stocks.accounting">Transaction</a>&gt;&nbsp;getTransactions&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</pre>
+<div class="block">Returns all orders related to the indicated stock</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#getTransactions-ch.pschatzmann.stocks.IStockID-">getTransactions</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getCashFlowHistory--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCashFlowHistory</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;&nbsp;getCashFlowHistory&#8203;()</pre>
+<div class="block">Returns the evolution of the available cash flow over time</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getCashHistory--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCashHistory</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;&nbsp;getCashHistory&#8203;()</pre>
+<div class="block">Gets the evolution of the cash total over time</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getCashHistoryForAllDates--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCashHistoryForAllDates</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;&nbsp;getCashHistoryForAllDates&#8203;()</pre>
+<div class="block">Gets the evaluation of the cash total for all dates</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getActualValueHistory--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getActualValueHistory</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;&nbsp;getActualValueHist
