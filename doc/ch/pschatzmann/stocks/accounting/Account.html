@@ -887,4 +887,101 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
 <ul class="blockList">
 <li class="blockList">
 <h4>getStockHistoryReturns</h4>
-<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;&nbsp;getStockHistoryReturns&#8203;(<a href="../../
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/IHistoricValue.html" title="interface in ch.pschatzmann.stocks.accounting">IHistoricValue</a>&gt;&nbsp;getStockHistoryReturns&#8203;(<a href="../../../../ch/pschatzmann/stocks/StockID.html" title="class in ch.pschatzmann.stocks">StockID</a>&nbsp;id,
+                                                                      double&nbsp;adjument)</pre>
+<div class="block">Determines the history of the % returns for the indicated stock. The return
+ includes the fees.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id</code> - </dd>
+<dd><code>adjument</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getPortfolio--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPortfolio</h4>
+<pre>public&nbsp;<a href="../../../../ch/pschatzmann/stocks/accounting/Portfolio.html" title="class in ch.pschatzmann.stocks.accounting">Portfolio</a>&nbsp;getPortfolio&#8203;()</pre>
+<div class="block">Returns the information on the portfolio which with the latest information</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getPortfolioStockInfo-ch.pschatzmann.stocks.IStockID-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPortfolioStockInfo</h4>
+<pre>public&nbsp;<a href="../../../../ch/pschatzmann/stocks/accounting/PortfolioStockInfo.html" title="class in ch.pschatzmann.stocks.accounting">PortfolioStockInfo</a>&nbsp;getPortfolioStockInfo&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</pre>
+<div class="block">Returns the current stock portfolio information of an indicated stock</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getPortfolio-java.util.Date-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPortfolio</h4>
+<pre>public&nbsp;<a href="../../../../ch/pschatzmann/stocks/accounting/Portfolio.html" title="class in ch.pschatzmann.stocks.accounting">Portfolio</a>&nbsp;getPortfolio&#8203;(java.util.Date&nbsp;forDate)</pre>
+<div class="block">Returns the stock portfolio information which was valid at the indicated date</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#getPortfolio-java.util.Date-">getPortfolio</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>forDate</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getOrderDates--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getOrderDates</h4>
+<pre>public&nbsp;java.util.Set&lt;java.util.Date&gt;&nbsp;getOrderDates&#8203;()</pre>
+<div class="block">Returns all dates on which we executed orders sorted ascending</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getTransactionsForDate-java.util.Date-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTransactionsForDate</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../ch/pschatzmann/stocks/accounting/Transaction.html" title="class in ch.pschatzmann.stocks.accounting">Transaction</a>&gt;&nbsp;getTransactionsForDate&#8203;(java.util.Date&nbsp;forDate)</pre>
+<div class="block">Returns all transactions for the indicated date</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>forDate</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getStockPrice-ch.pschatzmann.stocks.IStockID-java.util.Date-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getStockPrice</h4>
+<pre>public&nbsp;java.lang.Double&nbsp;getStockPrice&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id2,
+                                      java.util.Date&nbsp;date)</pre>
+<div class="block">Determines the stock price of the indicated stock at the indicated date. If
+ no date is available we provide the data at the latest available date before.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#getStockPri
