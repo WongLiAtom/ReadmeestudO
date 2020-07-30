@@ -984,4 +984,91 @@ implements <a href="../../../../ch/pschatzmann/stocks/accounting/kpi/IKPICollect
  no date is available we provide the data at the latest available date before.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#getStockPri
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#getStockPrice-ch.pschatzmann.stocks.IStockID-java.util.Date-">getStockPrice</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id2</code> - </dd>
+<dd><code>date</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getStockData-ch.pschatzmann.stocks.IStockID-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getStockData</h4>
+<pre>public&nbsp;<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;getStockData&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id2)</pre>
+<div class="block">Determines the cached StockData for the indicated StockIID. The data is
+ cached</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#getStockData-ch.pschatzmann.stocks.IStockID-">getStockData</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id2</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="putStockData-ch.pschatzmann.stocks.IStockData-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>putStockData</h4>
+<pre>public&nbsp;void&nbsp;putStockData&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;sd)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#putStockData-ch.pschatzmann.stocks.IStockData-">putStockData</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getQuantity-ch.pschatzmann.stocks.IStockID-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getQuantity</h4>
+<pre>public&nbsp;java.lang.Long&nbsp;getQuantity&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;id)</pre>
+<div class="block">Determines the quantity of the stocks which are in our possision for the
+ indicated stock id</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html#getQuantity-ch.pschatzmann.stocks.IStockID-">getQuantity</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getAllDates--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAllDates</h4>
+<pre>public&nbsp;java.util.List&lt;java.util.Date&gt;&nbsp;getAllDates&#8203;()</pre>
+<div class="block">Determines the all the dates on which the stock that we have aor had was
+ traded starting from the account opening date</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="putReader-ch.pschatzmann.stocks.StockID-ch.pschatzmann.stocks.input.IReader-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>putReader</h4>
+<pre>public&nbsp;void&nbsp;putReader&#8203;(<a href="../../../../ch/pschatzmann/stocks/StockID.html" title="class in ch.pschatzmann.stocks">StockID</a>&nbsp;id,
+                      <a href="../../../../ch/pschatzmann/stocks/input/IReader.html" title="interface in ch.pschatzmann.stocks.input">IReader</a>&nbsp;reader)</pre>
+</li>
+</ul>
+<a name="putReader-ch.pschatzmann.stocks.input.IReader-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>putReader</h4>
+<pre>public&nbsp;void&nbsp;
