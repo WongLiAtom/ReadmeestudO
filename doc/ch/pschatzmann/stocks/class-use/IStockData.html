@@ -363,4 +363,64 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a></code></td>
-<th class="colSecond" scope="row"><span class="typeNameLabel">IForecast.</span><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/forecasting/IForecast.html#forecast-ch.pschatzmann.stocks.IStockData-int-">forecast</a></span>&#8203;(<a href="../../../../ch/pschat
+<th class="colSecond" scope="row"><span class="typeNameLabel">IForecast.</span><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/forecasting/IForecast.html#forecast-ch.pschatzmann.stocks.IStockData-int-">forecast</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;stockData,
+        int&nbsp;numberOfForecasts)</code></th>
+<td class="colLast">
+<div class="block">Calculate the forecast for the indicated number of periods</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">IForecast.</span><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/forecasting/IForecast.html#forecast-ch.pschatzmann.stocks.IStockData-java.util.Date-">forecast</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;stockData,
+        java.util.Date&nbsp;endDate)</code></th>
+<td class="colLast">
+<div class="block">Calculate the forecast up to the end date</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="useSummary" summary="Use table, listing constructors, and an explanation">
+<caption><span>Constructors in <a href="../../../../ch/pschatzmann/stocks/forecasting/package-summary.html">ch.pschatzmann.stocks.forecasting</a> with parameters of type <a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Constructor</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/forecasting/ForecasterFromSimulationOnHistory.html#ForecasterFromSimulationOnHistory-java.util.Date-ch.pschatzmann.stocks.IStockData-">ForecasterFromSimulationOnHistory</a></span>&#8203;(java.util.Date&nbsp;referenceStartDate,
+                                 <a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;reference)</code></th>
+<td class="colLast">
+<div class="block">We use the indicated referenceValues (e.g an Index) starting from the start
+ Date</div>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li class="blockList"><a name="ch.pschatzmann.stocks.integration">
+<!--   -->
+</a>
+<h3>Uses of <a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a> in <a href="../../../../ch/pschatzmann/stocks/integration/package-summary.html">ch.pschatzmann.stocks.integration</a></h3>
+<table class="useSummary" summary="Use table, listing constructors, and an explanation">
+<caption><span>Constructors in <a href="../../../../ch/pschatzmann/stocks/integration/package-summary.html">ch.pschatzmann.stocks.integration</a> with parameters of type <a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Constructor</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTimeSeries.html#Ta4jTimeSeries-ch.pschatzmann.stocks.IStockData-">Ta4jTimeSeries</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;stockData)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTimeSeries.html#Ta4jTimeSeries-ch.pschatzmann.stocks.IStockData-ch.pschatzmann.dates.DateRange-">Ta4jTimeSeries</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;stockData,
+              <a href="../../../../ch/pschatzmann/dates/DateRange.html" title="class in ch.pschatzmann.dates">DateRange</a>&nbsp;dateRange)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li class="blockList"><a name="ch.pschatzmann.stocks.strategy">
+<!--   -->
+</a>
+<h3>Uses of <a href="../../../../ch/pschatz
