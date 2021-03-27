@@ -211,4 +211,117 @@ implements <a href="../../../../../ch/pschatzmann/stocks/data/universe/IUniverse
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../../ch/psch
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../../ch/pschatzmann/stocks/data/universe/MarketUniverse.html#toString--">toString</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="MarketUniverse--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>MarketUniverse</h4>
+<pre>public&nbsp;MarketUniverse&#8203;()</pre>
+</li>
+</ul>
+<a name="MarketUniverse-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>MarketUniverse</h4>
+<pre>public&nbsp;MarketUniverse&#8203;(java.lang.String&nbsp;exchangeRegex)
+               throws java.net.MalformedURLException</pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.net.MalformedURLException</code></dd>
+</dl>
+</li>
+</ul>
+<a name="MarketUniverse-java.lang.String-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>MarketUniverse</h4>
+<pre>public&nbsp;MarketUniverse&#8203;(java.lang.String&nbsp;exchangeRegex,
+                      java.lang.String&nbsp;tickerRegex)
+               throws java.net.MalformedURLException</pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.net.MalformedURLException</code></dd>
+</dl>
+</li>
+</ul>
+<a name="MarketUniverse-java.net.URL-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>MarketUniverse</h4>
+<pre>public&nbsp;MarketUniverse&#8203;(java.net.URL&nbsp;file)</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="stream--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>stream</h4>
+<pre>public&nbsp;java.util.stream.Stream&lt;<a href="../../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&gt;&nbsp;stream&#8203;()
+                                         throws <a href="../../../../../ch/pschatzmann/stocks/errors/UniverseException.html" title="class in ch.pschatzmann.stocks.errors">UniverseException</a></pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../ch/pschatzmann/stocks/data/universe/IUniverse.html#stream--">stream</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../ch/pschatzmann/stocks/data/universe/IUniverse.html" title="interface in ch.pschatzmann.stocks.data.universe">IUniverse</a></code></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../../../../ch/pschatzmann/stocks/errors/UniverseException.html" title="class in ch.pschatzmann.stocks.errors">UniverseException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="list--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>list</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&gt;&nbsp;list&#8203;()
+                              throws <a href="../../../../../ch/pschatzmann/stocks/errors/UniverseException.html" title="class in ch.pschatzmann.stocks.errors">UniverseException</a></pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../ch/pschatzmann/stocks/data/universe/IUniverse.html#list--">list</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../ch/pschatzmann/stocks/data/universe/IUniverse.html" title="interface in ch.pschatzmann.stocks.data.universe">IUniverse</a></code></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../../../../ch/pschatzmann/stocks/errors/UniverseException.html" title="class in ch.pschatzmann.stocks.errors">UniverseException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="toString--">
+<!--   -
