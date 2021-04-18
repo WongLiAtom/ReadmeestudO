@@ -175,4 +175,74 @@ implements java.io.Serializable</pre>
 </tr>
 <tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/execution/StrategyExecutor.html#StrategyExecutor-ch.pschatzmann.stocks.execution.ITrader-ch.pschatzmann.stocks.strategy.allocation.IAllocationStrategy-">StrategyExecutor</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/execution/ITrader.html" title="interface in ch.pschatzmann.stocks.execution">ITrader</a>&nbsp;trader,
-                <a href="../../../../ch/pschatzmann/stocks/strategy/all
+                <a href="../../../../ch/pschatzmann/stocks/strategy/allocation/IAllocationStrategy.html" title="interface in ch.pschatzmann.stocks.strategy.allocation">IAllocationStrategy</a>&nbsp;allocationStrategy)</code></th>
+<td class="colLast">
+<div class="block">Default constructor</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="memberSummary" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/execution/StrategyExecutor.html#addStrategy-ch.pschatzmann.stocks.strategy.ITradingStrategy-">addStrategy</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.html" title="interface in ch.pschatzmann.stocks.strategy">ITradingStrategy</a>&nbsp;strategy)</code></th>
+<td class="colLast">
+<div class="block">Adds a new trading strategy</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/execution/StrategyExecutor.html#addStrategy-java.util.Collection-">addStrategy</a></span>&#8203;(java.util.Collection&lt;<a href="../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.html" title="interface in ch.pschatzmann.stocks.strategy">ITradingStrategy</a>&gt;&nbsp;strategies)</code></th>
+<td class="colLast">
+<div class="block">Adds multiple strategies</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/execution/StrategyExecutor.html#getAccount--">getAccount</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>java.util.Collection&lt;<a href="../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.html" title="interface in ch.pschatzmann.stocks.strategy">ITradingStrategy</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/execution/StrategyExecutor.html#getTradingStrategies--">getTradingStrategies</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/execution/StrategyExecutor.html#isEmpty--">isEmpty</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/execution/StrategyExecutor.html#run-ch.pschatzmann.dates.DateRange-">run</a></span>&#8203;(<a href="../../../../ch/pschatzmann/dates/DateRange.html" title="class in ch.pschatzmann.dates">DateRange</a>&nbsp;period)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
