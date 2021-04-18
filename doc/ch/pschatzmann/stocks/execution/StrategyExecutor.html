@@ -246,3 +246,125 @@ implements java.io.Serializable</pre>
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="StrategyExecutor-ch.pschatzmann.stocks.execution.ITrader-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>StrategyExecutor</h4>
+<pre>public&nbsp;StrategyExecutor&#8203;(<a href="../../../../ch/pschatzmann/stocks/execution/ITrader.html" title="interface in ch.pschatzmann.stocks.execution">ITrader</a>&nbsp;trader)</pre>
+<div class="block">Simple Constructor</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>trader</code> - </dd>
+</dl>
+</li>
+</ul>
+<a name="StrategyExecutor-ch.pschatzmann.stocks.execution.ITrader-ch.pschatzmann.stocks.strategy.allocation.IAllocationStrategy-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>StrategyExecutor</h4>
+<pre>public&nbsp;StrategyExecutor&#8203;(<a href="../../../../ch/pschatzmann/stocks/execution/ITrader.html" title="interface in ch.pschatzmann.stocks.execution">ITrader</a>&nbsp;trader,
+                        <a href="../../../../ch/pschatzmann/stocks/strategy/allocation/IAllocationStrategy.html" title="interface in ch.pschatzmann.stocks.strategy.allocation">IAllocationStrategy</a>&nbsp;allocationStrategy)</pre>
+<div class="block">Default constructor</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>account</code> - </dd>
+<dd><code>allocationStrategy</code> - </dd>
+<dd><code>trader</code> - </dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="addStrategy-ch.pschatzmann.stocks.strategy.ITradingStrategy-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>addStrategy</h4>
+<pre>public&nbsp;void&nbsp;addStrategy&#8203;(<a href="../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.html" title="interface in ch.pschatzmann.stocks.strategy">ITradingStrategy</a>&nbsp;strategy)</pre>
+<div class="block">Adds a new trading strategy</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>strategy</code> - </dd>
+<dd><code>dateRange</code> - </dd>
+</dl>
+</li>
+</ul>
+<a name="addStrategy-java.util.Collection-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>addStrategy</h4>
+<pre>public&nbsp;void&nbsp;addStrategy&#8203;(java.util.Collection&lt;<a href="../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.html" title="interface in ch.pschatzmann.stocks.strategy">ITradingStrategy</a>&gt;&nbsp;strategies)</pre>
+<div class="block">Adds multiple strategies</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>strategies</code> - </dd>
+</dl>
+</li>
+</ul>
+<a name="isEmpty--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isEmpty</h4>
+<pre>public&nbsp;boolean&nbsp;isEmpty&#8203;()</pre>
+</li>
+</ul>
+<a name="run-ch.pschatzmann.dates.DateRange-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>run</h4>
+<pre>public&nbsp;void&nbsp;run&#8203;(<a href="../../../../ch/pschatzmann/dates/DateRange.html" title="class in ch.pschatzmann.dates">DateRange</a>&nbsp;period)</pre>
+</li>
+</ul>
+<a name="getTradingStrategies--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTradingStrategies</h4>
+<pre>public&nbsp;java.util.Collection&lt;<a href="../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.html" title="interface in ch.pschatzmann.stocks.strategy">ITradingStrategy</a>&gt;&nbsp;getTradingStrategies&#8203;()</pre>
+</li>
+</ul>
+<a name="getAccount--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getAccount</h4>
+<pre>public&nbsp;<a href="../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a>&nbsp;getAccount&#8203;()</pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<div class="bottomNav"><a name="navbar.bottom">
+<!--   -->
+</a>
+<div class="skipNav"><a href="#skip.navbar.bottom" title="Skip navigation links">Skip nav
