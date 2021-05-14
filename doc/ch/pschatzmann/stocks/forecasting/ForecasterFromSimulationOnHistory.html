@@ -169,4 +169,77 @@ implements java.io.Serializable, <a href="../../../../ch/pschatzmann/stocks/fore
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/forecasting/Foreca
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/forecasting/ForecasterFromSimulationOnHistory.html#ForecasterFromSimulationOnHistory--">ForecasterFromSimulationOnHistory</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">We use the forecast data as reference with a random date</div>
+</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/forecasting/ForecasterFromSimulationOnHistory.html#ForecasterFromSimulationOnHistory-java.util.Date-">ForecasterFromSimulationOnHistory</a></span>&#8203;(java.util.Date&nbsp;date)</code></th>
+<td class="colLast">
+<div class="block">We use the forecast data as reference with the indicated date</div>
+</td>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/forecasting/ForecasterFromSimulationOnHistory.html#ForecasterFromSimulationOnHistory-java.util.Date-ch.pschatzmann.stocks.IStockData-">ForecasterFromSimulationOnHistory</a></span>&#8203;(java.util.Date&nbsp;referenceStartDate,
+                                 <a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;reference)</code></th>
+<td class="colLast">
+<div class="block">We use the indicated referenceValues (e.g an Index) starting from the start
+ Date</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="memberSummary" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/forecasting/ForecasterFromSimulationOnHistory.html#forecast-ch.pschatzmann.stocks.IStockData-int-">forecast</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;stockData,
+        int&nbsp;numberOfForecasts)</code></th>
+<td class="colLast">
+<div class="block">Calculate the forecast for the indicated number of periods</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/forecasting/ForecasterFromSimulationOnHistory.html#forecast-ch.pschatzmann.stocks.IStockData-java.util.Date-">forecast</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;stockData,
+        java.util.Date&nbsp;endDate)</code></th>
+<td class="colLast">
+<div class="block">Calculate the forecast up to the end date</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="Forecast
