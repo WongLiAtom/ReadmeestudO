@@ -242,4 +242,85 @@ implements java.io.Serializable, <a href="../../../../ch/pschatzmann/stocks/fore
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="Forecast
+<a name="ForecasterFromSimulationOnHistory--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ForecasterFromSimulationOnHistory</h4>
+<pre>public&nbsp;ForecasterFromSimulationOnHistory&#8203;()</pre>
+<div class="block">We use the forecast data as reference with a random date</div>
+</li>
+</ul>
+<a name="ForecasterFromSimulationOnHistory-java.util.Date-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ForecasterFromSimulationOnHistory</h4>
+<pre>public&nbsp;ForecasterFromSimulationOnHistory&#8203;(java.util.Date&nbsp;date)</pre>
+<div class="block">We use the forecast data as reference with the indicated date</div>
+</li>
+</ul>
+<a name="ForecasterFromSimulationOnHistory-java.util.Date-ch.pschatzmann.stocks.IStockData-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ForecasterFromSimulationOnHistory</h4>
+<pre>public&nbsp;ForecasterFromSimulationOnHistory&#8203;(java.util.Date&nbsp;referenceStartDate,
+                                         <a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;reference)</pre>
+<div class="block">We use the indicated referenceValues (e.g an Index) starting from the start
+ Date</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>referenceValues</code> - </dd>
+<dd><code>referenceStartDate</code> - </dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="forecast-ch.pschatzmann.stocks.IStockData-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>forecast</h4>
+<pre>public&nbsp;<a href="../../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a>&nbsp;forecast&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;stockData,
+                          int&nbsp;numberOfForecasts)
+                   throws java.lang.Exception</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/forecasting/IForecast.html#forecast-ch.pschatzmann.stocks.IStockData-int-">IForecast</a></code></span></div>
+<div class="block">Calculate the forecast for the indicated number of periods</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/forecasting/IForecast.html#forecast-ch.pschatzmann.stocks.IStockData-int-">forecast</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/forecasting/IForecast.html" title="interface in ch.pschatzmann.stocks.forecasting">IForecast</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.Exception</code></dd>
+</dl>
+</li>
+</ul>
+<a name="forecast-ch.pschatzmann.stocks.IStockData-java.util.Date-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>forecast</h4>
+<pre>public&nbsp;<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;forecast&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;stockData,
+                           java.util.Date&nbsp;endDate)
+                    throws java.lang.Exception</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/forecasting/IForecast.html#forecast-ch.pschatzmann.stocks.IStockData-java.util.Date-">IForecast</a></code></span></div>
+<div class="block">Calculate the forecast up to the end date</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/forecasting/IForecast.html#forecast-ch.pschatzmann.stocks.IStockData-java.util.Date-">forecast</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/forecasting/IForecast.html" title="interface in ch.pschatzmann.stocks.forecasting">IForecast</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.Excepti
