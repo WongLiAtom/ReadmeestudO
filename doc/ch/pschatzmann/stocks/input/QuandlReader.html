@@ -137,4 +137,96 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="../../../../ch/pschatzmann/stocks/input/QuandlBSEReader.html" title="class in ch.pschatzmann.stocks.input">QuandlBSEReader</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/input/QuandlEuronextRea
+<dd><code><a href="../../../../ch/pschatzmann/stocks/input/QuandlBSEReader.html" title="class in ch.pschatzmann.stocks.input">QuandlBSEReader</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/input/QuandlEuronextReader.html" title="class in ch.pschatzmann.stocks.input">QuandlEuronextReader</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/input/QuandlSixReader.html" title="class in ch.pschatzmann.stocks.input">QuandlSixReader</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/input/QuandlWIKIReader.html" title="class in ch.pschatzmann.stocks.input">QuandlWIKIReader</a></code></dd>
+</dl>
+<hr>
+<br>
+<pre>public class <span class="typeNameLabel">QuandlReader</span>
+extends <a href="../../../../ch/pschatzmann/stocks/input/HttpReader.html" title="class in ch.pschatzmann.stocks.input">HttpReader</a></pre>
+<div class="block">Reader to load the stock history from MarketArchive files</div>
+<dl>
+<dt><span class="simpleTagLabel">Author:</span></dt>
+<dd>pschatzmann</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../serialized-form.html#ch.pschatzmann.stocks.input.QuandlReader">Serialized Form</a></dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="memberSummary" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Constructor</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/input/QuandlReader.html#QuandlReader--">QuandlReader</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/input/QuandlReader.html#QuandlReader-ch.pschatzmann.stocks.input.parser.IInputParser-">QuandlReader</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/input/parser/IInputParser.html" title="interface in ch.pschatzmann.stocks.input.parser">IInputParser</a>&nbsp;parser)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.ch.pschatzmann.stocks.input.HttpReader">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;ch.pschatzmann.stocks.input.<a href="../../../../ch/pschatzmann/stocks/input/HttpReader.html" title="class in ch.pschatzmann.stocks.input">HttpReader</a></h3>
+<code><a href="../../../../ch/pschatzmann/stocks/input/HttpReader.html#getInputParser--">getInputParser</a>, <a href="../../../../ch/pschatzmann/stocks/input/HttpReader.html#read-ch.pschatzmann.stocks.IStockTarget-">read</a>, <a href="../../../../ch/pschatzmann/stocks/input/HttpReader.html#read-ch.pschatzmann.stocks.IStockTarget-java.util.Date-">read</a>, <a href="../../../../ch/pschatzmann/stocks/input/HttpReader.html#setInputParser-ch.pschatzmann.stocks.input.parser.IInputParser-">setInputParser</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="QuandlReader--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>QuandlReader</h4>
+<pre>public&nbsp;QuandlReader&#8203;()</pre>
+</li>
+</ul>
+<a name="QuandlReader-ch.pschatzmann.stocks.input.parser.IInputParser-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>QuandlReader</h4>
+<pre>public&nbsp;QuandlReader&#8203;(<a href="../../../../ch/pschatzmann/stocks/input/parser/IInputParser.html" title="interface in ch.pschatzmann.stocks.input.parser">IInputParser</a>&nbsp;parser)</pre>
+</l
