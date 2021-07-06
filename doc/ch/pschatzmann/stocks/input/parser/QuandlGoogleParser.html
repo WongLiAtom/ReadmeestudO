@@ -241,4 +241,98 @@ implements <a href="../../../../../ch/pschatzmann/stocks/input/parser/IInputPars
 <li class="blockList"><a name="methods.inherited.from.class.ch.pschatzmann.stocks.input.parser.QuandlBaseParser">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;ch.pschatzmann.stocks.input.parser.<a href="../../../../../ch/pschatzmann/stocks/input/parser/QuandlBaseParser.html" title="class in ch.pscha
+<h3>Methods inherited from class&nbsp;ch.pschatzmann.stocks.input.parser.<a href="../../../../../ch/pschatzmann/stocks/input/parser/QuandlBaseParser.html" title="class in ch.pschatzmann.stocks.input.parser">QuandlBaseParser</a></h3>
+<code><a href="../../../../../ch/pschatzmann/stocks/input/parser/QuandlBaseParser.html#getDate-java.lang.String-">getDate</a>, <a href="../../../../../ch/pschatzmann/stocks/input/parser/QuandlBaseParser.html#getSeparator--">getSeparator</a>, <a href="../../../../../ch/pschatzmann/stocks/input/parser/QuandlBaseParser.html#getString-java.sql.Date-">getString</a>, <a href="../../../../../ch/pschatzmann/stocks/input/parser/QuandlBaseParser.html#ignoreFirstLine--">ignoreFirstLine</a>, <a href="../../../../../ch/pschatzmann/stocks/input/parser/QuandlBaseParser.html#isValid-java.lang.String-">isValid</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="QuandlGoogleParser--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>QuandlGoogleParser</h4>
+<pre>public&nbsp;QuandlGoogleParser&#8203;()</pre>
+</li>
+</ul>
+<a name="QuandlGoogleParser-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>QuandlGoogleParser</h4>
+<pre>public&nbsp;QuandlGoogleParser&#8203;(java.lang.String&nbsp;string)</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getPath--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPath</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getPath&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../ch/pschatzmann/stocks/input/parser/IInputParser.html#getPath--">getPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../ch/pschatzmann/stocks/input/parser/IInputParser.html" title="interface in ch.pschatzmann.stocks.input.parser">IInputParser</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="parse-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>parse</h4>
+<pre>public&nbsp;<a href="../../../../../ch/pschatzmann/stocks/StockRecord.html" title="class in ch.pschatzmann.stocks">StockRecord</a>&nbsp;parse&#8203;(java.lang.String&nbsp;line)
+                  throws java.text.ParseException</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../ch/pschatzmann/stocks/input/parser/IInputParser.html#parse-java.lang.String-">parse</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../ch/pschatzmann/stocks/input/parser/IInputParser.html" title="interface in ch.pschatzmann.stocks.input.parser">IInputParser</a></code></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.text.ParseException</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getStockID--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getStockID</h4>
+<pre>public&nbsp;<a href="../../../../../ch/pschatzmann/stocks/StockID.html" title="class in ch.pschatzmann.stocks">StockID</a>&nbsp;getStockID&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../ch/pschatzmann/stocks/input/parser/IInputParser.html#getStockID--">getStockID</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../ch/pschatzmann/stocks/input/parser/IInputParser.html" title="interface in ch.pschatzmann.stocks.input.parser">IInputParser</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="parseFileName-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>parseFileName</h4>
+<pre>public&nbsp;<a href="../../../../../ch/pschatzmann/stocks/IStockID.html" title="interface in ch.pschatzmann.stocks">IStockID</a>&nbsp;parseFileName&#8203;(java.lang.String&nbsp;filePath)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../ch/pschatzmann/stocks/input/parser/IInputParser.html#parseFileName-java.lang.String-">parseFileName</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../ch/pschatzmann/stocks/input/parser/IInputParser.ht
