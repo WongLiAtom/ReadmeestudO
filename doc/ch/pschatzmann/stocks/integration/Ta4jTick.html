@@ -159,4 +159,72 @@ implements org.ta4j.core.Tick, java.io.Serializable</pre>
 <li class="blockList"><a name="constructor.summary">
 <!--   -->
 </a>
-<h3>C
+<h3>Constructor Summary</h3>
+<table class="memberSummary" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Constructor</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#Ta4jTick-ch.pschatzmann.stocks.IStockRecord-">Ta4jTick</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockRecord.html" title="interface in ch.pschatzmann.stocks">IStockRecord</a>&nbsp;sr)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#Ta4jTick-java.time.ZonedDateTime-org.ta4j.core.Decimal-org.ta4j.core.Decimal-org.ta4j.core.Decimal-org.ta4j.core.Decimal-org.ta4j.core.Decimal-">Ta4jTick</a></span>&#8203;(java.time.ZonedDateTime&nbsp;time,
+        org.ta4j.core.Decimal&nbsp;open,
+        org.ta4j.core.Decimal&nbsp;high,
+        org.ta4j.core.Decimal&nbsp;low,
+        org.ta4j.core.Decimal&nbsp;closing,
+        org.ta4j.core.Decimal&nbsp;volue)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#Ta4jTick-java.util.Date-double-double-double-double-double-">Ta4jTick</a></span>&#8203;(java.util.Date&nbsp;time,
+        double&nbsp;open,
+        double&nbsp;high,
+        double&nbsp;low,
+        double&nbsp;closing,
+        double&nbsp;value)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="memberSummary" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#addTrade-org.ta4j.core.Decimal-org.ta4j.core.Decimal-">addTrade</a></span>&#8203;(org.ta4j.core.Decimal&nbsp;tradeVolume,
+        org.ta4j.core.Decimal&nbsp;tradePrice)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>org.ta4j.core.Decimal</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#getAmount--">getAmount</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.time.ZonedDateTime</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#getBeginTime--">getBeginTime</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>org.ta4j.core.Decimal</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#getClosePrice--">getClosePrice</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>java.time.ZonedDateTime</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../
