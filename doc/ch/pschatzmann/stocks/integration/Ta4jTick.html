@@ -227,4 +227,102 @@ implements org.ta4j.core.Tick, java.io.Serializable</pre>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.time.ZonedDateTime</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#getEndTime--">getEndTime</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>org.ta4j.core.Decimal</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#getMaxPrice--">getMaxPrice</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>org.ta4j.core.Decimal</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#getMinPrice--">getMinPrice</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>org.ta4j.core.Decimal</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#getOpenPrice--">getOpenPrice</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.time.Duration</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#getTimePeriod--">getTimePeriod</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#getTrades--">getTrades</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>org.ta4j.core.Decimal</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#getVolume--">getVolume</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/integration/Ta4jTick.html#toString--">toString</a></span>&#8203;()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.org.ta4j.core.Tick">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;org.ta4j.core.Tick</h3>
+<code>addTrade, addTrade, getDateName, getSimpleDateName, inPeriod, isBearish, isBullish</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="Ta4jTick-java.time.ZonedDateTime-org.ta4j.core.Decimal-org.ta4j.core.Decimal-org.ta4j.core.Decimal-org.ta4j.core.Decimal-org.ta4j.core.Decimal-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>Ta4jTick</h4>
+<pre>public&nbsp;Ta4jTick&#8203;(java.time.ZonedDateTime&nbsp;time,
+                org.ta4j.core.Decimal&nbsp;open,
+                org.ta4j.core.Decimal&nbsp;high,
+                org.ta4j.core.Decimal&nbsp;low,
+                org.ta4j.core.Decimal&nbsp;closing,
+                org.ta4j.core.Decimal&nbsp;volue)</pre>
+</li>
+</ul>
+<a name="Ta4jTick-java.util.Date-double-double-double-double-double-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>Ta4jTick</h4>
+<pre>public&nbsp;Ta4jTick&#8203;(java.util.Date&nbsp;time,
+                double&nbsp;open,
+                double&nbsp;high,
+                double&nbsp;low,
+                double&nbsp;closing,
+                double&nbsp;value)</pre>
+</li>
+</ul>
+<a name="Ta4jTick-ch.pschatzmann.stocks.IStockRecord-">
+<!--   -->
+</a>
+<ul class="blockListLast
