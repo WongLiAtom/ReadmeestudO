@@ -308,4 +308,144 @@ implements org.jfree.data.xy.OHLCDataset, java.io.Serializable</pre>
 <h3>Methods inherited from class&nbsp;org.jfree.data.general.AbstractSeriesDataset</h3>
 <code>indexOf, seriesChanged</code></li>
 </ul>
-<ul class="bl
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.org.jfree.data.xy.AbstractXYDataset">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.jfree.data.xy.AbstractXYDataset</h3>
+<code>getDomainOrder, getXValue, getYValue</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.org.jfree.data.general.Dataset">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;org.jfree.data.general.Dataset</h3>
+<code>addChangeListener, getGroup, removeChangeListener, setGroup</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.org.jfree.data.general.SeriesDataset">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;org.jfree.data.general.SeriesDataset</h3>
+<code>indexOf</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.org.jfree.data.xy.XYDataset">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;org.jfree.data.xy.XYDataset</h3>
+<code>getDomainOrder, getXValue, getYValue</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="HighLowData-ch.pschatzmann.stocks.StockData-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>HighLowData</h4>
+<pre>public&nbsp;HighLowData&#8203;(<a href="../../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a>&nbsp;sd)</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="add-ch.pschatzmann.stocks.StockData-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>add</h4>
+<pre>public&nbsp;void&nbsp;add&#8203;(<a href="../../../../ch/pschatzmann/stocks/StockData.html" title="class in ch.pschatzmann.stocks">StockData</a>&nbsp;sd)</pre>
+</li>
+</ul>
+<a name="getItemCount-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getItemCount</h4>
+<pre>public&nbsp;int&nbsp;getItemCount&#8203;(int&nbsp;series)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getItemCount</code>&nbsp;in interface&nbsp;<code>org.jfree.data.xy.XYDataset</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getX-int-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getX</h4>
+<pre>public&nbsp;java.lang.Number&nbsp;getX&#8203;(int&nbsp;series,
+                             int&nbsp;item)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getX</code>&nbsp;in interface&nbsp;<code>org.jfree.data.xy.XYDataset</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getY-int-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getY</h4>
+<pre>public&nbsp;java.lang.Number&nbsp;getY&#8203;(int&nbsp;series,
+                             int&nbsp;item)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getY</code>&nbsp;in interface&nbsp;<code>org.jfree.data.xy.XYDataset</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getHigh-int-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getHigh</h4>
+<pre>public&nbsp;java.lang.Number&nbsp;getHigh&#8203;(int&nbsp;series,
+                                int&nbsp;item)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getHigh</code>&nbsp;in interface&nbsp;<code>org.jfree.data.xy.OHLCDataset</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getHighValue-int-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getHighValue</h4>
+<pre>public&nbsp;double&nbsp;getHighValue&#8203;(int&nbsp;series,
+                           int&nbsp;item)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getHighValue</code>&nbsp;in interface&nbsp;<code>
