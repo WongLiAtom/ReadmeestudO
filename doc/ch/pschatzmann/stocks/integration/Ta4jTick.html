@@ -325,4 +325,160 @@ implements org.ta4j.core.Tick, java.io.Serializable</pre>
 <a name="Ta4jTick-ch.pschatzmann.stocks.IStockRecord-">
 <!--   -->
 </a>
-<ul class="blockListLast
+<ul class="blockListLast">
+<li class="blockList">
+<h4>Ta4jTick</h4>
+<pre>public&nbsp;Ta4jTick&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockRecord.html" title="interface in ch.pschatzmann.stocks">IStockRecord</a>&nbsp;sr)</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getOpenPrice--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getOpenPrice</h4>
+<pre>public&nbsp;org.ta4j.core.Decimal&nbsp;getOpenPrice&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getOpenPrice</code>&nbsp;in interface&nbsp;<code>org.ta4j.core.Tick</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getMinPrice--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMinPrice</h4>
+<pre>public&nbsp;org.ta4j.core.Decimal&nbsp;getMinPrice&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getMinPrice</code>&nbsp;in interface&nbsp;<code>org.ta4j.core.Tick</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getMaxPrice--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMaxPrice</h4>
+<pre>public&nbsp;org.ta4j.core.Decimal&nbsp;getMaxPrice&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getMaxPrice</code>&nbsp;in interface&nbsp;<code>org.ta4j.core.Tick</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getClosePrice--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getClosePrice</h4>
+<pre>public&nbsp;org.ta4j.core.Decimal&nbsp;getClosePrice&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getClosePrice</code>&nbsp;in interface&nbsp;<code>org.ta4j.core.Tick</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getVolume--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getVolume</h4>
+<pre>public&nbsp;org.ta4j.core.Decimal&nbsp;getVolume&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getVolume</code>&nbsp;in interface&nbsp;<code>org.ta4j.core.Tick</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getTrades--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTrades</h4>
+<pre>public&nbsp;int&nbsp;getTrades&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getTrades</code>&nbsp;in interface&nbsp;<code>org.ta4j.core.Tick</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getAmount--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAmount</h4>
+<pre>public&nbsp;org.ta4j.core.Decimal&nbsp;getAmount&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getAmount</code>&nbsp;in interface&nbsp;<code>org.ta4j.core.Tick</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getTimePeriod--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTimePeriod</h4>
+<pre>public&nbsp;java.time.Duration&nbsp;getTimePeriod&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getTimePeriod</code>&nbsp;in interface&nbsp;<code>org.ta4j.core.Tick</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getBeginTime--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getBeginTime</h4>
+<pre>public&nbsp;java.time.ZonedDateTime&nbsp;getBeginTime&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getBeginTime</code>&nbsp;in interface&nbsp;<code>org.ta4j.core.Tick</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getEndTime--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getEndTime</h4>
+<pre>public&nbsp;java.time.ZonedDateTime&nbsp;getEndTime&#8203;()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getEndTime</code>&nbsp;in interface&nbsp;<code>org.ta4j.core.Tick</code></dd>
+</dl>
+</li>
+</ul>
+<a name="addTrade-org.ta4j.core.Decimal-org.ta4j.core.Decimal-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>addTrade</h4>
+<pre>public&nbsp;void&nbsp;addTrade&#8203;(org.ta4j.core.Decimal&nbsp;tradeVolume,
+                     org.ta4j.core.Decimal&nbsp;tradePrice)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>addTrade</code>&nbsp;in interface&nbsp;<code>org.ta4j.core.Tick</code></dd>
+</dl>
+</li>
