@@ -139,4 +139,87 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">StateComparator</span>
-extends java.lang.O
+extends java.lang.Object
+implements java.util.Comparator&lt;<a href="../../../../ch/pschatzmann/stocks/parameters/State.html" title="class in ch.pschatzmann.stocks.parameters">State</a>&gt;, java.io.Serializable</pre>
+<div class="block">Compare State objects based on the indicated parameter. The values are sorted
+ in a descending order because bigger values are better!</div>
+<dl>
+<dt><span class="simpleTagLabel">Author:</span></dt>
+<dd>pschatzmann</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../serialized-form.html#ch.pschatzmann.stocks.parameters.StateComparator">Serialized Form</a></dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="memberSummary" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Constructor</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/parameters/StateComparator.html#StateComparator--">StateComparator</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Empty constructor for serialization</div>
+</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/parameters/StateComparator.html#StateComparator-ch.pschatzmann.stocks.accounting.kpi.KPI-">StateComparator</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/accounting/kpi/KPI.html" title="enum in ch.pschatzmann.stocks.accounting.kpi">KPI</a>&nbsp;kpi)</code></th>
+<td class="colLast">
+<div class="block">Default Constructor</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="memberSummary" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/parameters/StateComparator.html#compare-ch.pschatzmann.stocks.parameters.State-ch.pschatzmann.stocks.parameters.State-">compare</a></span>&#8203;(<a href="../../../../ch/pschatzmann/stocks/parameters/State.html" title="class in ch.pschatzmann.stocks.parameters">State</a>&nbsp;o1,
+       <a href="../../../../ch/pschatzmann/stocks/parameters/State.html" title="class in ch.pschatzmann.stocks.parameters">State</a>&nbsp;o2)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.java.util.Comparator">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;java.util.Comparator</h3>
+<code>comparing, comparing, comparingDouble, comparingInt, comparingLong, equals, naturalOrder, nullsFirst, nullsLast, reversed, reverseOrder, thenComparing, thenComparing, thenComparing, thenComparingDouble, thenComparingInt, thenComparingLong</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<u
