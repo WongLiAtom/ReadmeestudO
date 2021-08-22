@@ -126,4 +126,55 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Known Subinterfaces:</dt>
-<dd><code
+<dd><code><a href="../../../../ch/pschatzmann/stocks/strategy/optimization/IOptimizableTradingStrategy.html" title="interface in ch.pschatzmann.stocks.strategy.optimization">IOptimizableTradingStrategy</a></code></dd>
+</dl>
+<dl>
+<dt>All Known Implementing Classes:</dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/strategy/BuyAndHoldStrategy.html" title="class in ch.pschatzmann.stocks.strategy">BuyAndHoldStrategy</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/strategy/BuyOnUpAfterDown.html" title="class in ch.pschatzmann.stocks.strategy">BuyOnUpAfterDown</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/strategy/CCICorrectionStrategy.html" title="class in ch.pschatzmann.stocks.strategy">CCICorrectionStrategy</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/strategy/CommonTradingStrategy.html" title="class in ch.pschatzmann.stocks.strategy">CommonTradingStrategy</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/strategy/GlobalExtremaStrategy.html" title="class in ch.pschatzmann.stocks.strategy">GlobalExtremaStrategy</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/strategy/MovingMomentumStrategy.html" title="class in ch.pschatzmann.stocks.strategy">MovingMomentumStrategy</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/strategy/OptimizedStrategy.html" title="class in ch.pschatzmann.stocks.strategy">OptimizedStrategy</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/strategy/RSI2Strategy.html" title="class in ch.pschatzmann.stocks.strategy">RSI2Strategy</a></code>, <code><a href="../../../../ch/pschatzmann/stocks/strategy/SciptStrategy.html" title="class in ch.pschatzmann.stocks.strategy">SciptStrategy</a></code></dd>
+</dl>
+<hr>
+<br>
+<pre>public interface <span class="typeNameLabel">ITradingStrategy</span></pre>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="memberSummary" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.html#getDescription--">getDescription</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the description of the trading strategy</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.html#getName--">getName</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the name of the trading strategy</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/parameters/State.html" title="class in ch.pschatzmann.stocks.parameters">State</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.html#getParameters--">getParameters</a></span>&#8203;()</code></th>
+<td class="colLast">
+<div class="block">Returns the evaluation pararamters</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.html#getStockData--">
