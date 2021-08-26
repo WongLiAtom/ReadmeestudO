@@ -248,4 +248,107 @@ implements <a href="../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;java.lang.Ob
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>getClass, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="SciptStrategy-ch.pschatzmann.stocks.IStockData-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>SciptStrategy</h4>
+<pre>public&nbsp;SciptStrategy&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;stockData)</pre>
+</li>
+</ul>
+<a name="SciptStrategy-ch.pschatzmann.stocks.IStockData-java.lang.String-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>SciptStrategy</h4>
+<pre>public&nbsp;SciptStrategy&#8203;(<a href="../../../../ch/pschatzmann/stocks/IStockData.html" title="interface in ch.pschatzmann.stocks">IStockData</a>&nbsp;stockData,
+                     java.lang.String&nbsp;engineName,
+                     java.lang.String&nbsp;script)</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getParameterOptimizationSequence--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getParameterOptimizationSequence</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../ch/pschatzmann/stocks/strategy/optimization/InputParameterName.html" title="enum in ch.pschatzmann.stocks.strategy.optimization">InputParameterName</a>&gt;&nbsp;getParameterOptimizationSequence&#8203;()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/strategy/optimization/IOptimizableTradingStrategy.html#getParameterOptimizationSequence--">IOptimizableTradingStrategy</a></code></span></div>
+<div class="block">Returns the sequence in which the parameters are optimized</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/strategy/optimization/IOptimizableTradingStrategy.html#getParameterOptimizationSequence--">getParameterOptimizationSequence</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/strategy/optimization/IOptimizableTradingStrategy.html" title="interface in ch.pschatzmann.stocks.strategy.optimization">IOptimizableTradingStrategy</a></code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/strategy/CommonTradingStrategy.html#getParameterOptimizationSequence--">getParameterOptimizationSequence</a></code>&nbsp;in class&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/strategy/CommonTradingStrategy.html" title="class in ch.pschatzmann.stocks.strategy">CommonTradingStrategy</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="buildStrategy-org.ta4j.core.TimeSeries-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>buildStrategy</h4>
+<pre>public&nbsp;org.ta4j.core.Strategy&nbsp;buildStrategy&#8203;(org.ta4j.core.TimeSeries&nbsp;timeSeries)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../ch/pschatzmann/stocks/strategy/CommonTradingStrategy.html#buildStrategy-org.ta4j.core.TimeSeries-">buildStrategy</a></code>&nbsp;in class&nbsp;<code><a href="../../../../ch/pschatzmann/stocks/strategy/CommonTradingStrategy.html" title="class in ch.pschatzmann.stocks.strategy">CommonTradingStrategy</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getScript--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getScript</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getScript&#8203;()</pre>
+</li>
+</ul>
+<a name="setScript-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setScript</h4>
+<pre>public&nbsp;void&nbsp;setScript&#8203;(java.lang.String&nbsp;script)</pre>
+</li>
+</ul>
+<a name="getEngineName--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getEngineName</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getEngineName&#8203;()</pre>
+</li>
+</ul>
+<a name="setEngineName
