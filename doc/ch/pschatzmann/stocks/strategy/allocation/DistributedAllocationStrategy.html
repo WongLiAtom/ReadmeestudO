@@ -129,4 +129,70 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </ul>
 </li>
 </ul>
-<div cl
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/IAllocationStrategy.html" title="interface in ch.pschatzmann.stocks.strategy.allocation">IAllocationStrategy</a></code>, <code>java.io.Serializable</code></dd>
+</dl>
+<hr>
+<br>
+<pre>public class <span class="typeNameLabel">DistributedAllocationStrategy</span>
+extends java.lang.Object
+implements <a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/IAllocationStrategy.html" title="interface in ch.pschatzmann.stocks.strategy.allocation">IAllocationStrategy</a>, java.io.Serializable</pre>
+<div class="block">We buy as much stocks as possible. At each trade we rebalance the stock
+ amounts by recalculating the targets using a IDistributor. Per default the
+ system uses an EvenDistributor which allocates the values evenly.</div>
+<dl>
+<dt><span class="simpleTagLabel">Author:</span></dt>
+<dd>pschatzmann</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../serialized-form.html#ch.pschatzmann.stocks.strategy.allocation.DistributedAllocationStrategy">Serialized Form</a></dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="memberSummary" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Constructor</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/DistributedAllocationStrategy.html#DistributedAllocationStrategy-ch.pschatzmann.stocks.execution.ITrader-">DistributedAllocationStrategy</a></span>&#8203;(<a href="../../../../../ch/pschatzmann/stocks/execution/ITrader.html" title="interface in ch.pschatzmann.stocks.execution">ITrader</a>&nbsp;trader)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/DistributedAllocationStrategy.html#DistributedAllocationStrategy-ch.pschatzmann.stocks.execution.ITrader-ch.pschatzmann.stocks.strategy.allocation.IDistributor-">DistributedAllocationStrategy</a></span>&#8203;(<a href="../../../../../ch/pschatzmann/stocks/execution/ITrader.html" title="interface in ch.pschatzmann.stocks.execution">ITrader</a>&nbsp;trader,
+                             <a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/IDistributor.html" title="interface in ch.pschatzmann.stocks.strategy.allocation">IDistributor</a>&nbsp;distributor)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="memberSummary" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>java.lang.Long</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/DistributedAllocationStrategy.html#onBuy-ch.pschatzmann.stocks.accounting.IAccount-ch.pschatzmann.stocks.IStockRecord-ch.pschatzmann.stocks.strategy.ITradingStrategy-">onBuy</a></span>&#8203;(<a href="../../../../../ch/pschatzmann/stocks/accountin
