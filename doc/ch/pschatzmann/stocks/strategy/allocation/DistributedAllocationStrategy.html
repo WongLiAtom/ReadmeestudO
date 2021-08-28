@@ -271,4 +271,71 @@ implements <a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/IAl
 <ul class="blockList">
 <li class="blockList">
 <h4>onBuy</h4>
-<pre>public&nbsp;java.lang.Long&nbsp;onBuy&#8203;(<a href="../../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAc
+<pre>public&nbsp;java.lang.Long&nbsp;onBuy&#8203;(<a href="../../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a>&nbsp;account,
+                            <a href="../../../../../ch/pschatzmann/stocks/IStockRecord.html" title="interface in ch.pschatzmann.stocks">IStockRecord</a>&nbsp;sr,
+                            <a href="../../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.html" title="interface in ch.pschatzmann.stocks.strategy">ITradingStrategy</a>&nbsp;strategy)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/IAllocationStrategy.html#onBuy-ch.pschatzmann.stocks.accounting.IAccount-ch.pschatzmann.stocks.IStockRecord-ch.pschatzmann.stocks.strategy.ITradingStrategy-">onBuy</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/IAllocationStrategy.html" title="interface in ch.pschatzmann.stocks.strategy.allocation">IAllocationStrategy</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="onSell-ch.pschatzmann.stocks.accounting.IAccount-ch.pschatzmann.stocks.IStockRecord-ch.pschatzmann.stocks.strategy.ITradingStrategy-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>onSell</h4>
+<pre>public&nbsp;java.lang.Long&nbsp;onSell&#8203;(<a href="../../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a>&nbsp;account,
+                             <a href="../../../../../ch/pschatzmann/stocks/IStockRecord.html" title="interface in ch.pschatzmann.stocks">IStockRecord</a>&nbsp;sr,
+                             <a href="../../../../../ch/pschatzmann/stocks/strategy/ITradingStrategy.html" title="interface in ch.pschatzmann.stocks.strategy">ITradingStrategy</a>&nbsp;strategy)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/IAllocationStrategy.html#onSell-ch.pschatzmann.stocks.accounting.IAccount-ch.pschatzmann.stocks.IStockRecord-ch.pschatzmann.stocks.strategy.ITradingStrategy-">onSell</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/IAllocationStrategy.html" title="interface in ch.pschatzmann.stocks.strategy.allocation">IAllocationStrategy</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="onEndOfDate-ch.pschatzmann.stocks.accounting.IAccount-java.util.Date-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>onEndOfDate</h4>
+<pre>public&nbsp;void&nbsp;onEndOfDate&#8203;(<a href="../../../../../ch/pschatzmann/stocks/accounting/IAccount.html" title="interface in ch.pschatzmann.stocks.accounting">IAccount</a>&nbsp;account,
+                        java.util.Date&nbsp;date)</pre>
+<div class="block">Process consolidated orders which contain buys and sells from the strategy
+ and the Rebalancing</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/IAllocationStrategy.html#onEndOfDate-ch.pschatzmann.stocks.accounting.IAccount-java.util.Date-">onEndOfDate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../ch/pschatzmann/stocks/strategy/allocation/IAllocationStrategy.html" title="interface in ch.pschatzmann.stocks.strategy.allocation">IAllocationStrategy</a></code></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<div class="bottomNav"><a name="navbar.bottom">
+<!--   -->
+</a>
+<div class="skipNav"><a href="#skip.navbar.bottom" title="Skip navigation links">Skip navigation links</a></div>
+<a name="navbar.bottom.firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/DistributedAllocationStrategy.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../index-files/index-1.html">Index</a></li>
+<li><a href="../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul c
