@@ -56,4 +56,28 @@
     }
     function loadFrames() {
         if (targetPage != "" && targetPage != "undefined")
-             top.classFrame.lo
+             top.classFrame.location = top.targetPage;
+    }
+</script>
+</head>
+<body onload="loadFrames()">
+<script type="text/javascript">
+if (targetPage == "" || targetPage == "undefined")
+     window.location.replace('overview-summary.html');
+</script>
+<noscript>JavaScript is disabled on your browser.</noscript>
+<div class="mainContainer">
+<div class="leftContainer">
+<div class="leftTop">
+<iframe src="overview-frame.html" name="packageListFrame" title="All Packages"></iframe>
+</div>
+<div class="leftBottom">
+<iframe src="allclasses-frame.html" name="packageFrame" title="All classes and interfaces (except non-static nested types)"></iframe>
+</div>
+</div>
+<div class="rightContainer">
+<iframe src="overview-summary.html" name="classFrame" title="Package, class and interface descriptions" class="rightIframe"></iframe>
+</div>
+</div>
+</body>
+</html>
