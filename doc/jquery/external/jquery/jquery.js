@@ -5243,4 +5243,167 @@ jQuery.event = {
 			}
 
 			// Add relatedTarget, if necessary
-			if ( !event.relatedTarget &&
+			if ( !event.relatedTarget && fromElement ) {
+				event.relatedTarget = fromElement === event.target ? original.toElement : fromElement;
+			}
+
+			// Add which for click: 1 === left; 2 === middle; 3 === right
+			// Note: button is not normalized, so don't use it
+			if ( !event.which && button !== undefined ) {
+				event.which = ( button & 1 ? 1 : ( button & 2 ? 3 : ( button & 4 ? 2 : 0 ) ) );
+			}
+
+			return event;
+		}
+	},
+
+	special: {
+		load: {
+			// Prevent triggered image.load events from bubbling to window.load
+			noBubble: true
+		},
+		focus: {
+			// Fire native event if possible so blur/focus sequence is correct
+			trigger: function() {
+				if ( this !== safeActiveElement() && this.focus ) {
+					try {
+						this.focus();
+						return false;
+					} catch ( e ) {
+						// Support: IE<9
+						// If we error on focus to hidden element (#1486, #12518),
+						// let .trigger() run the handlers
+					}
+				}
+			},
+			delegateType: "focusin"
+		},
+		blur: {
+			trigger: function() {
+				if ( this === safeActiveElement() && this.blur ) {
+					this.blur();
+					return false;
+				}
+			},
+			delegateType: "focusout"
+		},
+		click: {
+			// For checkbox, fire native event so checked state will be right
+			trigger: function() {
+				if ( jQuery.nodeName( this, "input" ) && this.type === "checkbox" && this.click ) {
+					this.click();
+					return false;
+				}
+			},
+
+			// For cross-browser consistency, don't fire native .click() on links
+			_default: function( event ) {
+				return jQuery.nodeName( event.target, "a" );
+			}
+		},
+
+		beforeunload: {
+			postDispatch: function( event ) {
+
+				// Even when returnValue equals to undefined Firefox will still show alert
+				if ( event.result !== undefined ) {
+					event.originalEvent.returnValue = event.result;
+				}
+			}
+		}
+	},
+
+	simulate: function( type, elem, event, bubble ) {
+		// Piggyback on a donor event to simulate a different one.
+		// Fake originalEvent to avoid donor's stopPropagation, but if the
+		// simulated event prevents default then we do the same on the donor.
+		var e = jQuery.extend(
+			new jQuery.Event(),
+			event,
+			{
+				type: type,
+				isSimulated: true,
+				originalEvent: {}
+			}
+		);
+		if ( bubble ) {
+			jQuery.event.trigger( e, null, elem );
+		} else {
+			jQuery.event.dispatch.call( elem, e );
+		}
+		if ( e.isDefaultPrevented() ) {
+			event.preventDefault();
+		}
+	}
+};
+
+jQuery.removeEvent = document.removeEventListener ?
+	function( elem, type, handle ) {
+		if ( elem.removeEventListener ) {
+			elem.removeEventListener( type, handle, false );
+		}
+	} :
+	function( elem, type, handle ) {
+		var name = "on" + type;
+
+		if ( elem.detachEvent ) {
+
+			// #8545, #7054, preventing memory leaks for custom events in IE6-8
+			// detachEvent needed property on element, by name of that event, to properly expose it to GC
+			if ( typeof elem[ name ] === core_strundefined ) {
+				elem[ name ] = null;
+			}
+
+			elem.detachEvent( name, handle );
+		}
+	};
+
+jQuery.Event = function( src, props ) {
+	// Allow instantiation without the 'new' keyword
+	if ( !(this instanceof jQuery.Event) ) {
+		return new jQuery.Event( src, props );
+	}
+
+	// Event object
+	if ( src && src.type ) {
+		this.originalEvent = src;
+		this.type = src.type;
+
+		// Events bubbling up the document may have been marked as prevented
+		// by a handler lower down the tree; reflect the correct value.
+		this.isDefaultPrevented = ( src.defaultPrevented || src.returnValue === false ||
+			src.getPreventDefault && src.getPreventDefault() ) ? returnTrue : returnFalse;
+
+	// Event type
+	} else {
+		this.type = src;
+	}
+
+	// Put explicitly provided properties onto the event object
+	if ( props ) {
+		jQuery.extend( this, props );
+	}
+
+	// Create a timestamp if incoming event doesn't have one
+	this.timeStamp = src && src.timeStamp || jQuery.now();
+
+	// Mark it as fixed
+	this[ jQuery.expando ] = true;
+};
+
+// jQuery.Event is based on DOM3 Events as specified by the ECMAScript Language Binding
+// http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
+jQuery.Event.prototype = {
+	isDefaultPrevented: returnFalse,
+	isPropagationStopped: returnFalse,
+	isImmediatePropagationStopped: returnFalse,
+
+	preventDefault: function() {
+		var e = this.originalEvent;
+
+		this.isDefaultPrevented = returnTrue;
+		if ( !e ) {
+			return;
+		}
+
+		// If preventDefault exists, run it on t
