@@ -8345,4 +8345,177 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 	}
 }
 
-/* Chain conversions given the reques
+/* Chain conversions given the request and the original response
+ * Also sets the responseXXX fields on the jqXHR instance
+ */
+function ajaxConvert( s, response, jqXHR, isSuccess ) {
+	var conv2, current, conv, tmp, prev,
+		converters = {},
+		// Work with a copy of dataTypes in case we need to modify it for conversion
+		dataTypes = s.dataTypes.slice();
+
+	// Create converters map with lowercased keys
+	if ( dataTypes[ 1 ] ) {
+		for ( conv in s.converters ) {
+			converters[ conv.toLowerCase() ] = s.converters[ conv ];
+		}
+	}
+
+	current = dataTypes.shift();
+
+	// Convert to each sequential dataType
+	while ( current ) {
+
+		if ( s.responseFields[ current ] ) {
+			jqXHR[ s.responseFields[ current ] ] = response;
+		}
+
+		// Apply the dataFilter if provided
+		if ( !prev && isSuccess && s.dataFilter ) {
+			response = s.dataFilter( response, s.dataType );
+		}
+
+		prev = current;
+		current = dataTypes.shift();
+
+		if ( current ) {
+
+			// There's only work to do if current dataType is non-auto
+			if ( current === "*" ) {
+
+				current = prev;
+
+			// Convert response if prev dataType is non-auto and differs from current
+			} else if ( prev !== "*" && prev !== current ) {
+
+				// Seek a direct converter
+				conv = converters[ prev + " " + current ] || converters[ "* " + current ];
+
+				// If none found, seek a pair
+				if ( !conv ) {
+					for ( conv2 in converters ) {
+
+						// If conv2 outputs current
+						tmp = conv2.split( " " );
+						if ( tmp[ 1 ] === current ) {
+
+							// If prev can be converted to accepted input
+							conv = converters[ prev + " " + tmp[ 0 ] ] ||
+								converters[ "* " + tmp[ 0 ] ];
+							if ( conv ) {
+								// Condense equivalence converters
+								if ( conv === true ) {
+									conv = converters[ conv2 ];
+
+								// Otherwise, insert the intermediate dataType
+								} else if ( converters[ conv2 ] !== true ) {
+									current = tmp[ 0 ];
+									dataTypes.unshift( tmp[ 1 ] );
+								}
+								break;
+							}
+						}
+					}
+				}
+
+				// Apply converter (if not an equivalence)
+				if ( conv !== true ) {
+
+					// Unless errors are allowed to bubble, catch and return them
+					if ( conv && s[ "throws" ] ) {
+						response = conv( response );
+					} else {
+						try {
+							response = conv( response );
+						} catch ( e ) {
+							return { state: "parsererror", error: conv ? e : "No conversion from " + prev + " to " + current };
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return { state: "success", data: response };
+}
+// Install script dataType
+jQuery.ajaxSetup({
+	accepts: {
+		script: "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript"
+	},
+	contents: {
+		script: /(?:java|ecma)script/
+	},
+	converters: {
+		"text script": function( text ) {
+			jQuery.globalEval( text );
+			return text;
+		}
+	}
+});
+
+// Handle cache's special case and global
+jQuery.ajaxPrefilter( "script", function( s ) {
+	if ( s.cache === undefined ) {
+		s.cache = false;
+	}
+	if ( s.crossDomain ) {
+		s.type = "GET";
+		s.global = false;
+	}
+});
+
+// Bind script tag hack transport
+jQuery.ajaxTransport( "script", function(s) {
+
+	// This transport only deals with cross domain requests
+	if ( s.crossDomain ) {
+
+		var script,
+			head = document.head || jQuery("head")[0] || document.documentElement;
+
+		return {
+
+			send: function( _, callback ) {
+
+				script = document.createElement("script");
+
+				script.async = true;
+
+				if ( s.scriptCharset ) {
+					script.charset = s.scriptCharset;
+				}
+
+				script.src = s.url;
+
+				// Attach handlers for all browsers
+				script.onload = script.onreadystatechange = function( _, isAbort ) {
+
+					if ( isAbort || !script.readyState || /loaded|complete/.test( script.readyState ) ) {
+
+						// Handle memory leak in IE
+						script.onload = script.onreadystatechange = null;
+
+						// Remove the script
+						if ( script.parentNode ) {
+							script.parentNode.removeChild( script );
+						}
+
+						// Dereference the script
+						script = null;
+
+						// Callback if not abort
+						if ( !isAbort ) {
+							callback( 200, "success" );
+						}
+					}
+				};
+
+				// Circumvent IE6 bugs with base elements (#2709 and #4378) by prepending
+				// Use native DOM manipulation to avoid our domManip AJAX trickery
+				head.insertBefore( script, head.firstChild );
+			},
+
+			abort: function() {
+				if ( script ) {
+					script
