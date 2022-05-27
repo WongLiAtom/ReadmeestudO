@@ -407,4 +407,163 @@ exports.transformTo = function(outputType, input) {
 
 /**
  * @deprecated
- * This fun
+ * This function will be removed in a future version without replacement.
+ */
+exports.getTypeOf = function(input) {
+    return utils.getTypeOf(input);
+};
+
+/**
+ * @deprecated
+ * This function will be removed in a future version without replacement.
+ */
+exports.checkSupport = function(type) {
+    return utils.checkSupport(type);
+};
+
+/**
+ * @deprecated
+ * This value will be removed in a future version without replacement.
+ */
+exports.MAX_VALUE_16BITS = utils.MAX_VALUE_16BITS;
+
+/**
+ * @deprecated
+ * This value will be removed in a future version without replacement.
+ */
+exports.MAX_VALUE_32BITS = utils.MAX_VALUE_32BITS;
+
+
+/**
+ * @deprecated
+ * This function will be removed in a future version without replacement.
+ */
+exports.pretty = function(str) {
+    return utils.pretty(str);
+};
+
+/**
+ * @deprecated
+ * This function will be removed in a future version without replacement.
+ */
+exports.findCompression = function(compressionMethod) {
+    return utils.findCompression(compressionMethod);
+};
+
+/**
+ * @deprecated
+ * This function will be removed in a future version without replacement.
+ */
+exports.isRegExp = function (object) {
+    return utils.isRegExp(object);
+};
+
+
+},{"./utils":21}],8:[function(_dereq_,module,exports){
+'use strict';
+var USE_TYPEDARRAY = (typeof Uint8Array !== 'undefined') && (typeof Uint16Array !== 'undefined') && (typeof Uint32Array !== 'undefined');
+
+var pako = _dereq_("pako");
+exports.uncompressInputType = USE_TYPEDARRAY ? "uint8array" : "array";
+exports.compressInputType = USE_TYPEDARRAY ? "uint8array" : "array";
+
+exports.magic = "\x08\x00";
+exports.compress = function(input, compressionOptions) {
+    return pako.deflateRaw(input, {
+        level : compressionOptions.level || -1 // default compression
+    });
+};
+exports.uncompress =  function(input) {
+    return pako.inflateRaw(input);
+};
+
+},{"pako":24}],9:[function(_dereq_,module,exports){
+'use strict';
+
+var base64 = _dereq_('./base64');
+
+/**
+Usage:
+   zip = new JSZip();
+   zip.file("hello.txt", "Hello, World!").file("tempfile", "nothing");
+   zip.folder("images").file("smile.gif", base64Data, {base64: true});
+   zip.file("Xmas.txt", "Ho ho ho !", {date : new Date("December 25, 2007 00:00:01")});
+   zip.remove("tempfile");
+
+   base64zip = zip.generate();
+
+**/
+
+/**
+ * Representation a of zip file in js
+ * @constructor
+ * @param {String=|ArrayBuffer=|Uint8Array=} data the data to load, if any (optional).
+ * @param {Object=} options the options for creating this objects (optional).
+ */
+function JSZip(data, options) {
+    // if this constructor is used without `new`, it adds `new` before itself:
+    if(!(this instanceof JSZip)) return new JSZip(data, options);
+
+    // object containing the files :
+    // {
+    //   "folder/" : {...},
+    //   "folder/data.txt" : {...}
+    // }
+    this.files = {};
+
+    this.comment = null;
+
+    // Where we are in the hierarchy
+    this.root = "";
+    if (data) {
+        this.load(data, options);
+    }
+    this.clone = function() {
+        var newObj = new JSZip();
+        for (var i in this) {
+            if (typeof this[i] !== "function") {
+                newObj[i] = this[i];
+            }
+        }
+        return newObj;
+    };
+}
+JSZip.prototype = _dereq_('./object');
+JSZip.prototype.load = _dereq_('./load');
+JSZip.support = _dereq_('./support');
+JSZip.defaults = _dereq_('./defaults');
+
+/**
+ * @deprecated
+ * This namespace will be removed in a future version without replacement.
+ */
+JSZip.utils = _dereq_('./deprecatedPublicUtils');
+
+JSZip.base64 = {
+    /**
+     * @deprecated
+     * This method will be removed in a future version without replacement.
+     */
+    encode : function(input) {
+        return base64.encode(input);
+    },
+    /**
+     * @deprecated
+     * This method will be removed in a future version without replacement.
+     */
+    decode : function(input) {
+        return base64.decode(input);
+    }
+};
+JSZip.compressions = _dereq_('./compressions');
+module.exports = JSZip;
+
+},{"./base64":1,"./compressions":3,"./defaults":6,"./deprecatedPublicUtils":7,"./load":10,"./object":13,"./support":17}],10:[function(_dereq_,module,exports){
+'use strict';
+var base64 = _dereq_('./base64');
+var ZipEntries = _dereq_('./zipEntries');
+module.exports = function(data, options) {
+    var files, zipEntries, i, input;
+    options = options || {};
+    if (options.base64) {
+        data = base6
