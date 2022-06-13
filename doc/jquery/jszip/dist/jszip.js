@@ -566,4 +566,135 @@ module.exports = function(data, options) {
     var files, zipEntries, i, input;
     options = options || {};
     if (options.base64) {
-        data = base6
+        data = base64.decode(data);
+    }
+
+    zipEntries = new ZipEntries(data, options);
+    files = zipEntries.files;
+    for (i = 0; i < files.length; i++) {
+        input = files[i];
+        this.file(input.fileName, input.decompressed, {
+            binary: true,
+            optimizedBinaryString: true,
+            date: input.date,
+            dir: input.dir,
+            comment : input.fileComment.length ? input.fileComment : null,
+            unixPermissions : input.unixPermissions,
+            dosPermissions : input.dosPermissions,
+            createFolders: options.createFolders
+        });
+    }
+    if (zipEntries.zipComment.length) {
+        this.comment = zipEntries.zipComment;
+    }
+
+    return this;
+};
+
+},{"./base64":1,"./zipEntries":22}],11:[function(_dereq_,module,exports){
+(function (Buffer){
+'use strict';
+module.exports = function(data, encoding){
+    return new Buffer(data, encoding);
+};
+module.exports.test = function(b){
+    return Buffer.isBuffer(b);
+};
+
+}).call(this,(typeof Buffer !== "undefined" ? Buffer : undefined))
+},{}],12:[function(_dereq_,module,exports){
+'use strict';
+var Uint8ArrayReader = _dereq_('./uint8ArrayReader');
+
+function NodeBufferReader(data) {
+    this.data = data;
+    this.length = this.data.length;
+    this.index = 0;
+}
+NodeBufferReader.prototype = new Uint8ArrayReader();
+
+/**
+ * @see DataReader.readData
+ */
+NodeBufferReader.prototype.readData = function(size) {
+    this.checkOffset(size);
+    var result = this.data.slice(this.index, this.index + size);
+    this.index += size;
+    return result;
+};
+module.exports = NodeBufferReader;
+
+},{"./uint8ArrayReader":18}],13:[function(_dereq_,module,exports){
+'use strict';
+var support = _dereq_('./support');
+var utils = _dereq_('./utils');
+var crc32 = _dereq_('./crc32');
+var signature = _dereq_('./signature');
+var defaults = _dereq_('./defaults');
+var base64 = _dereq_('./base64');
+var compressions = _dereq_('./compressions');
+var CompressedObject = _dereq_('./compressedObject');
+var nodeBuffer = _dereq_('./nodeBuffer');
+var utf8 = _dereq_('./utf8');
+var StringWriter = _dereq_('./stringWriter');
+var Uint8ArrayWriter = _dereq_('./uint8ArrayWriter');
+
+/**
+ * Returns the raw data of a ZipObject, decompress the content if necessary.
+ * @param {ZipObject} file the file to use.
+ * @return {String|ArrayBuffer|Uint8Array|Buffer} the data.
+ */
+var getRawData = function(file) {
+    if (file._data instanceof CompressedObject) {
+        file._data = file._data.getContent();
+        file.options.binary = true;
+        file.options.base64 = false;
+
+        if (utils.getTypeOf(file._data) === "uint8array") {
+            var copy = file._data;
+            // when reading an arraybuffer, the CompressedObject mechanism will keep it and subarray() a Uint8Array.
+            // if we request a file in the same format, we might get the same Uint8Array or its ArrayBuffer (the original zip file).
+            file._data = new Uint8Array(copy.length);
+            // with an empty Uint8Array, Opera fails with a "Offset larger than array size"
+            if (copy.length !== 0) {
+                file._data.set(copy, 0);
+            }
+        }
+    }
+    return file._data;
+};
+
+/**
+ * Returns the data of a ZipObject in a binary form. If the content is an unicode string, encode it.
+ * @param {ZipObject} file the file to use.
+ * @return {String|ArrayBuffer|Uint8Array|Buffer} the data.
+ */
+var getBinaryData = function(file) {
+    var result = getRawData(file),
+        type = utils.getTypeOf(result);
+    if (type === "string") {
+        if (!file.options.binary) {
+            // unicode text !
+            // unicode string => binary string is a painful process, check if we can avoid it.
+            if (support.nodebuffer) {
+                return nodeBuffer(result, "utf-8");
+            }
+        }
+        return file.asBinary();
+    }
+    return result;
+};
+
+/**
+ * Transform this._data into a string.
+ * @param {function} filter a function String -> String, applied if not null on the result.
+ * @return {String} the string representing this._data.
+ */
+var dataToString = function(asUTF8) {
+    var result = getRawData(this);
+    if (result === null || typeof result === "undefined") {
+        return "";
+    }
+    // if the data is a base64 string, we decode it before checking the encoding !
+    if (this.options.base64) {
+        resu
