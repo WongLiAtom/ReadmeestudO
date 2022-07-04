@@ -846,4 +846,144 @@ var prepareFileAttrs = function(o) {
  * @return {Object} the new file.
  */
 var fileAdd = function(name, data, o) {
-   
+    // be sure sub folders exist
+    var dataType = utils.getTypeOf(data),
+        parent;
+
+    o = prepareFileAttrs(o);
+
+    if (typeof o.unixPermissions === "string") {
+        o.unixPermissions = parseInt(o.unixPermissions, 8);
+    }
+
+    // UNX_IFDIR  0040000 see zipinfo.c
+    if (o.unixPermissions && (o.unixPermissions & 0x4000)) {
+        o.dir = true;
+    }
+    // Bit 4    Directory
+    if (o.dosPermissions && (o.dosPermissions & 0x0010)) {
+        o.dir = true;
+    }
+
+    if (o.dir) {
+        name = forceTrailingSlash(name);
+    }
+
+    if (o.createFolders && (parent = parentFolder(name))) {
+        folderAdd.call(this, parent, true);
+    }
+
+    if (o.dir || data === null || typeof data === "undefined") {
+        o.base64 = false;
+        o.binary = false;
+        data = null;
+        dataType = null;
+    }
+    else if (dataType === "string") {
+        if (o.binary && !o.base64) {
+            // optimizedBinaryString == true means that the file has already been filtered with a 0xFF mask
+            if (o.optimizedBinaryString !== true) {
+                // this is a string, not in a base64 format.
+                // Be sure that this is a correct "binary string"
+                data = utils.string2binary(data);
+            }
+        }
+    }
+    else { // arraybuffer, uint8array, ...
+        o.base64 = false;
+        o.binary = true;
+
+        if (!dataType && !(data instanceof CompressedObject)) {
+            throw new Error("The data of '" + name + "' is in an unsupported format !");
+        }
+
+        // special case : it's way easier to work with Uint8Array than with ArrayBuffer
+        if (dataType === "arraybuffer") {
+            data = utils.transformTo("uint8array", data);
+        }
+    }
+
+    var object = new ZipObject(name, data, o);
+    this.files[name] = object;
+    return object;
+};
+
+/**
+ * Find the parent folder of the path.
+ * @private
+ * @param {string} path the path to use
+ * @return {string} the parent folder, or ""
+ */
+var parentFolder = function (path) {
+    if (path.slice(-1) == '/') {
+        path = path.substring(0, path.length - 1);
+    }
+    var lastSlash = path.lastIndexOf('/');
+    return (lastSlash > 0) ? path.substring(0, lastSlash) : "";
+};
+
+
+/**
+ * Returns the path with a slash at the end.
+ * @private
+ * @param {String} path the path to check.
+ * @return {String} the path with a trailing slash.
+ */
+var forceTrailingSlash = function(path) {
+    // Check the name ends with a /
+    if (path.slice(-1) != "/") {
+        path += "/"; // IE doesn't like substr(-1)
+    }
+    return path;
+};
+/**
+ * Add a (sub) folder in the current folder.
+ * @private
+ * @param {string} name the folder's name
+ * @param {boolean=} [createFolders] If true, automatically create sub
+ *  folders. Defaults to false.
+ * @return {Object} the new folder.
+ */
+var folderAdd = function(name, createFolders) {
+    createFolders = (typeof createFolders !== 'undefined') ? createFolders : false;
+
+    name = forceTrailingSlash(name);
+
+    // Does this folder already exist?
+    if (!this.files[name]) {
+        fileAdd.call(this, name, null, {
+            dir: true,
+            createFolders: createFolders
+        });
+    }
+    return this.files[name];
+};
+
+/**
+ * Generate a JSZip.CompressedObject for a given zipOject.
+ * @param {ZipObject} file the object to read.
+ * @param {JSZip.compression} compression the compression to use.
+ * @param {Object} compressionOptions the options to use when compressing.
+ * @return {JSZip.CompressedObject} the compressed result.
+ */
+var generateCompressedObjectFrom = function(file, compression, compressionOptions) {
+    var result = new CompressedObject(),
+        content;
+
+    // the data has not been decompressed, we might reuse things !
+    if (file._data instanceof CompressedObject) {
+        result.uncompressedSize = file._data.uncompressedSize;
+        result.crc32 = file._data.crc32;
+
+        if (result.uncompressedSize === 0 || file.dir) {
+            compression = compressions['STORE'];
+            result.compressedContent = "";
+            result.crc32 = 0;
+        }
+        else if (file._data.compressionMethod === compression.magic) {
+            result.compressedContent = file._data.getCompressedContent();
+        }
+        else {
+            content = file._data.getContent();
+            // need to decompress / recompress
+            result.compressedContent = compression.compres
