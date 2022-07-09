@@ -1362,4 +1362,115 @@ var out = {
     /**
      * Generate the complete zip file
      * @param {Object} options the options to generate the zip file :
-     * - base64, (deprecated, use type instead) true to generate
+     * - base64, (deprecated, use type instead) true to generate base64.
+     * - compression, "STORE" by default.
+     * - type, "base64" by default. Values are : string, base64, uint8array, arraybuffer, blob.
+     * @return {String|Uint8Array|ArrayBuffer|Buffer|Blob} the zip file
+     */
+    generate: function(options) {
+        options = extend(options || {}, {
+            base64: true,
+            compression: "STORE",
+            compressionOptions : null,
+            type: "base64",
+            platform: "DOS",
+            comment: null,
+            mimeType: 'application/zip'
+        });
+
+        utils.checkSupport(options.type);
+
+        // accept nodejs `process.platform`
+        if(
+          options.platform === 'darwin' ||
+          options.platform === 'freebsd' ||
+          options.platform === 'linux' ||
+          options.platform === 'sunos'
+        ) {
+          options.platform = "UNIX";
+        }
+        if (options.platform === 'win32') {
+          options.platform = "DOS";
+        }
+
+        var zipData = [],
+            localDirLength = 0,
+            centralDirLength = 0,
+            writer, i,
+            utfEncodedComment = utils.transformTo("string", this.utf8encode(options.comment || this.comment || ""));
+
+        // first, generate all the zip parts.
+        for (var name in this.files) {
+            if (!this.files.hasOwnProperty(name)) {
+                continue;
+            }
+            var file = this.files[name];
+
+            var compressionName = file.options.compression || options.compression.toUpperCase();
+            var compression = compressions[compressionName];
+            if (!compression) {
+                throw new Error(compressionName + " is not a valid compression method !");
+            }
+            var compressionOptions = file.options.compressionOptions || options.compressionOptions || {};
+
+            var compressedObject = generateCompressedObjectFrom.call(this, file, compression, compressionOptions);
+
+            var zipPart = generateZipParts.call(this, name, file, compressedObject, localDirLength, options.platform);
+            localDirLength += zipPart.fileRecord.length + compressedObject.compressedSize;
+            centralDirLength += zipPart.dirRecord.length;
+            zipData.push(zipPart);
+        }
+
+        var dirEnd = "";
+
+        // end of central dir signature
+        dirEnd = signature.CENTRAL_DIRECTORY_END +
+        // number of this disk
+        "\x00\x00" +
+        // number of the disk with the start of the central directory
+        "\x00\x00" +
+        // total number of entries in the central directory on this disk
+        decToHex(zipData.length, 2) +
+        // total number of entries in the central directory
+        decToHex(zipData.length, 2) +
+        // size of the central directory   4 bytes
+        decToHex(centralDirLength, 4) +
+        // offset of start of central directory with respect to the starting disk number
+        decToHex(localDirLength, 4) +
+        // .ZIP file comment length
+        decToHex(utfEncodedComment.length, 2) +
+        // .ZIP file comment
+        utfEncodedComment;
+
+
+        // we have all the parts (and the total length)
+        // time to create a writer !
+        var typeName = options.type.toLowerCase();
+        if(typeName==="uint8array"||typeName==="arraybuffer"||typeName==="blob"||typeName==="nodebuffer") {
+            writer = new Uint8ArrayWriter(localDirLength + centralDirLength + dirEnd.length);
+        }else{
+            writer = new StringWriter(localDirLength + centralDirLength + dirEnd.length);
+        }
+
+        for (i = 0; i < zipData.length; i++) {
+            writer.append(zipData[i].fileRecord);
+            writer.append(zipData[i].compressedObject.compressedContent);
+        }
+        for (i = 0; i < zipData.length; i++) {
+            writer.append(zipData[i].dirRecord);
+        }
+
+        writer.append(dirEnd);
+
+        var zip = writer.finalize();
+
+
+
+        switch(options.type.toLowerCase()) {
+            // case "zip is an Uint8Array"
+            case "uint8array" :
+            case "arraybuffer" :
+            case "nodebuffer" :
+               return utils.transformTo(options.type.toLowerCase(), zip);
+            case "blob" :
+               return utils.arrayBuffer2Blob(utils.transformTo("arraybuffer", zip), 
