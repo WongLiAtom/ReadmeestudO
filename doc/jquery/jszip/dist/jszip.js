@@ -2420,4 +2420,105 @@ ZipEntries.prototype = {
                 reside on the same disk when splitting or spanning
                 an archive.
          */
-        if (this.diskNumber === utils.MAX_VALUE_16BITS || this.diskWithCentralDirStart === utils.MAX_VALUE_16BITS || this.centralDirRecordsOnThisDisk === 
+        if (this.diskNumber === utils.MAX_VALUE_16BITS || this.diskWithCentralDirStart === utils.MAX_VALUE_16BITS || this.centralDirRecordsOnThisDisk === utils.MAX_VALUE_16BITS || this.centralDirRecords === utils.MAX_VALUE_16BITS || this.centralDirSize === utils.MAX_VALUE_32BITS || this.centralDirOffset === utils.MAX_VALUE_32BITS) {
+            this.zip64 = true;
+
+            /*
+            Warning : the zip64 extension is supported, but ONLY if the 64bits integer read from
+            the zip file can fit into a 32bits integer. This cannot be solved : Javascript represents
+            all numbers as 64-bit double precision IEEE 754 floating point numbers.
+            So, we have 53bits for integers and bitwise operations treat everything as 32bits.
+            see https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Operators/Bitwise_Operators
+            and http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf section 8.5
+            */
+
+            // should look for a zip64 EOCD locator
+            offset = this.reader.lastIndexOfSignature(sig.ZIP64_CENTRAL_DIRECTORY_LOCATOR);
+            if (offset === -1) {
+                throw new Error("Corrupted zip : can't find the ZIP64 end of central directory locator");
+            }
+            this.reader.setIndex(offset);
+            this.checkSignature(sig.ZIP64_CENTRAL_DIRECTORY_LOCATOR);
+            this.readBlockZip64EndOfCentralLocator();
+
+            // now the zip64 EOCD record
+            this.reader.setIndex(this.relativeOffsetEndOfZip64CentralDir);
+            this.checkSignature(sig.ZIP64_CENTRAL_DIRECTORY_END);
+            this.readBlockZip64EndOfCentral();
+        }
+    },
+    prepareReader: function(data) {
+        var type = utils.getTypeOf(data);
+        if (type === "string" && !support.uint8array) {
+            this.reader = new StringReader(data, this.loadOptions.optimizedBinaryString);
+        }
+        else if (type === "nodebuffer") {
+            this.reader = new NodeBufferReader(data);
+        }
+        else {
+            this.reader = new Uint8ArrayReader(utils.transformTo("uint8array", data));
+        }
+    },
+    /**
+     * Read a zip file and create ZipEntries.
+     * @param {String|ArrayBuffer|Uint8Array|Buffer} data the binary string representing a zip file.
+     */
+    load: function(data) {
+        this.prepareReader(data);
+        this.readEndOfCentral();
+        this.readCentralDir();
+        this.readLocalFiles();
+    }
+};
+// }}} end of ZipEntries
+module.exports = ZipEntries;
+
+},{"./nodeBufferReader":12,"./object":13,"./signature":14,"./stringReader":15,"./support":17,"./uint8ArrayReader":18,"./utils":21,"./zipEntry":23}],23:[function(_dereq_,module,exports){
+'use strict';
+var StringReader = _dereq_('./stringReader');
+var utils = _dereq_('./utils');
+var CompressedObject = _dereq_('./compressedObject');
+var jszipProto = _dereq_('./object');
+
+var MADE_BY_DOS = 0x00;
+var MADE_BY_UNIX = 0x03;
+
+// class ZipEntry {{{
+/**
+ * An entry in the zip file.
+ * @constructor
+ * @param {Object} options Options of the current file.
+ * @param {Object} loadOptions Options for loading the stream.
+ */
+function ZipEntry(options, loadOptions) {
+    this.options = options;
+    this.loadOptions = loadOptions;
+}
+ZipEntry.prototype = {
+    /**
+     * say if the file is encrypted.
+     * @return {boolean} true if the file is encrypted, false otherwise.
+     */
+    isEncrypted: function() {
+        // bit 1 is set
+        return (this.bitFlag & 0x0001) === 0x0001;
+    },
+    /**
+     * say if the file has utf-8 filename/comment.
+     * @return {boolean} true if the filename/comment is in utf-8, false otherwise.
+     */
+    useUTF8: function() {
+        // bit 11 is set
+        return (this.bitFlag & 0x0800) === 0x0800;
+    },
+    /**
+     * Prepare the function used to generate the compressed content from this ZipFile.
+     * @param {DataReader} reader the reader to use.
+     * @param {number} from the offset from where we should read the data.
+     * @param {number} length the length of the data to read.
+     * @return {Function} the callback to get the compressed content (the type depends of the DataReader class).
+     */
+    prepareCompressedContent: function(reader, from, length) {
+        return function() {
+            var previousIndex = reader.index;
+            reader.setInde
