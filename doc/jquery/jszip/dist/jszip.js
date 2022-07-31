@@ -3015,4 +3015,167 @@ Deflate.prototype.push = function(data, mode) {
     if (strm.avail_out === 0) {
       strm.output = new utils.Buf8(chunkSize);
       strm.next_out = 0;
-   
+      strm.avail_out = chunkSize;
+    }
+    status = zlib_deflate.deflate(strm, _mode);    /* no bad return value */
+
+    if (status !== Z_STREAM_END && status !== Z_OK) {
+      this.onEnd(status);
+      this.ended = true;
+      return false;
+    }
+    if (strm.avail_out === 0 || (strm.avail_in === 0 && _mode === Z_FINISH)) {
+      if (this.options.to === 'string') {
+        this.onData(strings.buf2binstring(utils.shrinkBuf(strm.output, strm.next_out)));
+      } else {
+        this.onData(utils.shrinkBuf(strm.output, strm.next_out));
+      }
+    }
+  } while ((strm.avail_in > 0 || strm.avail_out === 0) && status !== Z_STREAM_END);
+
+  // Finalize on the last chunk.
+  if (_mode === Z_FINISH) {
+    status = zlib_deflate.deflateEnd(this.strm);
+    this.onEnd(status);
+    this.ended = true;
+    return status === Z_OK;
+  }
+
+  return true;
+};
+
+
+/**
+ * Deflate#onData(chunk) -> Void
+ * - chunk (Uint8Array|Array|String): ouput data. Type of array depends
+ *   on js engine support. When string output requested, each chunk
+ *   will be string.
+ *
+ * By default, stores data blocks in `chunks[]` property and glue
+ * those in `onEnd`. Override this handler, if you need another behaviour.
+ **/
+Deflate.prototype.onData = function(chunk) {
+  this.chunks.push(chunk);
+};
+
+
+/**
+ * Deflate#onEnd(status) -> Void
+ * - status (Number): deflate status. 0 (Z_OK) on success,
+ *   other if not.
+ *
+ * Called once after you tell deflate that input stream complete
+ * or error happenned. By default - join collected chunks,
+ * free memory and fill `results` / `err` properties.
+ **/
+Deflate.prototype.onEnd = function(status) {
+  // On success - join
+  if (status === Z_OK) {
+    if (this.options.to === 'string') {
+      this.result = this.chunks.join('');
+    } else {
+      this.result = utils.flattenChunks(this.chunks);
+    }
+  }
+  this.chunks = [];
+  this.err = status;
+  this.msg = this.strm.msg;
+};
+
+
+/**
+ * deflate(data[, options]) -> Uint8Array|Array|String
+ * - data (Uint8Array|Array|String): input data to compress.
+ * - options (Object): zlib deflate options.
+ *
+ * Compress `data` with deflate alrorythm and `options`.
+ *
+ * Supported options are:
+ *
+ * - level
+ * - windowBits
+ * - memLevel
+ * - strategy
+ *
+ * [http://zlib.net/manual.html#Advanced](http://zlib.net/manual.html#Advanced)
+ * for more information on these.
+ *
+ * Sugar (options):
+ *
+ * - `raw` (Boolean) - say that we work with raw stream, if you don't wish to specify
+ *   negative windowBits implicitly.
+ * - `to` (String) - if equal to 'string', then result will be "binary string"
+ *    (each char code [0..255])
+ *
+ * ##### Example:
+ *
+ * ```javascript
+ * var pako = require('pako')
+ *   , data = Uint8Array([1,2,3,4,5,6,7,8,9]);
+ *
+ * console.log(pako.deflate(data));
+ * ```
+ **/
+function deflate(input, options) {
+  var deflator = new Deflate(options);
+
+  deflator.push(input, true);
+
+  // That will never happens, if you don't cheat with options :)
+  if (deflator.err) { throw deflator.msg; }
+
+  return deflator.result;
+}
+
+
+/**
+ * deflateRaw(data[, options]) -> Uint8Array|Array|String
+ * - data (Uint8Array|Array|String): input data to compress.
+ * - options (Object): zlib deflate options.
+ *
+ * The same as [[deflate]], but creates raw data, without wrapper
+ * (header and adler32 crc).
+ **/
+function deflateRaw(input, options) {
+  options = options || {};
+  options.raw = true;
+  return deflate(input, options);
+}
+
+
+/**
+ * gzip(data[, options]) -> Uint8Array|Array|String
+ * - data (Uint8Array|Array|String): input data to compress.
+ * - options (Object): zlib deflate options.
+ *
+ * The same as [[deflate]], but create gzip wrapper instead of
+ * deflate one.
+ **/
+function gzip(input, options) {
+  options = options || {};
+  options.gzip = true;
+  return deflate(input, options);
+}
+
+
+exports.Deflate = Deflate;
+exports.deflate = deflate;
+exports.deflateRaw = deflateRaw;
+exports.gzip = gzip;
+},{"./utils/common":27,"./utils/strings":28,"./zlib/deflate.js":32,"./zlib/messages":37,"./zlib/zstream":39}],26:[function(_dereq_,module,exports){
+'use strict';
+
+
+var zlib_inflate = _dereq_('./zlib/inflate.js');
+var utils = _dereq_('./utils/common');
+var strings = _dereq_('./utils/strings');
+var c = _dereq_('./zlib/constants');
+var msg = _dereq_('./zlib/messages');
+var zstream = _dereq_('./zlib/zstream');
+var gzheader = _dereq_('./zlib/gzheader');
+
+
+/**
+ * class Inflate
+ *
+ * Generic JS-sty
