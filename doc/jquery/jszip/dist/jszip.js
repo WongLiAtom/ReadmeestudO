@@ -3476,4 +3476,180 @@ Inflate.prototype.onEnd = function(status) {
  *
  * ```javascript
  * var pako = require('pako')
- * 
+ *   , input = pako.deflate([1,2,3,4,5,6,7,8,9])
+ *   , output;
+ *
+ * try {
+ *   output = pako.inflate(input);
+ * } catch (err)
+ *   console.log(err);
+ * }
+ * ```
+ **/
+function inflate(input, options) {
+  var inflator = new Inflate(options);
+
+  inflator.push(input, true);
+
+  // That will never happens, if you don't cheat with options :)
+  if (inflator.err) { throw inflator.msg; }
+
+  return inflator.result;
+}
+
+
+/**
+ * inflateRaw(data[, options]) -> Uint8Array|Array|String
+ * - data (Uint8Array|Array|String): input data to decompress.
+ * - options (Object): zlib inflate options.
+ *
+ * The same as [[inflate]], but creates raw data, without wrapper
+ * (header and adler32 crc).
+ **/
+function inflateRaw(input, options) {
+  options = options || {};
+  options.raw = true;
+  return inflate(input, options);
+}
+
+
+/**
+ * ungzip(data[, options]) -> Uint8Array|Array|String
+ * - data (Uint8Array|Array|String): input data to decompress.
+ * - options (Object): zlib inflate options.
+ *
+ * Just shortcut to [[inflate]], because it autodetects format
+ * by header.content. Done for convenience.
+ **/
+
+
+exports.Inflate = Inflate;
+exports.inflate = inflate;
+exports.inflateRaw = inflateRaw;
+exports.ungzip  = inflate;
+
+},{"./utils/common":27,"./utils/strings":28,"./zlib/constants":30,"./zlib/gzheader":33,"./zlib/inflate.js":35,"./zlib/messages":37,"./zlib/zstream":39}],27:[function(_dereq_,module,exports){
+'use strict';
+
+
+var TYPED_OK =  (typeof Uint8Array !== 'undefined') &&
+                (typeof Uint16Array !== 'undefined') &&
+                (typeof Int32Array !== 'undefined');
+
+
+exports.assign = function (obj /*from1, from2, from3, ...*/) {
+  var sources = Array.prototype.slice.call(arguments, 1);
+  while (sources.length) {
+    var source = sources.shift();
+    if (!source) { continue; }
+
+    if (typeof(source) !== 'object') {
+      throw new TypeError(source + 'must be non-object');
+    }
+
+    for (var p in source) {
+      if (source.hasOwnProperty(p)) {
+        obj[p] = source[p];
+      }
+    }
+  }
+
+  return obj;
+};
+
+
+// reduce buffer size, avoiding mem copy
+exports.shrinkBuf = function (buf, size) {
+  if (buf.length === size) { return buf; }
+  if (buf.subarray) { return buf.subarray(0, size); }
+  buf.length = size;
+  return buf;
+};
+
+
+var fnTyped = {
+  arraySet: function (dest, src, src_offs, len, dest_offs) {
+    if (src.subarray && dest.subarray) {
+      dest.set(src.subarray(src_offs, src_offs+len), dest_offs);
+      return;
+    }
+    // Fallback to ordinary array
+    for(var i=0; i<len; i++) {
+      dest[dest_offs + i] = src[src_offs + i];
+    }
+  },
+  // Join array of chunks to single array.
+  flattenChunks: function(chunks) {
+    var i, l, len, pos, chunk, result;
+
+    // calculate data length
+    len = 0;
+    for (i=0, l=chunks.length; i<l; i++) {
+      len += chunks[i].length;
+    }
+
+    // join chunks
+    result = new Uint8Array(len);
+    pos = 0;
+    for (i=0, l=chunks.length; i<l; i++) {
+      chunk = chunks[i];
+      result.set(chunk, pos);
+      pos += chunk.length;
+    }
+
+    return result;
+  }
+};
+
+var fnUntyped = {
+  arraySet: function (dest, src, src_offs, len, dest_offs) {
+    for(var i=0; i<len; i++) {
+      dest[dest_offs + i] = src[src_offs + i];
+    }
+  },
+  // Join array of chunks to single array.
+  flattenChunks: function(chunks) {
+    return [].concat.apply([], chunks);
+  }
+};
+
+
+// Enable/Disable typed arrays use, for testing
+//
+exports.setTyped = function (on) {
+  if (on) {
+    exports.Buf8  = Uint8Array;
+    exports.Buf16 = Uint16Array;
+    exports.Buf32 = Int32Array;
+    exports.assign(exports, fnTyped);
+  } else {
+    exports.Buf8  = Array;
+    exports.Buf16 = Array;
+    exports.Buf32 = Array;
+    exports.assign(exports, fnUntyped);
+  }
+};
+
+exports.setTyped(TYPED_OK);
+},{}],28:[function(_dereq_,module,exports){
+// String encode/decode helpers
+'use strict';
+
+
+var utils = _dereq_('./common');
+
+
+// Quick check if we can use fast array to bin string conversion
+//
+// - apply(Array) can fail on Android 2.2
+// - apply(Uint8Array) can fail on iOS 5.1 Safary
+//
+var STR_APPLY_OK = true;
+var STR_APPLY_UIA_OK = true;
+
+try { String.fromCharCode.apply(null, [0]); } catch(__) { STR_APPLY_OK = false; }
+try { String.fromCharCode.apply(null, new Uint8Array(1)); } catch(__) { STR_APPLY_UIA_OK = false; }
+
+
+// Table with utf8 lengths (calculated by first byte of sequence)
+// Note, that 5 & 6-byte values and so
