@@ -3323,4 +3323,157 @@ var Inflate = function(options) {
  * format is detected automatically). Also, don't skip last param and always
  * use the same type in your code (boolean or number). That will improve JS speed.
  *
- * For regular `A
+ * For regular `Array`-s make sure all elements are [0..255].
+ *
+ * ##### Example
+ *
+ * ```javascript
+ * push(chunk, false); // push one of data chunks
+ * ...
+ * push(chunk, true);  // push last chunk
+ * ```
+ **/
+Inflate.prototype.push = function(data, mode) {
+  var strm = this.strm;
+  var chunkSize = this.options.chunkSize;
+  var status, _mode;
+  var next_out_utf8, tail, utf8str;
+
+  if (this.ended) { return false; }
+  _mode = (mode === ~~mode) ? mode : ((mode === true) ? c.Z_FINISH : c.Z_NO_FLUSH);
+
+  // Convert data if needed
+  if (typeof data === 'string') {
+    // Only binary strings can be decompressed on practice
+    strm.input = strings.binstring2buf(data);
+  } else {
+    strm.input = data;
+  }
+
+  strm.next_in = 0;
+  strm.avail_in = strm.input.length;
+
+  do {
+    if (strm.avail_out === 0) {
+      strm.output = new utils.Buf8(chunkSize);
+      strm.next_out = 0;
+      strm.avail_out = chunkSize;
+    }
+
+    status = zlib_inflate.inflate(strm, c.Z_NO_FLUSH);    /* no bad return value */
+
+    if (status !== c.Z_STREAM_END && status !== c.Z_OK) {
+      this.onEnd(status);
+      this.ended = true;
+      return false;
+    }
+
+    if (strm.next_out) {
+      if (strm.avail_out === 0 || status === c.Z_STREAM_END || (strm.avail_in === 0 && _mode === c.Z_FINISH)) {
+
+        if (this.options.to === 'string') {
+
+          next_out_utf8 = strings.utf8border(strm.output, strm.next_out);
+
+          tail = strm.next_out - next_out_utf8;
+          utf8str = strings.buf2string(strm.output, next_out_utf8);
+
+          // move tail
+          strm.next_out = tail;
+          strm.avail_out = chunkSize - tail;
+          if (tail) { utils.arraySet(strm.output, strm.output, next_out_utf8, tail, 0); }
+
+          this.onData(utf8str);
+
+        } else {
+          this.onData(utils.shrinkBuf(strm.output, strm.next_out));
+        }
+      }
+    }
+  } while ((strm.avail_in > 0) && status !== c.Z_STREAM_END);
+
+  if (status === c.Z_STREAM_END) {
+    _mode = c.Z_FINISH;
+  }
+  // Finalize on the last chunk.
+  if (_mode === c.Z_FINISH) {
+    status = zlib_inflate.inflateEnd(this.strm);
+    this.onEnd(status);
+    this.ended = true;
+    return status === c.Z_OK;
+  }
+
+  return true;
+};
+
+
+/**
+ * Inflate#onData(chunk) -> Void
+ * - chunk (Uint8Array|Array|String): ouput data. Type of array depends
+ *   on js engine support. When string output requested, each chunk
+ *   will be string.
+ *
+ * By default, stores data blocks in `chunks[]` property and glue
+ * those in `onEnd`. Override this handler, if you need another behaviour.
+ **/
+Inflate.prototype.onData = function(chunk) {
+  this.chunks.push(chunk);
+};
+
+
+/**
+ * Inflate#onEnd(status) -> Void
+ * - status (Number): inflate status. 0 (Z_OK) on success,
+ *   other if not.
+ *
+ * Called once after you tell inflate that input stream complete
+ * or error happenned. By default - join collected chunks,
+ * free memory and fill `results` / `err` properties.
+ **/
+Inflate.prototype.onEnd = function(status) {
+  // On success - join
+  if (status === c.Z_OK) {
+    if (this.options.to === 'string') {
+      // Glue & convert here, until we teach pako to send
+      // utf8 alligned strings to onData
+      this.result = this.chunks.join('');
+    } else {
+      this.result = utils.flattenChunks(this.chunks);
+    }
+  }
+  this.chunks = [];
+  this.err = status;
+  this.msg = this.strm.msg;
+};
+
+
+/**
+ * inflate(data[, options]) -> Uint8Array|Array|String
+ * - data (Uint8Array|Array|String): input data to decompress.
+ * - options (Object): zlib inflate options.
+ *
+ * Decompress `data` with inflate/ungzip and `options`. Autodetect
+ * format via wrapper header by default. That's why we don't provide
+ * separate `ungzip` method.
+ *
+ * Supported options are:
+ *
+ * - windowBits
+ *
+ * [http://zlib.net/manual.html#Advanced](http://zlib.net/manual.html#Advanced)
+ * for more information.
+ *
+ * Sugar (options):
+ *
+ * - `raw` (Boolean) - say that we work with raw stream, if you don't wish to specify
+ *   negative windowBits implicitly.
+ * - `to` (String) - if equal to 'string', then result will be converted
+ *   from utf8 to utf16 (javascript) string. When string output requested,
+ *   chunk length can differ from `chunkSize`, depending on content.
+ *
+ *
+ * ##### Example:
+ *
+ * ```javascript
+ * var pako = require('pako')
+ * 
