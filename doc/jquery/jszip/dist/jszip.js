@@ -2871,4 +2871,148 @@ var Z_DEFLATED  = 8;
  * new Deflate(options)
  * - options (Object): zlib deflate options.
  *
- * Creat
+ * Creates new deflator instance with specified params. Throws exception
+ * on bad params. Supported options:
+ *
+ * - `level`
+ * - `windowBits`
+ * - `memLevel`
+ * - `strategy`
+ *
+ * [http://zlib.net/manual.html#Advanced](http://zlib.net/manual.html#Advanced)
+ * for more information on these.
+ *
+ * Additional options, for internal needs:
+ *
+ * - `chunkSize` - size of generated data chunks (16K by default)
+ * - `raw` (Boolean) - do raw deflate
+ * - `gzip` (Boolean) - create gzip wrapper
+ * - `to` (String) - if equal to 'string', then result will be "binary string"
+ *    (each char code [0..255])
+ * - `header` (Object) - custom header for gzip
+ *   - `text` (Boolean) - true if compressed data believed to be text
+ *   - `time` (Number) - modification time, unix timestamp
+ *   - `os` (Number) - operation system code
+ *   - `extra` (Array) - array of bytes with extra data (max 65536)
+ *   - `name` (String) - file name (binary string)
+ *   - `comment` (String) - comment (binary string)
+ *   - `hcrc` (Boolean) - true if header crc should be added
+ *
+ * ##### Example:
+ *
+ * ```javascript
+ * var pako = require('pako')
+ *   , chunk1 = Uint8Array([1,2,3,4,5,6,7,8,9])
+ *   , chunk2 = Uint8Array([10,11,12,13,14,15,16,17,18,19]);
+ *
+ * var deflate = new pako.Deflate({ level: 3});
+ *
+ * deflate.push(chunk1, false);
+ * deflate.push(chunk2, true);  // true -> last chunk
+ *
+ * if (deflate.err) { throw new Error(deflate.err); }
+ *
+ * console.log(deflate.result);
+ * ```
+ **/
+var Deflate = function(options) {
+
+  this.options = utils.assign({
+    level: Z_DEFAULT_COMPRESSION,
+    method: Z_DEFLATED,
+    chunkSize: 16384,
+    windowBits: 15,
+    memLevel: 8,
+    strategy: Z_DEFAULT_STRATEGY,
+    to: ''
+  }, options || {});
+
+  var opt = this.options;
+
+  if (opt.raw && (opt.windowBits > 0)) {
+    opt.windowBits = -opt.windowBits;
+  }
+
+  else if (opt.gzip && (opt.windowBits > 0) && (opt.windowBits < 16)) {
+    opt.windowBits += 16;
+  }
+
+  this.err    = 0;      // error code, if happens (0 = Z_OK)
+  this.msg    = '';     // error message
+  this.ended  = false;  // used to avoid multiple onEnd() calls
+  this.chunks = [];     // chunks of compressed data
+
+  this.strm = new zstream();
+  this.strm.avail_out = 0;
+
+  var status = zlib_deflate.deflateInit2(
+    this.strm,
+    opt.level,
+    opt.method,
+    opt.windowBits,
+    opt.memLevel,
+    opt.strategy
+  );
+
+  if (status !== Z_OK) {
+    throw new Error(msg[status]);
+  }
+
+  if (opt.header) {
+    zlib_deflate.deflateSetHeader(this.strm, opt.header);
+  }
+};
+
+/**
+ * Deflate#push(data[, mode]) -> Boolean
+ * - data (Uint8Array|Array|String): input data. Strings will be converted to
+ *   utf8 byte sequence.
+ * - mode (Number|Boolean): 0..6 for corresponding Z_NO_FLUSH..Z_TREE modes.
+ *   See constants. Skipped or `false` means Z_NO_FLUSH, `true` meansh Z_FINISH.
+ *
+ * Sends input data to deflate pipe, generating [[Deflate#onData]] calls with
+ * new compressed chunks. Returns `true` on success. The last data block must have
+ * mode Z_FINISH (or `true`). That flush internal pending buffers and call
+ * [[Deflate#onEnd]].
+ *
+ * On fail call [[Deflate#onEnd]] with error code and return false.
+ *
+ * We strongly recommend to use `Uint8Array` on input for best speed (output
+ * array format is detected automatically). Also, don't skip last param and always
+ * use the same type in your code (boolean or number). That will improve JS speed.
+ *
+ * For regular `Array`-s make sure all elements are [0..255].
+ *
+ * ##### Example
+ *
+ * ```javascript
+ * push(chunk, false); // push one of data chunks
+ * ...
+ * push(chunk, true);  // push last chunk
+ * ```
+ **/
+Deflate.prototype.push = function(data, mode) {
+  var strm = this.strm;
+  var chunkSize = this.options.chunkSize;
+  var status, _mode;
+
+  if (this.ended) { return false; }
+
+  _mode = (mode === ~~mode) ? mode : ((mode === true) ? Z_FINISH : Z_NO_FLUSH);
+
+  // Convert data if needed
+  if (typeof data === 'string') {
+    // If we need to compress text, change encoding to utf8.
+    strm.input = strings.string2buf(data);
+  } else {
+    strm.input = data;
+  }
+
+  strm.next_in = 0;
+  strm.avail_in = strm.input.length;
+
+  do {
+    if (strm.avail_out === 0) {
+      strm.output = new utils.Buf8(chunkSize);
+      strm.next_out = 0;
+   
