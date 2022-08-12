@@ -5559,3 +5559,144 @@ function deflate(strm, flush) {
       return Z_OK;
     }
 
+    /* Make sure there is something to do and avoid duplicate consecutive
+     * flushes. For repeated and useless calls with Z_FINISH, we keep
+     * returning Z_STREAM_END instead of Z_BUF_ERROR.
+     */
+  } else if (strm.avail_in === 0 && rank(flush) <= rank(old_flush) &&
+    flush !== Z_FINISH) {
+    return err(strm, Z_BUF_ERROR);
+  }
+
+  /* User must not provide more input after the first FINISH: */
+  if (s.status === FINISH_STATE && strm.avail_in !== 0) {
+    return err(strm, Z_BUF_ERROR);
+  }
+
+  /* Start a new block or continue the current one.
+   */
+  if (strm.avail_in !== 0 || s.lookahead !== 0 ||
+    (flush !== Z_NO_FLUSH && s.status !== FINISH_STATE)) {
+    var bstate = (s.strategy === Z_HUFFMAN_ONLY) ? deflate_huff(s, flush) :
+      (s.strategy === Z_RLE ? deflate_rle(s, flush) :
+        configuration_table[s.level].func(s, flush));
+
+    if (bstate === BS_FINISH_STARTED || bstate === BS_FINISH_DONE) {
+      s.status = FINISH_STATE;
+    }
+    if (bstate === BS_NEED_MORE || bstate === BS_FINISH_STARTED) {
+      if (strm.avail_out === 0) {
+        s.last_flush = -1;
+        /* avoid BUF_ERROR next call, see above */
+      }
+      return Z_OK;
+      /* If flush != Z_NO_FLUSH && avail_out == 0, the next call
+       * of deflate should use the same flush parameter to make sure
+       * that the flush is complete. So we don't have to output an
+       * empty block here, this will be done at next call. This also
+       * ensures that for a very small output buffer, we emit at most
+       * one empty block.
+       */
+    }
+    if (bstate === BS_BLOCK_DONE) {
+      if (flush === Z_PARTIAL_FLUSH) {
+        trees._tr_align(s);
+      }
+      else if (flush !== Z_BLOCK) { /* FULL_FLUSH or SYNC_FLUSH */
+
+        trees._tr_stored_block(s, 0, 0, false);
+        /* For a full flush, this empty block will be recognized
+         * as a special marker by inflate_sync().
+         */
+        if (flush === Z_FULL_FLUSH) {
+          /*** CLEAR_HASH(s); ***/             /* forget history */
+          zero(s.head); // Fill with NIL (= 0);
+
+          if (s.lookahead === 0) {
+            s.strstart = 0;
+            s.block_start = 0;
+            s.insert = 0;
+          }
+        }
+      }
+      flush_pending(strm);
+      if (strm.avail_out === 0) {
+        s.last_flush = -1; /* avoid BUF_ERROR at next call, see above */
+        return Z_OK;
+      }
+    }
+  }
+  //Assert(strm->avail_out > 0, "bug2");
+  //if (strm.avail_out <= 0) { throw new Error("bug2");}
+
+  if (flush !== Z_FINISH) { return Z_OK; }
+  if (s.wrap <= 0) { return Z_STREAM_END; }
+
+  /* Write the trailer */
+  if (s.wrap === 2) {
+    put_byte(s, strm.adler & 0xff);
+    put_byte(s, (strm.adler >> 8) & 0xff);
+    put_byte(s, (strm.adler >> 16) & 0xff);
+    put_byte(s, (strm.adler >> 24) & 0xff);
+    put_byte(s, strm.total_in & 0xff);
+    put_byte(s, (strm.total_in >> 8) & 0xff);
+    put_byte(s, (strm.total_in >> 16) & 0xff);
+    put_byte(s, (strm.total_in >> 24) & 0xff);
+  }
+  else
+  {
+    putShortMSB(s, strm.adler >>> 16);
+    putShortMSB(s, strm.adler & 0xffff);
+  }
+
+  flush_pending(strm);
+  /* If avail_out is zero, the application will call deflate again
+   * to flush the rest.
+   */
+  if (s.wrap > 0) { s.wrap = -s.wrap; }
+  /* write the trailer only once! */
+  return s.pending !== 0 ? Z_OK : Z_STREAM_END;
+}
+
+function deflateEnd(strm) {
+  var status;
+
+  if (!strm/*== Z_NULL*/ || !strm.state/*== Z_NULL*/) {
+    return Z_STREAM_ERROR;
+  }
+
+  status = strm.state.status;
+  if (status !== INIT_STATE &&
+    status !== EXTRA_STATE &&
+    status !== NAME_STATE &&
+    status !== COMMENT_STATE &&
+    status !== HCRC_STATE &&
+    status !== BUSY_STATE &&
+    status !== FINISH_STATE
+  ) {
+    return err(strm, Z_STREAM_ERROR);
+  }
+
+  strm.state = null;
+
+  return status === BUSY_STATE ? err(strm, Z_DATA_ERROR) : Z_OK;
+}
+
+/* =========================================================================
+ * Copy the source state to the destination state
+ */
+//function deflateCopy(dest, source) {
+//
+//}
+
+exports.deflateInit = deflateInit;
+exports.deflateInit2 = deflateInit2;
+exports.deflateReset = deflateReset;
+exports.deflateResetKeep = deflateResetKeep;
+exports.deflateSetHeader = deflateSetHeader;
+exports.deflate = deflate;
+exports.deflateEnd = deflateEnd;
+exports.deflateInfo = 'pako deflate (from Nodeca project)';
+
+/* Not implemented
+exports.deflat
