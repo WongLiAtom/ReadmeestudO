@@ -5123,4 +5123,131 @@ function DeflateState() {
   zero(this.dyn_dtree);
   zero(this.bl_tree);
 
-  this.l_des
+  this.l_desc   = null;         /* desc. for literal tree */
+  this.d_desc   = null;         /* desc. for distance tree */
+  this.bl_desc  = null;         /* desc. for bit length tree */
+
+  //ush bl_count[MAX_BITS+1];
+  this.bl_count = new utils.Buf16(MAX_BITS+1);
+  /* number of codes at each bit length for an optimal tree */
+
+  //int heap[2*L_CODES+1];      /* heap used to build the Huffman trees */
+  this.heap = new utils.Buf16(2*L_CODES+1);  /* heap used to build the Huffman trees */
+  zero(this.heap);
+
+  this.heap_len = 0;               /* number of elements in the heap */
+  this.heap_max = 0;               /* element of largest frequency */
+  /* The sons of heap[n] are heap[2*n] and heap[2*n+1]. heap[0] is not used.
+   * The same heap array is used to build all trees.
+   */
+
+  this.depth = new utils.Buf16(2*L_CODES+1); //uch depth[2*L_CODES+1];
+  zero(this.depth);
+  /* Depth of each subtree used as tie breaker for trees of equal frequency
+   */
+
+  this.l_buf = 0;          /* buffer index for literals or lengths */
+
+  this.lit_bufsize = 0;
+  /* Size of match buffer for literals/lengths.  There are 4 reasons for
+   * limiting lit_bufsize to 64K:
+   *   - frequencies can be kept in 16 bit counters
+   *   - if compression is not successful for the first block, all input
+   *     data is still in the window so we can still emit a stored block even
+   *     when input comes from standard input.  (This can also be done for
+   *     all blocks if lit_bufsize is not greater than 32K.)
+   *   - if compression is not successful for a file smaller than 64K, we can
+   *     even emit a stored file instead of a stored block (saving 5 bytes).
+   *     This is applicable only for zip (not gzip or zlib).
+   *   - creating new Huffman trees less frequently may not provide fast
+   *     adaptation to changes in the input data statistics. (Take for
+   *     example a binary file with poorly compressible code followed by
+   *     a highly compressible string table.) Smaller buffer sizes give
+   *     fast adaptation but have of course the overhead of transmitting
+   *     trees more frequently.
+   *   - I can't count above 4
+   */
+
+  this.last_lit = 0;      /* running index in l_buf */
+
+  this.d_buf = 0;
+  /* Buffer index for distances. To simplify the code, d_buf and l_buf have
+   * the same number of elements. To use different lengths, an extra flag
+   * array would be necessary.
+   */
+
+  this.opt_len = 0;       /* bit length of current block with optimal trees */
+  this.static_len = 0;    /* bit length of current block with static trees */
+  this.matches = 0;       /* number of string matches in current block */
+  this.insert = 0;        /* bytes at end of window left to insert */
+
+
+  this.bi_buf = 0;
+  /* Output buffer. bits are inserted starting at the bottom (least
+   * significant bits).
+   */
+  this.bi_valid = 0;
+  /* Number of valid bits in bi_buf.  All bits above the last valid bit
+   * are always zero.
+   */
+
+  // Used for window memory init. We safely ignore it for JS. That makes
+  // sense only for pointers and memory check tools.
+  //this.high_water = 0;
+  /* High water mark offset in window for initialized bytes -- bytes above
+   * this are set to zero in order to avoid memory check warnings when
+   * longest match routines access bytes past the input.  This is then
+   * updated to the new high water mark.
+   */
+}
+
+
+function deflateResetKeep(strm) {
+  var s;
+
+  if (!strm || !strm.state) {
+    return err(strm, Z_STREAM_ERROR);
+  }
+
+  strm.total_in = strm.total_out = 0;
+  strm.data_type = Z_UNKNOWN;
+
+  s = strm.state;
+  s.pending = 0;
+  s.pending_out = 0;
+
+  if (s.wrap < 0) {
+    s.wrap = -s.wrap;
+    /* was made negative by deflate(..., Z_FINISH); */
+  }
+  s.status = (s.wrap ? INIT_STATE : BUSY_STATE);
+  strm.adler = (s.wrap === 2) ?
+    0  // crc32(0, Z_NULL, 0)
+  :
+    1; // adler32(0, Z_NULL, 0)
+  s.last_flush = Z_NO_FLUSH;
+  trees._tr_init(s);
+  return Z_OK;
+}
+
+
+function deflateReset(strm) {
+  var ret = deflateResetKeep(strm);
+  if (ret === Z_OK) {
+    lm_init(strm.state);
+  }
+  return ret;
+}
+
+
+function deflateSetHeader(strm, head) {
+  if (!strm || !strm.state) { return Z_STREAM_ERROR; }
+  if (strm.state.wrap !== 2) { return Z_STREAM_ERROR; }
+  strm.state.gzhead = head;
+  return Z_OK;
+}
+
+
+function deflateInit2(strm, level, method, windowBits, memLevel, strategy) {
+  if (!strm) { // === Z_NULL
+    ret
