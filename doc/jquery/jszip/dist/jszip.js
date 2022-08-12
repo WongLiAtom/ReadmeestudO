@@ -5407,4 +5407,155 @@ function deflate(strm, flush) {
       }
       header |= (level_flags << 6);
       if (s.strstart !== 0) { header |= PRESET_DICT; }
-      h
+      header += 31 - (header % 31);
+
+      s.status = BUSY_STATE;
+      putShortMSB(s, header);
+
+      /* Save the adler32 of the preset dictionary: */
+      if (s.strstart !== 0) {
+        putShortMSB(s, strm.adler >>> 16);
+        putShortMSB(s, strm.adler & 0xffff);
+      }
+      strm.adler = 1; // adler32(0L, Z_NULL, 0);
+    }
+  }
+
+//#ifdef GZIP
+  if (s.status === EXTRA_STATE) {
+    if (s.gzhead.extra/* != Z_NULL*/) {
+      beg = s.pending;  /* start of bytes to update crc */
+
+      while (s.gzindex < (s.gzhead.extra.length & 0xffff)) {
+        if (s.pending === s.pending_buf_size) {
+          if (s.gzhead.hcrc && s.pending > beg) {
+            strm.adler = crc32(strm.adler, s.pending_buf, s.pending - beg, beg);
+          }
+          flush_pending(strm);
+          beg = s.pending;
+          if (s.pending === s.pending_buf_size) {
+            break;
+          }
+        }
+        put_byte(s, s.gzhead.extra[s.gzindex] & 0xff);
+        s.gzindex++;
+      }
+      if (s.gzhead.hcrc && s.pending > beg) {
+        strm.adler = crc32(strm.adler, s.pending_buf, s.pending - beg, beg);
+      }
+      if (s.gzindex === s.gzhead.extra.length) {
+        s.gzindex = 0;
+        s.status = NAME_STATE;
+      }
+    }
+    else {
+      s.status = NAME_STATE;
+    }
+  }
+  if (s.status === NAME_STATE) {
+    if (s.gzhead.name/* != Z_NULL*/) {
+      beg = s.pending;  /* start of bytes to update crc */
+      //int val;
+
+      do {
+        if (s.pending === s.pending_buf_size) {
+          if (s.gzhead.hcrc && s.pending > beg) {
+            strm.adler = crc32(strm.adler, s.pending_buf, s.pending - beg, beg);
+          }
+          flush_pending(strm);
+          beg = s.pending;
+          if (s.pending === s.pending_buf_size) {
+            val = 1;
+            break;
+          }
+        }
+        // JS specific: little magic to add zero terminator to end of string
+        if (s.gzindex < s.gzhead.name.length) {
+          val = s.gzhead.name.charCodeAt(s.gzindex++) & 0xff;
+        } else {
+          val = 0;
+        }
+        put_byte(s, val);
+      } while (val !== 0);
+
+      if (s.gzhead.hcrc && s.pending > beg){
+        strm.adler = crc32(strm.adler, s.pending_buf, s.pending - beg, beg);
+      }
+      if (val === 0) {
+        s.gzindex = 0;
+        s.status = COMMENT_STATE;
+      }
+    }
+    else {
+      s.status = COMMENT_STATE;
+    }
+  }
+  if (s.status === COMMENT_STATE) {
+    if (s.gzhead.comment/* != Z_NULL*/) {
+      beg = s.pending;  /* start of bytes to update crc */
+      //int val;
+
+      do {
+        if (s.pending === s.pending_buf_size) {
+          if (s.gzhead.hcrc && s.pending > beg) {
+            strm.adler = crc32(strm.adler, s.pending_buf, s.pending - beg, beg);
+          }
+          flush_pending(strm);
+          beg = s.pending;
+          if (s.pending === s.pending_buf_size) {
+            val = 1;
+            break;
+          }
+        }
+        // JS specific: little magic to add zero terminator to end of string
+        if (s.gzindex < s.gzhead.comment.length) {
+          val = s.gzhead.comment.charCodeAt(s.gzindex++) & 0xff;
+        } else {
+          val = 0;
+        }
+        put_byte(s, val);
+      } while (val !== 0);
+
+      if (s.gzhead.hcrc && s.pending > beg) {
+        strm.adler = crc32(strm.adler, s.pending_buf, s.pending - beg, beg);
+      }
+      if (val === 0) {
+        s.status = HCRC_STATE;
+      }
+    }
+    else {
+      s.status = HCRC_STATE;
+    }
+  }
+  if (s.status === HCRC_STATE) {
+    if (s.gzhead.hcrc) {
+      if (s.pending + 2 > s.pending_buf_size) {
+        flush_pending(strm);
+      }
+      if (s.pending + 2 <= s.pending_buf_size) {
+        put_byte(s, strm.adler & 0xff);
+        put_byte(s, (strm.adler >> 8) & 0xff);
+        strm.adler = 0; //crc32(0L, Z_NULL, 0);
+        s.status = BUSY_STATE;
+      }
+    }
+    else {
+      s.status = BUSY_STATE;
+    }
+  }
+//#endif
+
+  /* Flush as much pending output as possible */
+  if (s.pending !== 0) {
+    flush_pending(strm);
+    if (strm.avail_out === 0) {
+      /* Since avail_out is 0, deflate will be called again with
+       * more output space, but possibly with both pending and
+       * avail_in equal to zero. There won't be anything to do,
+       * but this is not an error situation so make sure we
+       * return OK instead of BUF_ERROR at next call of deflate:
+       */
+      s.last_flush = -1;
+      return Z_OK;
+    }
+
