@@ -5699,4 +5699,113 @@ exports.deflateEnd = deflateEnd;
 exports.deflateInfo = 'pako deflate (from Nodeca project)';
 
 /* Not implemented
-exports.deflat
+exports.deflateBound = deflateBound;
+exports.deflateCopy = deflateCopy;
+exports.deflateSetDictionary = deflateSetDictionary;
+exports.deflateParams = deflateParams;
+exports.deflatePending = deflatePending;
+exports.deflatePrime = deflatePrime;
+exports.deflateTune = deflateTune;
+*/
+},{"../utils/common":27,"./adler32":29,"./crc32":31,"./messages":37,"./trees":38}],33:[function(_dereq_,module,exports){
+'use strict';
+
+
+function GZheader() {
+  /* true if compressed data believed to be text */
+  this.text       = 0;
+  /* modification time */
+  this.time       = 0;
+  /* extra flags (not used when writing a gzip file) */
+  this.xflags     = 0;
+  /* operating system */
+  this.os         = 0;
+  /* pointer to extra field or Z_NULL if none */
+  this.extra      = null;
+  /* extra field length (valid if extra != Z_NULL) */
+  this.extra_len  = 0; // Actually, we don't need it in JS,
+                       // but leave for few code modifications
+
+  //
+  // Setup limits is not necessary because in js we should not preallocate memory 
+  // for inflate use constant limit in 65536 bytes
+  //
+
+  /* space at extra (only when reading header) */
+  // this.extra_max  = 0;
+  /* pointer to zero-terminated file name or Z_NULL */
+  this.name       = '';
+  /* space at name (only when reading header) */
+  // this.name_max   = 0;
+  /* pointer to zero-terminated comment or Z_NULL */
+  this.comment    = '';
+  /* space at comment (only when reading header) */
+  // this.comm_max   = 0;
+  /* true if there was or will be a header crc */
+  this.hcrc       = 0;
+  /* true when done reading gzip header (not used when writing a gzip file) */
+  this.done       = false;
+}
+
+module.exports = GZheader;
+},{}],34:[function(_dereq_,module,exports){
+'use strict';
+
+// See state defs from inflate.js
+var BAD = 30;       /* got a data error -- remain here until reset */
+var TYPE = 12;      /* i: waiting for type bits, including last-flag bit */
+
+/*
+   Decode literal, length, and distance codes and write out the resulting
+   literal and match bytes until either not enough input or output is
+   available, an end-of-block is encountered, or a data error is encountered.
+   When large enough input and output buffers are supplied to inflate(), for
+   example, a 16K input buffer and a 64K output buffer, more than 95% of the
+   inflate execution time is spent in this routine.
+
+   Entry assumptions:
+
+        state.mode === LEN
+        strm.avail_in >= 6
+        strm.avail_out >= 258
+        start >= strm.avail_out
+        state.bits < 8
+
+   On return, state.mode is one of:
+
+        LEN -- ran out of enough output space or enough available input
+        TYPE -- reached end of block code, inflate() to interpret next block
+        BAD -- error in block data
+
+   Notes:
+
+    - The maximum input bits used by a length/distance pair is 15 bits for the
+      length code, 5 bits for the length extra, 15 bits for the distance code,
+      and 13 bits for the distance extra.  This totals 48 bits, or six bytes.
+      Therefore if strm.avail_in >= 6, then there is enough input to avoid
+      checking for available input while decoding.
+
+    - The maximum bytes that a single length/distance pair can output is 258
+      bytes, which is the maximum length that can be coded.  inflate_fast()
+      requires strm.avail_out >= 258 for each loop to avoid checking for
+      output space.
+ */
+module.exports = function inflate_fast(strm, start) {
+  var state;
+  var _in;                    /* local strm.input */
+  var last;                   /* have enough input while in < last */
+  var _out;                   /* local strm.output */
+  var beg;                    /* inflate()'s initial strm.output */
+  var end;                    /* while out < end, enough space available */
+//#ifdef INFLATE_STRICT
+  var dmax;                   /* maximum distance from zlib header */
+//#endif
+  var wsize;                  /* window size or zero if not using window */
+  var whave;                  /* valid bytes in the window */
+  var wnext;                  /* window write index */
+  var window;                 /* allocated sliding window, if wsize != 0 */
+  var hold;                   /* local strm.hold */
+  var bits;                   /* local strm.bits */
+  var lcode;                  /* local strm.lencode */
+  var dcode;                  /* local strm.distcode */
+  var lmask;                  /
