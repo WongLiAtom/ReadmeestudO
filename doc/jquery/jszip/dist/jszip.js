@@ -7697,4 +7697,126 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
     //table.op[opts.table_index] = 64;  //here.op = (var char)64;    /* invalid code marker */
     //table.bits[opts.table_index] = 1;   //here.bits = (var char)1;
     //table.val[opts.table_index++] = 0;   //here.val = (var short)0;
-    table[table_index++] = (1 << 24) | (64 <<
+    table[table_index++] = (1 << 24) | (64 << 16) | 0;
+
+
+    //table.op[opts.table_index] = 64;
+    //table.bits[opts.table_index] = 1;
+    //table.val[opts.table_index++] = 0;
+    table[table_index++] = (1 << 24) | (64 << 16) | 0;
+
+    opts.bits = 1;
+    return 0;     /* no symbols, but wait for decoding to report error */
+  }
+  for (min = 1; min < max; min++) {
+    if (count[min] !== 0) { break; }
+  }
+  if (root < min) {
+    root = min;
+  }
+
+  /* check for an over-subscribed or incomplete set of lengths */
+  left = 1;
+  for (len = 1; len <= MAXBITS; len++) {
+    left <<= 1;
+    left -= count[len];
+    if (left < 0) {
+      return -1;
+    }        /* over-subscribed */
+  }
+  if (left > 0 && (type === CODES || max !== 1)) {
+    return -1;                      /* incomplete set */
+  }
+
+  /* generate offsets into symbol table for each length for sorting */
+  offs[1] = 0;
+  for (len = 1; len < MAXBITS; len++) {
+    offs[len + 1] = offs[len] + count[len];
+  }
+
+  /* sort symbols by length, by symbol order within each length */
+  for (sym = 0; sym < codes; sym++) {
+    if (lens[lens_index + sym] !== 0) {
+      work[offs[lens[lens_index + sym]]++] = sym;
+    }
+  }
+
+  /*
+   Create and fill in decoding tables.  In this loop, the table being
+   filled is at next and has curr index bits.  The code being used is huff
+   with length len.  That code is converted to an index by dropping drop
+   bits off of the bottom.  For codes where len is less than drop + curr,
+   those top drop + curr - len bits are incremented through all values to
+   fill the table with replicated entries.
+
+   root is the number of index bits for the root table.  When len exceeds
+   root, sub-tables are created pointed to by the root entry with an index
+   of the low root bits of huff.  This is saved in low to check for when a
+   new sub-table should be started.  drop is zero when the root table is
+   being filled, and drop is root when sub-tables are being filled.
+
+   When a new sub-table is needed, it is necessary to look ahead in the
+   code lengths to determine what size sub-table is needed.  The length
+   counts are used for this, and so count[] is decremented as codes are
+   entered in the tables.
+
+   used keeps track of how many table entries have been allocated from the
+   provided *table space.  It is checked for LENS and DIST tables against
+   the constants ENOUGH_LENS and ENOUGH_DISTS to guard against changes in
+   the initial root table size constants.  See the comments in inftrees.h
+   for more information.
+
+   sym increments through all symbols, and the loop terminates when
+   all codes of length max, i.e. all codes, have been processed.  This
+   routine permits incomplete codes, so another loop after this one fills
+   in the rest of the decoding tables with invalid code markers.
+   */
+
+  /* set up for code type */
+  // poor man optimization - use if-else instead of switch,
+  // to avoid deopts in old v8
+  if (type === CODES) {
+      base = extra = work;    /* dummy value--not used */
+      end = 19;
+  } else if (type === LENS) {
+      base = lbase;
+      base_index -= 257;
+      extra = lext;
+      extra_index -= 257;
+      end = 256;
+  } else {                    /* DISTS */
+      base = dbase;
+      extra = dext;
+      end = -1;
+  }
+
+  /* initialize opts for loop */
+  huff = 0;                   /* starting code */
+  sym = 0;                    /* starting code symbol */
+  len = min;                  /* starting code length */
+  next = table_index;              /* current table to fill in */
+  curr = root;                /* current table index bits */
+  drop = 0;                   /* current bits to drop from code for index */
+  low = -1;                   /* trigger new sub-table when len > root */
+  used = 1 << root;          /* use root table entries */
+  mask = used - 1;            /* mask for comparing low */
+
+  /* check available table space */
+  if ((type === LENS && used > ENOUGH_LENS) ||
+    (type === DISTS && used > ENOUGH_DISTS)) {
+    return 1;
+  }
+
+  var i=0;
+  /* process all codes and make table entries */
+  for (;;) {
+    i++;
+    /* create table entry */
+    here_bits = len - drop;
+    if (work[sym] < end) {
+      here_op = 0;
+      here_val = work[sym];
+    }
+    else if (work[sym] > end) {
+      here_op = extra[extra_index + work[sym]];
+  
