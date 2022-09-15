@@ -7964,4 +7964,142 @@ var MAX_MATCH    = 258;
  */
 
 var LENGTH_CODES  = 29;
-/* number of length codes, no
+/* number of length codes, not counting the special END_BLOCK code */
+
+var LITERALS      = 256;
+/* number of literal bytes 0..255 */
+
+var L_CODES       = LITERALS + 1 + LENGTH_CODES;
+/* number of Literal or Length codes, including the END_BLOCK code */
+
+var D_CODES       = 30;
+/* number of distance codes */
+
+var BL_CODES      = 19;
+/* number of codes used to transfer the bit lengths */
+
+var HEAP_SIZE     = 2*L_CODES + 1;
+/* maximum heap size */
+
+var MAX_BITS      = 15;
+/* All codes must not exceed MAX_BITS bits */
+
+var Buf_size      = 16;
+/* size of bit buffer in bi_buf */
+
+
+/* ===========================================================================
+ * Constants
+ */
+
+var MAX_BL_BITS = 7;
+/* Bit length codes must not exceed MAX_BL_BITS bits */
+
+var END_BLOCK   = 256;
+/* end of block literal code */
+
+var REP_3_6     = 16;
+/* repeat previous bit length 3-6 times (2 bits of repeat count) */
+
+var REPZ_3_10   = 17;
+/* repeat a zero length 3-10 times  (3 bits of repeat count) */
+
+var REPZ_11_138 = 18;
+/* repeat a zero length 11-138 times  (7 bits of repeat count) */
+
+var extra_lbits =   /* extra bits for each length code */
+  [0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0];
+
+var extra_dbits =   /* extra bits for each distance code */
+  [0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13];
+
+var extra_blbits =  /* extra bits for each bit length code */
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,7];
+
+var bl_order =
+  [16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15];
+/* The lengths of the bit length codes are sent in order of decreasing
+ * probability, to avoid transmitting the lengths for unused bit length codes.
+ */
+
+/* ===========================================================================
+ * Local data. These are initialized only once.
+ */
+
+// We pre-fill arrays with 0 to avoid uninitialized gaps
+
+var DIST_CODE_LEN = 512; /* see definition of array dist_code below */
+
+// !!!! Use flat array insdead of structure, Freq = i*2, Len = i*2+1
+var static_ltree  = new Array((L_CODES+2) * 2);
+zero(static_ltree);
+/* The static literal tree. Since the bit lengths are imposed, there is no
+ * need for the L_CODES extra codes used during heap construction. However
+ * The codes 286 and 287 are needed to build a canonical tree (see _tr_init
+ * below).
+ */
+
+var static_dtree  = new Array(D_CODES * 2);
+zero(static_dtree);
+/* The static distance tree. (Actually a trivial tree since all codes use
+ * 5 bits.)
+ */
+
+var _dist_code    = new Array(DIST_CODE_LEN);
+zero(_dist_code);
+/* Distance codes. The first 256 values correspond to the distances
+ * 3 .. 258, the last 256 values correspond to the top 8 bits of
+ * the 15 bit distances.
+ */
+
+var _length_code  = new Array(MAX_MATCH-MIN_MATCH+1);
+zero(_length_code);
+/* length code for each normalized match length (0 == MIN_MATCH) */
+
+var base_length   = new Array(LENGTH_CODES);
+zero(base_length);
+/* First normalized length for each code (0 = MIN_MATCH) */
+
+var base_dist     = new Array(D_CODES);
+zero(base_dist);
+/* First normalized distance for each code (0 = distance of 1) */
+
+
+var StaticTreeDesc = function (static_tree, extra_bits, extra_base, elems, max_length) {
+
+  this.static_tree  = static_tree;  /* static tree or NULL */
+  this.extra_bits   = extra_bits;   /* extra bits for each code or NULL */
+  this.extra_base   = extra_base;   /* base index for extra_bits */
+  this.elems        = elems;        /* max number of elements in the tree */
+  this.max_length   = max_length;   /* max bit length for the codes */
+
+  // show if `static_tree` has data or dummy - needed for monomorphic objects
+  this.has_stree    = static_tree && static_tree.length;
+};
+
+
+var static_l_desc;
+var static_d_desc;
+var static_bl_desc;
+
+
+var TreeDesc = function(dyn_tree, stat_desc) {
+  this.dyn_tree = dyn_tree;     /* the dynamic tree */
+  this.max_code = 0;            /* largest code with non zero frequency */
+  this.stat_desc = stat_desc;   /* the corresponding static tree */
+};
+
+
+
+function d_code(dist) {
+  return dist < 256 ? _dist_code[dist] : _dist_code[256 + (dist >>> 7)];
+}
+
+
+/* ===========================================================================
+ * Output a short LSB first on the stream.
+ * IN assertion: there is enough room in pendingBuf.
+ */
+function put_short (s, w) {
+//    put_byte(s, (uch)((w) & 0xff));
+//    put_byte(s, (uch)((
