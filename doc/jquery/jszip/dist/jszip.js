@@ -9036,4 +9036,120 @@ function _tr_flush_block(s, buf, stored_len, last)
     compress_block(s, static_ltree, static_dtree);
 
   } else {
-    send_bits(s, (DYN_TREES<<1)
+    send_bits(s, (DYN_TREES<<1) + (last ? 1 : 0), 3);
+    send_all_trees(s, s.l_desc.max_code+1, s.d_desc.max_code+1, max_blindex+1);
+    compress_block(s, s.dyn_ltree, s.dyn_dtree);
+  }
+  // Assert (s->compressed_len == s->bits_sent, "bad compressed size");
+  /* The above check is made mod 2^32, for files larger than 512 MB
+   * and uLong implemented on 32 bits.
+   */
+  init_block(s);
+
+  if (last) {
+    bi_windup(s);
+  }
+  // Tracev((stderr,"\ncomprlen %lu(%lu) ", s->compressed_len>>3,
+  //       s->compressed_len-7*last));
+}
+
+/* ===========================================================================
+ * Save the match info and tally the frequency counts. Return true if
+ * the current block must be flushed.
+ */
+function _tr_tally(s, dist, lc)
+//    deflate_state *s;
+//    unsigned dist;  /* distance of matched string */
+//    unsigned lc;    /* match length-MIN_MATCH or unmatched char (if dist==0) */
+{
+  //var out_length, in_length, dcode;
+
+  s.pending_buf[s.d_buf + s.last_lit * 2]     = (dist >>> 8) & 0xff;
+  s.pending_buf[s.d_buf + s.last_lit * 2 + 1] = dist & 0xff;
+
+  s.pending_buf[s.l_buf + s.last_lit] = lc & 0xff;
+  s.last_lit++;
+
+  if (dist === 0) {
+    /* lc is the unmatched char */
+    s.dyn_ltree[lc*2]/*.Freq*/++;
+  } else {
+    s.matches++;
+    /* Here, lc is the match length - MIN_MATCH */
+    dist--;             /* dist = match distance - 1 */
+    //Assert((ush)dist < (ush)MAX_DIST(s) &&
+    //       (ush)lc <= (ush)(MAX_MATCH-MIN_MATCH) &&
+    //       (ush)d_code(dist) < (ush)D_CODES,  "_tr_tally: bad match");
+
+    s.dyn_ltree[(_length_code[lc]+LITERALS+1) * 2]/*.Freq*/++;
+    s.dyn_dtree[d_code(dist) * 2]/*.Freq*/++;
+  }
+
+// (!) This block is disabled in zlib defailts,
+// don't enable it for binary compatibility
+
+//#ifdef TRUNCATE_BLOCK
+//  /* Try to guess if it is profitable to stop the current block here */
+//  if ((s.last_lit & 0x1fff) === 0 && s.level > 2) {
+//    /* Compute an upper bound for the compressed length */
+//    out_length = s.last_lit*8;
+//    in_length = s.strstart - s.block_start;
+//
+//    for (dcode = 0; dcode < D_CODES; dcode++) {
+//      out_length += s.dyn_dtree[dcode*2]/*.Freq*/ * (5 + extra_dbits[dcode]);
+//    }
+//    out_length >>>= 3;
+//    //Tracev((stderr,"\nlast_lit %u, in %ld, out ~%ld(%ld%%) ",
+//    //       s->last_lit, in_length, out_length,
+//    //       100L - out_length*100L/in_length));
+//    if (s.matches < (s.last_lit>>1)/*int /2*/ && out_length < (in_length>>1)/*int /2*/) {
+//      return true;
+//    }
+//  }
+//#endif
+
+  return (s.last_lit === s.lit_bufsize-1);
+  /* We avoid equality with lit_bufsize because of wraparound at 64K
+   * on 16 bit machines and because stored blocks are restricted to
+   * 64K-1 bytes.
+   */
+}
+
+exports._tr_init  = _tr_init;
+exports._tr_stored_block = _tr_stored_block;
+exports._tr_flush_block  = _tr_flush_block;
+exports._tr_tally = _tr_tally;
+exports._tr_align = _tr_align;
+},{"../utils/common":27}],39:[function(_dereq_,module,exports){
+'use strict';
+
+
+function ZStream() {
+  /* next input byte */
+  this.input = null; // JS specific, because we have no pointers
+  this.next_in = 0;
+  /* number of bytes available at input */
+  this.avail_in = 0;
+  /* total number of input bytes read so far */
+  this.total_in = 0;
+  /* next output byte should be put there */
+  this.output = null; // JS specific, because we have no pointers
+  this.next_out = 0;
+  /* remaining free space at output */
+  this.avail_out = 0;
+  /* total number of bytes output so far */
+  this.total_out = 0;
+  /* last error message, NULL if no error */
+  this.msg = ''/*Z_NULL*/;
+  /* not visible by applications */
+  this.state = null;
+  /* best guess about the data type: binary or text */
+  this.data_type = 2/*Z_UNKNOWN*/;
+  /* adler32 value of the uncompressed data */
+  this.adler = 0;
+}
+
+module.exports = ZStream;
+},{}]},{},[9])
+(9)
+});
