@@ -61,4 +61,14 @@ public class DateRangeUtils implements Serializable {
 	}
 
 	/**
-	 * Returns a date range for each month up to today sta
+	 * Returns a date range for each month up to today starting from 2007-01-01
+	 * @return
+	 * @throws DateException
+	 */
+	public static List<DateRange> getMonthlyDateRanges() throws DateException {
+		return mds.getDates();
+	}
+
+
+
+}
