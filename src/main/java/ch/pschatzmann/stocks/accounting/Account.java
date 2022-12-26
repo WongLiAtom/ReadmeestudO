@@ -121,4 +121,176 @@ public class Account implements IKPICollector, IAccount, Serializable {
 	}
 
 	/**
-	 * Returns the 
+	 * Returns the value of all available stocks valuated at the market price
+	 * 
+	 * @return
+	 */
+	public double getActualValue() {
+		return this.getPortfolio().getActualValue();
+	}
+
+	/**
+	 * Returns the value of all available stocks valuated at purchasing price
+	 * 
+	 * @return
+	 */
+	public double getPurchasedValue() {
+		return this.getPortfolio().getPurchasedValue();
+	}
+
+	/**
+	 * Returns the total value of the account (stocks valuated at the market price
+	 * and cash)
+	 * 
+	 * @return
+	 */
+	public double getTotalValue() {
+		return getCash() + getActualValue();
+	}
+
+	/**
+	 * Returns the total of the values of the account ( stocks valuated at
+	 * purchasing price and cash)
+	 * 
+	 * @return
+	 */
+	public double getTotalPurchasedValue() {
+		return getCash() + getPurchasedValue();
+	}
+
+	/**
+	 * Returns the total of all fees
+	 * 
+	 * @return
+	 */
+	public double getTotalFees() {
+		return this.getTransactions().stream().filter(t -> !t.isCashTransfer()).mapToDouble(t -> t.getFees()).sum();
+	}
+
+	/**
+	 * Returns the realized gain. We do not consider trading fees!
+	 * 
+	 * @return
+	 */
+	public double getRealizedGain() {
+		return this.getPortfolio().getRealizedGains();
+	}
+
+	/**
+	 * Returns the unrealized gains
+	 * 
+	 * @return
+	 */
+	public double getUnrealizedGain() {
+		return this.getPortfolio().getUnrealizedGains();
+	}
+
+	/**
+	 * Returns the total profit
+	 * 
+	 * @return
+	 */
+	public double getTotalProfit() {
+		return this.getPortfolio().getTotalProfit();
+	}
+
+	/**
+	 * Determines the total number of trades
+	 * 
+	 * @return
+	 */
+
+	public long getNumberOfTrades() {
+		return getPortfolio().getNumberOfTrades();
+	}
+
+	/**
+	 * Returns the portfolio history for all transaction dates
+	 * 
+	 * @return
+	 */
+	public Stream<Portfolio> getTradingPortfolioHistory() {
+		List<Portfolio> result = new ArrayList();
+		Portfolio lastPortfolio = null;
+		Date currentDate = new Date();
+		for (Date date : getAllTransactionDates()) {
+			Portfolio portfolio = this.getPortfolio(date);
+			if (portfolio == null) {
+				Portfolio temp = new Portfolio(this, date, lastPortfolio);
+				getTransactionsForDate(date).forEach(t -> temp.recordOrder(t, date));
+				temp.updateActualPrices();
+				portfolio = temp;
+			}
+			result.add(portfolio);
+			lastPortfolio = portfolio;
+		}
+		return result.stream();
+	}
+
+	/**
+	 * Gets the portfolio history over all dates
+	 * 
+	 * @return
+	 */
+	public Stream<Portfolio> getPortfolioHistory() {
+		List<Portfolio> result = new ArrayList();
+		Portfolio lastPortfolio = null;
+		Date currentDate = new Date();
+		for (Date date : getAllDates()) {
+			Portfolio portfolio = this.getPortfolio(date);
+			if (portfolio == null) {
+				Portfolio temp = new Portfolio(this, date, lastPortfolio);
+				getTransactionsForDate(date).forEach(t -> temp.recordOrder(t, date));
+				temp.updateActualPrices();
+				portfolio = temp;
+			}
+			result.add(portfolio);
+			lastPortfolio = portfolio;
+		}
+		return result.stream();
+	}
+
+	/**
+	 * Returns the portfolio history for a single stock
+	 * 
+	 * @return
+	 */
+	public Stream<PortfolioStockInfo> getPortfolioStockInfoHistory(IStockID id) {
+		return getPortfolioHistory().map(p -> p.getInfo(id));
+	}
+
+	/**
+	 * Determines the history of the % returns for the indicated stock. The return
+	 * includes the fees.
+	 * 
+	 * @param id
+	 * @param adjument
+	 * @return
+	 */
+	public Stream<IHistoricValue> getStockHistoryReturns(StockID id, double adjument) {
+		List<PortfolioStockInfo> historyList = getPortfolioStockInfoHistory(id).sorted().collect(Collectors.toList());
+		List<IHistoricValue> result = new ArrayList();
+
+		for (int i = 1; i < historyList.size(); i++) {
+			Date date = historyList.get(i).getDate();
+			double value = historyList.get(i).getActualValue() - historyList.get(i).getFees();
+			double priorValue = historyList.get(i - 1).getActualValue() - historyList.get(i - 1).getFees();
+			long qty = historyList.get(i).getQuantity();
+			if (qty != 0L) {
+				result.add(new HistoricValue(date, ((value - priorValue) / priorValue) + adjument));
+			} else {
+				result.add(new HistoricValue(date, 0.0));
+			}
+		}
+		return result.stream();
+	}
+
+	private Set<Date> getAllTransactionDates() {
+		Set<Date> result = new TreeSet();
+		result.addAll(this.getOrderDates());
+		result.addAll(this.getTradingDates());
+		return result;
+	}
+
+	/**
+	 * Returns the information on the portfolio which with the
