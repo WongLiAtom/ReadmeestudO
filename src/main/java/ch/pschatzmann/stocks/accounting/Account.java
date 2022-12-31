@@ -460,4 +460,163 @@ public class Account implements IKPICollector, IAccount, Serializable {
 	/**
 	 * Determines the list of all dates on which some stocks were traded on the
 	 * market and therefore there was a change in the valuation starting from the
-	 * opening dat
+	 * opening date of the account
+	 * 
+	 * @return
+	 */
+	public List<Date> getTradingDates() {
+		List<Date> result = this.getTransactions().stream().filter(t -> !t.isCashTransfer()).map(t -> t.getStockID()).distinct()
+				.map(id -> Context.getStockData(id)).map(stockData -> stockData.getHistory())
+				.flatMap(stockRecordCollection -> stockRecordCollection.stream())
+				.map(stockRecord -> stockRecord.getDate()).filter(d -> getDateRange().isValid(d)).sorted().distinct()
+				.collect(Collectors.toList());
+		return result;
+	}
+
+	/**
+	 * Returns a date range from the opening date up to the closing date. If the account is not closed yet we set the
+	 * range up to the current date
+	 */
+	@Override
+	public DateRange getDateRange() {
+		return new DateRange(account.getOpenDate(), account.getCloseDate()==null?new Date():account.getCloseDate());
+	}
+
+	/**
+	 * Returns a list of all stock ID which were traded via this account
+	 * 
+	 * @return
+	 */
+
+	@Override
+	public List<IStockID> getStockIDs() {
+		List<IStockID> result = this.getTransactions().stream().filter(t -> !t.isCashTransfer()).map(t -> t.getStockID())
+				.sorted().distinct().collect(Collectors.toList());
+		return result;
+	}
+
+	/**
+	 * Returns the risk free return (in percent) which is used to calculate the
+	 * Sharpe Ratio
+	 * 
+	 * @return
+	 */
+	public double getRiskFreeReturnInPercent() {
+		return riskFreeReturnInPercent;
+	}
+
+	/**
+	 * Defines the risk free return (in percent) which is used to calculate the
+	 * Sharpe Ratio
+	 * 
+	 * @param riskFreeReturnInPercent
+	 */
+	public void setRiskFreeReturnInPercent(double riskFreeReturnInPercent) {
+		this.riskFreeReturnInPercent = riskFreeReturnInPercent;
+	}
+
+	/**
+	 * Determines all KPIs to evaluate the history of the account
+	 * 
+	 * @return
+	 */
+	@Override
+	public List<KPIValue> getKPIValues() {
+		List<IHistoricValue> historyList = getTotalValueHistory().sorted().collect(Collectors.toList());
+		List<KPIValue> result = new ArrayList();
+		new Return(historyList).collectKPIValues(result);
+		new SharpeRatio(historyList, riskFreeReturnInPercent).collectKPIValues(result);
+		new DrawDown(historyList).collectKPIValues(result);
+		new NumberOfTrades(this.getAccount()).collectKPIValues(result);
+		new Account(this).collectKPIValues(result);
+		return result;
+	}
+	
+	/**
+	 * Returns the KPI values as Map
+	 * @return
+	 */
+	public Map<KPI, Double> getKPIValuesMap(){
+		Map<KPI, Double> result = new TreeMap();
+		for (KPIValue v : this.getKPIValues()) {
+			result.put(v.getKpi(), v.getDoubleValue());
+		}
+		return result;
+	}
+	
+	/**
+	 * Calculate the simulated KPI for the stock ID
+	 * @param id
+	 * @return
+	 */
+	public List<KPIValue> getKPIValues(IStockID id) {
+		Account oneStockAccount = new Account(this);	
+		
+		this.getTransactions(id).forEach(t -> oneStockAccount.addTransaction(t));
+		List<IHistoricValue> historyList = oneStockAccount.getTotalValueHistory().sorted().collect(Collectors.toList());
+		List<KPIValue> result = new ArrayList();
+		new Return(historyList).collectKPIValues(result);
+		new SharpeRatio(historyList, riskFreeReturnInPercent).collectKPIValues(result);
+		new DrawDown(historyList).collectKPIValues(result);
+		new NumberOfTrades(this.getAccount()).collectKPIValues(result);
+		new Account(this).collectKPIValues(result);
+		return result;
+	}
+	
+	/**
+	 * Returns the indicated KPI for all stock IDs
+	 * @param kpi
+	 * @return
+	 */
+	public Map<IStockID,Double> getKPIValueByStockID(KPI kpi) {
+		Map<IStockID, Double> result = new TreeMap();
+		for (IStockID id : this.getStockIDs()) {
+			Double kpiValue = this.getKPIValue(kpi, this.getKPIValues(id));
+			result.put(id, kpiValue);
+		}
+		return result;
+	}
+	
+
+	/**
+	 * Returns the IBasicAccount
+	 */
+	@Override
+	public IBasicAccount getAccount() {
+		return this.account;
+	}
+
+	/**
+	 * Retrieves the requested KPI double value from the list
+	 * 
+	 * @param kpi
+	 * @param values
+	 * @return
+	 */
+	public Double getKPIValue(KPI kpi) {
+		for (KPIValue v : getKPIValues()) {
+			if (v.getKpi() == kpi) {
+				return v.getDoubleValue();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Retrieves the requested KPI double value from the list
+	 * 
+	 * @param kpi
+	 * @param values
+	 * @return
+	 */
+	public Double getKPIValue(KPI kpi, List<KPIValue> values) {
+		for (KPIValue v : values) {
+			if (v.getKpi() == kpi) {
+				return v.getDoubleValue();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns all
