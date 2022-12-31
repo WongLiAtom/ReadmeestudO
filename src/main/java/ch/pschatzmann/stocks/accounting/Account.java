@@ -293,4 +293,171 @@ public class Account implements IKPICollector, IAccount, Serializable {
 	}
 
 	/**
-	 * Returns the information on the portfolio which with the
+	 * Returns the information on the portfolio which with the latest information
+	 * 
+	 * @return
+	 */
+	@JsonIgnore
+	public Portfolio getPortfolio() {
+		// Date lastDate = getOrderDates().stream().max(Date::compareTo).get();
+		return getPortfolio(this.getCloseDate()!=null ? this.getCloseDate() : Context.date(Context.format(new Date())));
+	}
+
+	/**
+	 * Returns the current stock portfolio information of an indicated stock
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public PortfolioStockInfo getPortfolioStockInfo(IStockID id) {
+		return this.getPortfolio().getInfo(id);
+	}
+
+	/**
+	 * Returns the stock portfolio information which was valid at the indicated date
+	 * 
+	 * @param forDate
+	 * @return
+	 */
+	@Override
+	public Portfolio getPortfolio(Date forDate) {
+		LOG.debug("getPortfolio "+forDate);
+		Portfolio portfolio = new Portfolio(this, forDate);
+		for (Date d : getOrderDates()) {
+			if (d.getTime() <= forDate.getTime()) {
+				Portfolio temp = portfolio;
+				getTransactionsForDate(d).forEach(t -> temp.recordOrder(t, forDate));
+				// portfolio.setDate(d);
+			}
+		}
+		// portfolio.setDate(forDate);
+		portfolio.updateActualPrices();
+		return portfolio;
+	}
+
+	/**
+	 * Returns all dates on which we executed orders sorted ascending
+	 * 
+	 * @return
+	 */
+	public synchronized Set<Date> getOrderDates() {
+		return new TreeSet<>(this.getTransactions().stream().map(o -> Context.date(o.getDate())).collect(Collectors.toSet()));
+	}
+
+	/**
+	 * Returns all transactions for the indicated date
+	 * 
+	 * @param forDate
+	 * @return
+	 */
+	public Stream<Transaction> getTransactionsForDate(Date forDate) {
+		return this.getTransactions().stream().filter(ol -> Context.date(ol.getDate()).equals(Context.date(forDate)));
+	}
+
+	/**
+	 * Determines the stock price of the indicated stock at the indicated date. If
+	 * no date is available we provide the data at the latest available date before.
+	 * 
+	 * @param id2
+	 * @param date
+	 * @return
+	 */
+	@Override
+	public Double getStockPrice(IStockID id2, Date date) {
+		if (id2 == Context.cashID()) {
+			return 1.0;
+		}
+		Double result = 0.0;
+		IStockData sd = getStockData(id2);
+		IStockRecord sr = sd.getValue(date);
+		if (sr != null) {
+			result = sr.getClosing().doubleValue();
+		} else {
+			LOG.warn("No rate found for " + sd + " " + date);
+		}
+		return result;
+	}
+
+	/**
+	 * Determines the cached StockData for the indicated StockIID. The data is
+	 * cached
+	 * 
+	 * @param id2
+	 * @return
+	 */
+	@Override
+	public IStockData getStockData(IStockID id2) {
+		IStockData result = stockDataMap.get(id2);
+		if (result == null) {
+			IReader r = this.readerMap.get(id2);
+			if (r == null) {
+				r = this.readerMap.get(defaultValue);
+			}
+			if(r==null) {
+				r = Context.getDefaultReader();
+			}
+			result = Context.getStockData(id2, r);
+			stockDataMap.put(id2, result);
+		}
+		return result;
+	}
+
+	@Override
+	public void putStockData(IStockData sd) {
+		// only replace stock data if it does not exist
+		if (stockDataMap.get(sd.getStockID()) == null) {
+			stockDataMap.put(sd.getStockID(), sd);
+		}
+	}
+
+	/**
+	 * Determines the quantity of the stocks which are in our possision for the
+	 * indicated stock id. We also include orders
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public Long getQuantity(IStockID id) {
+		return this.getTransactions().stream().
+				filter(t -> t.getStatus()!=Status.Cancelled && t.getStockID().equals(id)).
+				mapToLong(t -> t.getQuantity()).
+				sum();
+	}
+
+	/**
+	 * Determines the all the dates on which the stock that we have aor had was
+	 * traded starting from the account opening date
+	 * 
+	 * @return
+	 */
+	public List<Date> getAllDates() {
+		Set<Date> dates = new TreeSet();
+		List<Transaction> transactionsList = this.getTransactions().stream().collect(Collectors.toList());
+		if (!transactionsList.isEmpty()) {
+			Date startDate = transactionsList.iterator().next().getDate();
+			dates.add(startDate);
+			for (IStockID id : this.getStockIDs()) {
+				IStockData data = this.getStockData(id);
+				for (IStockRecord sr : data.getHistory()) {
+					if (this.getDateRange().isValid(sr.getDate())) {
+						dates.add(sr.getDate());
+					}
+				}
+			}
+		}
+		return new ArrayList(dates);
+	}
+
+	public void putReader(StockID id, IReader reader) {
+		readerMap.put(id, reader);
+	}
+
+	public void putReader(IReader reader) {
+		readerMap.put(defaultValue, reader);
+	}
+
+	/**
+	 * Determines the list of all dates on which some stocks were traded on the
+	 * market and therefore there was a change in the valuation starting from the
+	 * opening dat
