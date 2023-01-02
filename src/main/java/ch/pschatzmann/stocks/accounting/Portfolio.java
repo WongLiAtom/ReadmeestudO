@@ -202,4 +202,31 @@ public class Portfolio implements Serializable {
 		long numerOfTrades = (!order.isCashTransfer()) ? 1L : 0L;
 		if (line==null) {
 			// add new line because the stock does not exist yet
-			line = new PortfolioStockInfo(forDate,order.getStockID(),order.getQuantity(), order.getPurchasedValue(), order.getFees(), order.getImpactOnCash
+			line = new PortfolioStockInfo(forDate,order.getStockID(),order.getQuantity(), order.getPurchasedValue(), order.getFees(), order.getImpactOnCash(), numerOfTrades);
+			data.put(order.getStockID(), line);
+		} else {
+			// calcluate realized gains when we sell the stock
+			double realizedGain = 0.0;
+			if (order.getQuantity().doubleValue()<0.0) {
+				realizedGain = (order.getFilledPrice() - line.getPurchasedAveragePrice()) * -order.getQuantity();
+			}
+			// update existing value
+			Double avgPrice = line.getPurchasedAveragePrice();
+			line.addQuantity(order.getQuantity());
+			line.addPurchasedValue(order.getQuantity()>0.0 ?  order.getPurchasedValue() : order.getQuantity() * avgPrice);
+			line.addFees(order.getFees());
+			line.addImpactOnCash (order.getImpactOnCash());			
+			line.addNumberOfTrades(numerOfTrades);
+			line.addRealizedGains(realizedGain);
+			data.put(order.getStockID(), line);			
+		}
+		
+		// collect the related transactions
+		LOG.debug("recordOrder "+order +" realized gains: "+line.getRealizedGains());
+
+		line.addTransaction(order);
+	}
+	
+	
+
+}
