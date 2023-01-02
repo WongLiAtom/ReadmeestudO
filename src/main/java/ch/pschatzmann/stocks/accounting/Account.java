@@ -619,4 +619,162 @@ public class Account implements IKPICollector, IAccount, Serializable {
 	}
 
 	/**
-	 * Returns all
+	 * Returns all orders related to the indicated stock
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public Stream<Transaction> getTransactions(IStockID id) {
+		return getTransactions().stream().sorted().filter(t -> t.getStockID().equals(id));
+	}
+
+	/**
+	 * Returns the evolution of the available cash flow over time
+	 * 
+	 * @return
+	 */
+	public Stream<IHistoricValue> getCashFlowHistory() {
+		Map<Date, Double> map = getTransactions().stream().collect(
+				Collectors.groupingBy(Transaction::getDate, Collectors.summingDouble(Transaction::getImpactOnCash)));
+		return map.entrySet().stream().map(v -> (IHistoricValue) new HistoricValue(v.getKey(), v.getValue())).sorted();
+	}
+
+	/**
+	 * Gets the evolution of the cash total over time
+	 * 
+	 * @return
+	 */
+	public Stream<IHistoricValue> getCashHistory() {
+		List<IHistoricValue> result = new ArrayList();
+		double sum = 0.0;
+		for (IHistoricValue v : getCashFlowHistory().collect(Collectors.toList())) {
+			sum += v.getValue();
+			result.add(new HistoricValue(v.getDate(), sum));
+		}
+		return result.stream();
+	}
+
+	/**
+	 * Gets the evaluation of the cash total for all dates
+	 * 
+	 * @return
+	 */
+	public Stream<IHistoricValue> getCashHistoryForAllDates() {
+		return this.getAllDates().stream().map(date -> new HistoricValue(date, getCash(date)))
+				.map(i -> (IHistoricValue) i);
+	}
+
+	/**
+	 * Returns the evolution of the actual value over time
+	 * 
+	 * @return
+	 */
+
+	public Stream<IHistoricValue> getActualValueHistory() {
+		return getPortfolioHistory().map(p -> new HistoricValue(p.getDate(), p.getActualValue()))
+				.map(i -> (IHistoricValue) i).sorted();
+	}
+
+	/**
+	 * Returns the historic values for the indicated stock
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Stream<IHistoricValue> getActualValueHistory(IStockID id) {
+		return getPortfolioStockInfoHistory(id).map(i -> (IHistoricValue) i)
+				.filter(p -> p.getDate() != null && p.getValue() != null);
+	}
+
+	/**
+	 * Returns the evolution of the actual value over time
+	 * 
+	 * @return
+	 */
+	public Stream<IHistoricValue> getTotalValueHistory() {
+		return getPortfolioHistory().map(p -> new HistoricValue(p.getDate(), p.getTotalValue()))
+				.map(i -> (IHistoricValue) i).sorted();
+	}
+
+	/**
+	 * Returns the evolution of the value (at purchased prices) and cash over time
+	 * 
+	 * @return
+	 */
+	public Stream<IHistoricValue> getPurchasedValueHistory() {
+		return getPortfolioHistory().map(p -> new HistoricValue(p.getDate(), p.getPurchasedValue()))
+				.map(i -> (IHistoricValue) i).sorted();
+	}
+
+	@Override
+	public void addTransaction(Transaction order) {
+		this.account.addTransaction(order);
+
+	}
+
+	@Override
+	public IFeesModel getFeesModel() {
+		return this.account.getFeesModel();
+	}
+
+	@Override
+	public Date getOpenDate() {
+		return this.account.getOpenDate();
+	}
+
+	@Override
+	public double getInitialCash() {
+		return this.account.getInitialCash();
+	}
+
+	@Override
+	public boolean isMargin() {
+		return this.account.isMargin();
+	}
+
+	@Override
+	public void reset() {
+		this.account.reset();
+	}
+
+	@Override
+	public Date getCloseDate() {
+		return this.account.getCloseDate();
+	}
+	
+	@Override
+	public void setCloseDate(Date date) {
+		this.account.setCloseDate(date);
+	}
+
+	@Override
+	public String getId() {
+		return this.account.getId();
+	}
+
+	@Override
+	public String getCurrency() {
+		return this.account.getCurrency();
+	}
+
+	@Override
+	public double getTotalValue(Date date) {
+		return this.getPortfolio(date).getTotalValue();
+	}
+
+	@Override
+	public double getActualValue(Date date, IStockID id) {
+		return this.getPortfolio(date).getInfo(id).getActualValue();
+	}
+	
+	protected void resetStockData() {
+		stockDataMap.clear();
+	}
+	
+	@Override
+	public String toString() {
+		return "Account: "+this.getId();
+	}
+
+}
