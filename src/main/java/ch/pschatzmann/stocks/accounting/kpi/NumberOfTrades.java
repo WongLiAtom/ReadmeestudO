@@ -39,4 +39,16 @@ public class NumberOfTrades implements IKPICollector, Serializable {
 	}
 	
 	public Long getNumberTradedStocks() {
-		return this.account.getTransactio
+		return this.account.getTransactions().stream().filter(t -> !t.isCashTransfer()).map(t->t.getStockID()).distinct().count();
+	}
+	
+
+	@Override
+	public void collectKPIValues(Collection<KPIValue> result) {
+		result.add(new KPIValue(KPI.NumberOfTrades, "Number of Trades", this.getNumberOfTrades()));
+		result.add(new KPIValue(KPI.NumberOfBuys, "Number of Buys", this.getNumberOfBuys()));
+		result.add(new KPIValue(KPI.NumberOfSells, "Number of Sells", this.getNumberOfSells()));
+		result.add(new KPIValue(KPI.NumberOfCashTransfers, "Number of Cash Transfers", this.getNumberOfCashTransfers()));
+		result.add(new KPIValue(KPI.NumberOfTradedStocks, "Number of Traded Stocks", this.getNumberTradedStocks()));
+	}
+}
