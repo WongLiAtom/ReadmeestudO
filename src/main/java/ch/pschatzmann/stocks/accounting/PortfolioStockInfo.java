@@ -148,4 +148,39 @@ public class PortfolioStockInfo implements IHistoricValue, Serializable, Compara
 		this.fees+=fees;
 	}
 
-	public void addR
+	public void addRealizedGains(double gain) {
+		realizedGains +=gain;	
+		LOG.debug(this.id+" "+realizedGains);
+	}
+
+	public void addTransaction(Transaction t) {
+		this.transactions.add(t);
+	}
+	
+	@Override
+	public Date getDate() {
+		return this.date;
+	}
+	
+	public boolean isCash() {
+		return this.id.getTicker().equals("Cash");
+	}
+
+	@Override
+	public Double getValue() {
+		return this.getActualValue();
+	}
+	
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(this.getStockID());
+		sb.append(" ");
+		sb.append(Context.format(this.getDate()));
+		sb.append(" ");
+		sb.append(this.getValue());
+		return sb.toString();
+	}
+
+
+}
