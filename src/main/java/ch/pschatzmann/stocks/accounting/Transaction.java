@@ -346,4 +346,39 @@ public class Transaction implements Serializable, Comparable<Transaction> {
 	}
 	
 
-	public boolean isAc
+	public boolean isActive() {
+		return this.getStatus() != Status.Cancelled;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public void setQuantity(long total) {
+		this.quantity = total;
+	}
+
+	public String getID() {
+		if (this.id == null) {
+			this.id = String.valueOf(idGenerator.getID());
+		}
+		return this.id;
+	}
+
+	public void setID(String id) {
+		this.id = id;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+}
