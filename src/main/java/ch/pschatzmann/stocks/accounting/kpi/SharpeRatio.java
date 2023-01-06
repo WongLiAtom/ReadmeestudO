@@ -34,4 +34,32 @@ public class SharpeRatio implements IKPICollector, Serializable {
 	 * @param historyList
 	 * @param riskFreeReturnInPercent
 	 */
-	public SharpeRatio(List
+	public SharpeRatio(List<IHistoricValue> historyList, double riskFreeReturnInPercent) {
+		this(historyList, riskFreeReturnInPercent, 252);
+	}
+
+	public SharpeRatio(List<IHistoricValue> historyValues, double riskFreeReturnAsPercent, int tradingDays) {
+		Collections.sort(historyValues, new HistoricValueComparator());
+		Calculations.removeLeadingZeros(historyValues);
+
+		this.history = historyValues;
+		this.tradingDays = tradingDays;
+		this.riskFreeReturnPerDay = (riskFreeReturnAsPercent / 100) / tradingDays;
+	}
+
+
+	public double getValue() {
+		List<IHistoricValue> returns = getRiskExcessDailyReturns();
+		return Math.sqrt(tradingDays) * Calculations.avg(returns) / Calculations.stddev(returns);
+	}
+
+	private List<IHistoricValue> getRiskExcessDailyReturns() {
+		return Calculations.getReturns(history, -riskFreeReturnPerDay);
+	}
+
+	@Override
+	public void collectKPIValues(Collection<KPIValue> result) {
+		result.add(new KPIValue(KPI.SharpeRatio, "Sharp Ratio", getValue()));
+		
+	}
+}
