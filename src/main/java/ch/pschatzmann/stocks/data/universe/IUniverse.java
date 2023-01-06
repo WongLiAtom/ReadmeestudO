@@ -78,4 +78,10 @@ public interface IUniverse {
 	/**
 	 * 
 	 * @return the data as Stream
-	 * @throws 
+	 * @throws UniverseException
+	 */
+	public default Stream<IStockID> stream()  {
+		return list().stream();
+	}
+
+}
