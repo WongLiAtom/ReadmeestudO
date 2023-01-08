@@ -67,4 +67,19 @@ public abstract class BaseForecast implements IForecast {
 		return result;
 	}
 
-	public
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public HistoricValues getValues() {
+		return values;
+	}
+
+	@Override
+	public abstract HistoricValues forecast(int numberOfForecasts) throws Exception;
+
+}
