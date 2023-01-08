@@ -169,4 +169,19 @@
 //			test = true;
 //		}
 //		if (argList.size() != 2 && argList.size() != 3) {
-//			System.out.println("Usage: java -cp ch.pschatzmann.stocks.dow
+//			System.out.println("Usage: java -cp ch.pschatzmann.stocks.download.Extract7zip [-t] <archive> <output-dir> [filter]");
+//			System.exit(1);
+//		}
+//		if (argList.size() == 3) {
+//			filter = argList.get(2);
+//		}
+//		try {
+//			LOG.info("Extract7zip...");
+//			new Extract7zip(new File(argList.get(0)), new File(argList.get(1)), test, filter).extract(null,null);
+//			LOG.info("Extraction successfull");
+//		} catch (Exception e) {
+//			LOG.error("ERROR: " + e.getLocalizedMessage(),e);
+//		}
+//		System.exit(0);
+//	}
+//}
