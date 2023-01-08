@@ -17,4 +17,14 @@ public interface ITrader {
 	IAccount getAccount();
 	
 	/**
-	
+	 * Returns the DelayModel which is simulating the delay from order entry to execution
+	 * @return
+	 */
+	ITradingDelayModel getDelay();
+
+	/**
+	 * Returns the trading price
+	 */
+	IPriceLogic getPrice();
+
+}
