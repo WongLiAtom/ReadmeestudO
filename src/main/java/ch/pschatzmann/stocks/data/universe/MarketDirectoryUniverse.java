@@ -73,4 +73,20 @@ public class MarketDirectoryUniverse implements IUniverse, Serializable {
 		try {
 			Stream<IStockID> result = Files.walk(Paths.get(directory.getAbsolutePath()))
 					.filter(f -> !f.toFile().isDirectory()).map(f -> f.normalize().toString()).parallel()
-					.map(s -> ip.parseFileName(s)).filter(id -> id != null).filter
+					.map(s -> ip.parseFileName(s)).filter(id -> id != null).filter(id -> id.getExchange() != null)
+					.filter(id -> !id.getExchange().matches("out|stocks.csv")).filter(id -> id.getTicker() != null)
+					.filter(id -> id.getTicker().matches(tickerRegex));
+
+			return result;
+		} catch (Exception ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+
+	@Override
+	public List<IStockID> list()  {
+		return stream().collect(Collectors.toList());
+	}
+
+
+}
