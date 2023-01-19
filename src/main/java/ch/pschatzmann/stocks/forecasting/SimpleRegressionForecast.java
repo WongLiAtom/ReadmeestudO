@@ -36,4 +36,26 @@ public class SimpleRegressionForecast extends BaseForecast  {
 	}
 
 	@Override
-	public HistoricValues for
+	public HistoricValues forecast(int numberOfForecasts) throws Exception {
+		int x = 0;
+		List<IHistoricValue> result = new ArrayList();
+		for (IHistoricValue value : this.getValues().list()) {
+			result.add(new HistoricValue(value.getDate(), regression.predict(x)));
+			x++;
+		}
+		Date date = Calculations.lastDate(this.getValues().list(), new Date());
+		for (int j=0;j<numberOfForecasts;j++) {
+			date = CalendarUtils.nextWorkDay(date);
+			result.add(new HistoricValue(date, regression.predict(x)));
+			x++;			
+		}
+		
+		return HistoricValues.create(result, this.getName());
+	}
+
+	
+	public SimpleRegression getSimpleRegression() {
+		return regression;
+	}
+
+}
