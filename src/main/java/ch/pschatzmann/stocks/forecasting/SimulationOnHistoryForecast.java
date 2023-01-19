@@ -111,4 +111,42 @@ public class SimulationOnHistoryForecast implements Serializable, IForecast  {
 		return HistoricValues.create(result, this.getName());
 	}
 
-	protected HistoricValue getNewRecord( IHistoricValue lastRefValue, IHistoricValue f
+	protected HistoricValue getNewRecord( IHistoricValue lastRefValue, IHistoricValue forecastValue,
+			IHistoricValue v) {
+		// calculate factors
+		double value = v.getValue() / lastRefValue.getValue();
+		return new HistoricValue((Date)null, value);
+	}
+
+	@Override
+	public HistoricValues forecast(Date endDate) throws Exception {
+		Date nextDate = getStartDay();
+		int count = 0;
+		while (nextDate.before(endDate)) {
+			count++;
+			nextDate = CalendarUtils.nextWorkDay(nextDate);
+		}
+		return forecast(count);
+	}
+	
+	protected Date getStartDay() {
+		Date start = new Date();;
+		if (values!=null){
+			List<Date> dates = values.getDates();
+			start = dates.get(dates.size()-1);
+		}
+		if (CalendarUtils.isHoiday(start)) {
+			start = CalendarUtils.nextWorkDay(start);
+		}
+		return start;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+}
