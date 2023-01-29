@@ -120,4 +120,60 @@ public class InvestopiaReader implements IReaderEx {
 			if (qName.equalsIgnoreCase("tr")) {
 				j = -1;
 				rec = new StockRecord();
-			} 
+			} else if (qName.equalsIgnoreCase("td")) {
+				j++;
+				sb.setLength(0);
+			}
+		}
+
+		@Override
+		public void endElement(String uri, String localName, String qName) throws SAXException {
+			if (qName.equalsIgnoreCase("tr")) {
+				if (!isHeader && rec.getOpen()!=null) {
+					sd.addRecord(rec);
+					recordCount++;
+				}  
+				isHeader = false;
+				j = -1;
+			} if (qName.equalsIgnoreCase("td")) {
+				String value = sb.toString().trim();
+				try {
+					if (!isHeader && j >=0 && !value.isEmpty()) {
+						switch (j) {
+						case 0:
+							rec.setDate(df.parse(value));
+							break;
+						case 1:
+							if (!value.endsWith("Dividend") && !value.endsWith("Split")) {
+								rec.setOpen(getDouble(value));
+							}
+							break;
+						case 2:
+							rec.setHigh(getDouble(value));
+							break;
+						case 3:
+							rec.setLow(getDouble(value));
+							break;
+						case 4:
+							rec.setClosing(getDouble(value));
+							break;
+						case 5:
+							rec.setVolume(getDouble(value.replaceAll(",", "")));
+							break;
+						}
+					}
+				} catch (Exception ex) {
+					LOG.error(ex.getMessage()+"("+value+")",ex);;
+				}
+				
+			}
+		}
+
+		@Override
+		public void characters(char ch[], int start, int length) throws SAXException {
+			sb.append(new String(ch, start, length));
+		}
+
+	}
+
+}
