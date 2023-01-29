@@ -44,4 +44,37 @@ public class IEXReader implements IReaderEx, Serializable {
 			String urlString = "https://cloud.iexapis.com/stable/stock/" + ticker + "/chart/5y?token="+Context.getPropertyMandatory("IEXAPIKey");
 			LOG.debug(urlString);
 			URL url = new URL(urlString);
-			List<Object> values = mapper.readValu
+			List<Object> values = mapper.readValue(url, List.class);
+			for (Object v : values) {
+				Map<String, Object> map = (Map<String, Object>) v;
+				StockRecord sr = new StockRecord();
+				sr.setClosing(value(map, "close"));
+				sr.setDate(date(map, "date"));
+				sr.setHigh(value(map, "high"));
+				sr.setLow(value(map, "low"));
+				sr.setOpen(value(map, "open"));
+				sr.setVolume(value(map, "volume"));
+				if (date == null || sr.getDate().after(date)) {
+					sd.addRecord(sr);
+					sr.setIndex(count);
+					count++;
+				}
+			}
+		} catch (Exception ex) {
+			count = 0;
+			LOG.error(ex.getMessage(), ex);
+		}
+
+		return count;
+	}
+
+	private Date date(Map<String, Object> map, String name) throws ParseException {
+		return dateFormat.parse(map.get(name).toString());
+	}
+
+	private Number value(Map<String, Object> map, String name) {
+		Number number = (Number) map.get(name);
+		return number;
+	}
+
+}
