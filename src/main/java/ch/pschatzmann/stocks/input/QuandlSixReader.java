@@ -1,8 +1,9 @@
+
 package ch.pschatzmann.stocks.input;
 
 import ch.pschatzmann.stocks.IStockID;
 import ch.pschatzmann.stocks.input.parser.IInputParser;
-import ch.pschatzmann.stocks.input.parser.QuandlEuronextParser;
+import ch.pschatzmann.stocks.input.parser.SixParser;
 
 /**
  * Reader to load the stock history from MarketArchive files 
@@ -10,20 +11,20 @@ import ch.pschatzmann.stocks.input.parser.QuandlEuronextParser;
  * @author pschatzmann
  *
  */
-public class QuandlEuronextReader extends QuandlReader {
+public class QuandlSixReader extends QuandlReader {
 	private static final long serialVersionUID = 1L;
 
-	public QuandlEuronextReader() {
-		this.setInputParser(new QuandlEuronextParser());
+	public QuandlSixReader() {
+		this.setInputParser(new SixParser());
 	}
 
-	public QuandlEuronextReader(IInputParser parser) {
+	public QuandlSixReader(IInputParser parser) {
 		this.setInputParser(parser);
 	}
-
+	
 	@Override
 	protected String getExchange(IStockID id) {
-		return "EURONEXT";
+		return "SIX";
 	}
-
+	
 }
