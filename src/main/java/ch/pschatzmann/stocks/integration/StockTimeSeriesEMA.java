@@ -40,4 +40,26 @@ public class StockTimeSeriesEMA extends BaseBarSeries {
 			EMAIndicator volEmea = new EMAIndicator(vol, periods);
 
 			for (int j = 0; j < close.getBarSeries().getBarCount(); j++) {
-				ZonedDateTime time = close.getBar
+				ZonedDateTime time = close.getBarSeries().getBar(j).getEndTime();
+				Num value = closeEmea.getValue(j);
+				if (!value.isNaN() && value.doubleValue() >= 0.0) {
+					StockBar bar = new StockBar(time, openEmea.getValue(j), maxEmea.getValue(j), minEmea.getValue(j),
+							closeEmea.getValue(j), volEmea.getValue(j));
+					this.addBar(bar);
+				}
+			}
+		} else {
+			series.getBarData().forEach(bar -> this.addBar(bar));
+		}
+
+	}
+
+	public static BarSeries create(BarSeries series, int periods) {
+		return new StockTimeSeriesEMA(series, periods);
+	}
+	
+	@Override
+	public String toString() {
+		return this.getName();
+	}
+}
