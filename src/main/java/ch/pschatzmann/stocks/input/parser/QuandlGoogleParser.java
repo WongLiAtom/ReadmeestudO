@@ -16,11 +16,11 @@ import ch.pschatzmann.stocks.StockRecord;
  *
  */
 
-public class QuandlEuronextParser extends QuandlBaseParser implements IInputParser, Serializable {
+public class QuandlGoogleParser extends QuandlBaseParser implements IInputParser, Serializable {
 	private static final long serialVersionUID = 1L;
 	private StockID id;
 
-	public QuandlEuronextParser() {
+	public QuandlGoogleParser() {
 	}
 	
 
@@ -28,7 +28,7 @@ public class QuandlEuronextParser extends QuandlBaseParser implements IInputPars
 	public StockRecord parse(String line) throws ParseException {
 		StockRecord sr = new StockRecord();
 		String[] sa = line.split(getSeparator());
-		if (sa.length==7) {
+		if (sa.length==6) {
 			double adjustmentFactor = 1.0;
 			sr.setAdjustmentFactor(adjustmentFactor);;
 
@@ -49,7 +49,6 @@ public class QuandlEuronextParser extends QuandlBaseParser implements IInputPars
 		return Context.isEmpty(v) ? null : Double.valueOf(v)*adjustmentFactor;
 	}
 	
-
 	@Override
 	public void setup(String line) {
 	}
