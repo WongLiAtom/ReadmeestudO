@@ -64,4 +64,29 @@ public class Parameters<E> implements Serializable {
 	}
 
 	public void setParameters(Map<E, ParameterValue<Number>> parameters) {
-		this.parame
+		this.parameters = parameters;
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		for (Entry <E,ParameterValue<Number>> e : parameters.entrySet()) {
+			sb.append(e.getKey());
+			sb.append(":");
+			sb.append(e.getValue());
+			sb.append("; ");
+		}
+		return sb.toString();
+	}
+	
+	public void clear() {
+		this.parameters.clear();
+	}
+
+	public Parameters<E> addValue(E key, ParameterValue<Number> value) {
+		parameters.put(key, value);
+		return this;
+	}
+
+	
+}
