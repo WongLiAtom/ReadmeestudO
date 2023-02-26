@@ -134,3 +134,128 @@ public class TradingStrategyFactory {
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}
+	}
+	
+	/**
+	 * Provides a list of strategies
+	 * @param strategies
+	 * @return
+	 */
+	public static List<String> list(StrategyEnum ... strategies) {
+		try {
+			List<String> result = new ArrayList();
+			for (StrategyEnum cl : strategies) {
+				result.add(cl.name());
+			}
+			return result;
+		} catch (Exception ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+
+	/**
+	 * Provides a list of strategies
+	 * @param strategies
+	 * @return
+	 */
+	public static List<String> list(String ... strategies) {
+		try {
+			List<String> result = new ArrayList();
+			for (String cl : strategies) {
+				result.add(StrategyEnum.valueOf(cl).name());
+			}
+			return result;
+		} catch (Exception ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+
+	/**
+	 * Provides a list of IOptimizableTradingStrategy
+	 * @param stockData
+	 * @return
+	 * @throws CommonException
+	 */
+
+	public static List<IOptimizableTradingStrategy> listTradingStrategies(StockData stockData)
+			throws CommonException {
+		try {
+			List<IOptimizableTradingStrategy> result = new ArrayList();
+			for (StrategyEnum cl : StrategyEnum.values()) {
+				result.add((IOptimizableTradingStrategy) create(cl.name(), stockData));
+			}
+			return result;
+		} catch (Exception ex) {
+			throw new CommonException(ex);
+		}
+	}
+	
+	/**
+	 * Provides a list of randomly generated IOptimizableTradingStrategy 
+	 * @param universe
+	 * @param reader
+	 * @param number
+	 * @return
+	 * @throws UniverseException
+	 */
+	public static List<ITradingStrategy> getRandomStrategies(IUniverse universe, IReader reader, int number) {
+		return new RandomUniverse(universe, number).list().
+			stream().
+			map(id -> Context.getStockData(id, reader)).
+			map(stockData -> create(getRandomStrategyName(), stockData)).
+			collect(Collectors.toList());			  
+	}
+
+	/**
+	 * Generates a list of a list of randomly generated IOptimizableTradingStrategy objects
+	 * 
+	 * @param universe
+	 * @param reader
+	 * @param number
+	 * @param numberOfLists
+	 * @return
+	 * @throws UniverseException
+	 */
+	public static List<List<ITradingStrategy>> getRandomStrategiesList(IUniverse universe, IReader reader, int number, int numberOfLists) throws UniverseException{	
+		return getRandomStrategiesStream(universe,reader,number,numberOfLists).collect(Collectors.toList());
+	}
+	
+	/**
+	 * Generates a stream of a list of randomly generated IOptimizableTradingStrategy objects
+	 * 
+	 * @param universe
+	 * @param reader
+	 * @param number
+	 * @param numberOfLists
+	 * @return
+	 * @throws UniverseException
+	 */
+	public static Stream<List<ITradingStrategy>> getRandomStrategiesStream(IUniverse universe, IReader reader, int number, int numberOfLists) throws UniverseException{
+		return IntStream.range(0, numberOfLists).mapToObj(i -> getRandomStrategies(universe,reader,number));  
+	}
+	
+	/**
+	 * Provides a random strategy name 
+	 * @return
+	 */
+	public static String getRandomStrategyName()  {
+		int randomNum = 0 + (int)(Math.random() * list().size()); 
+		return list().get(randomNum);
+	}
+
+	
+	/**
+	 * Translates a list of stocks into a list of trading strategies
+	 * 
+	 * @param stocks
+	 * @param reader
+	 * @param strategy
+	 * @return
+	 */
+	public static List<ITradingStrategy> getStrategies(Collection<IStockID> stocks, IReader reader, String strategy) {
+		return stocks.stream().map(id -> Context.getStockData(id, reader))
+				.map(stock -> TradingStrategyFactory.create(strategy, stock)).collect(Collectors.toList());
+
+	}
+
+}
