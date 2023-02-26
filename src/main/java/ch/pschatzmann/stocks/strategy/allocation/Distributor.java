@@ -25,4 +25,15 @@ public class Distributor extends EvenDistributor {
 	}
 
 	/**
-	 * Adds a
+	 * Adds a new strategy with a predefined weight
+	 * @param id
+	 * @param weight
+	 */
+	public void add(ITradingStrategy id, double weight) {
+		if (weight>=0.0) {
+			super.getDistribution().put(id, weight);
+			super.getActualDistribution().put(id, weight);
+		}
+	}
+
+}
