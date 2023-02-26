@@ -75,4 +75,82 @@ public class SimulatedAnnealingOptimizer implements IOptimizer, Serializable {
 		ch.pschatzmann.stocks.parameters.State priorValues;
 		int errorCount;
 
-		StockState(IOptimizableTradingStrategy strategy, TopNSet<ch.pschatzmann.stocks.pa
+		StockState(IOptimizableTradingStrategy strategy, TopNSet<ch.pschatzmann.stocks.parameters.State> bestState) {
+			this.strategy = strategy;
+			this.bestValue = bestState;
+			this.actualVaules  = fitness.getFitness(strategy, optimizationPeriod);
+			this.priorValues = actualVaules.clone();
+		}
+
+		@Override
+		public void step() {
+			this.priorValues = this.actualVaules.clone();
+			for (ParameterValue pv : actualVaules.input().values()) {
+				double value = pv.random().doubleValue();
+				pv.setValue(value);
+			}
+			try {
+				strategy.reset();
+				strategy.getParameters().input().setParameters(actualVaules.getInput().getParameters());	
+				
+				actualVaules = fitness.getFitness(strategy,optimizationPeriod);
+				bestValue.add(actualVaules);
+				errorCount = 0;
+			} catch (RuntimeException ex) {
+				errorCount++;
+				if (errorCount > 20) {
+					throw ex;
+				}
+				LOG.warn(ex.getLocalizedMessage(), ex);
+			}
+		}
+
+		public ch.pschatzmann.stocks.parameters.State getParameters() {
+			return actualVaules;
+		}
+
+		@Override
+		public void undo() {
+			actualVaules = priorValues;
+		}
+
+		@Override
+		public double result() {
+			return strategy.getParameters().result().getDouble(optimizationParameter);
+		}
+		
+		@Override
+		public StockState clone() {
+			StockState s = new StockState(this.strategy, bestValue);
+			s.actualVaules = actualVaules.clone();
+			s.priorValues = priorValues.clone();
+			return s;
+		}
+
+		@Override
+		public String toString() {
+			return this.actualVaules.toString();
+		}
+		
+	}
+
+	public long getCount() {
+		return count;
+	}
+
+	public void setCount(long count) {
+		this.count = count;
+	}
+	
+	@Override
+	public IFitness getFitness() {
+		return this.fitness;	
+	}
+
+	@Override
+	public KPI getOptimizationParameter() {
+		return optimizationParameter;
+	}
+
+
+}
