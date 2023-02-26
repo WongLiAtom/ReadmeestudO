@@ -60,3 +60,18 @@ public class Fitness implements IFitness, Serializable {
 	private void setResult(IAccount account, ITradingStrategy ts) {
 		if (ts != null) {
 			List<KPIValue> result = account.getKPIValues();
+			if (result != null) {
+				for (KPIValue v : result) {
+					Double dv = v.getDoubleValue();
+					if (dv != null) {
+						Parameters<KPI> p = ts.getParameters().result();
+						if (p != null) {
+							p.setValue(v.getKpi(), dv);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+}
