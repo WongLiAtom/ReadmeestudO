@@ -17,4 +17,39 @@ import ch.pschatzmann.stocks.integration.HistoricValues;
  *
  */
 
-public class ForecastIndicator implements Indicator<Num>, IIndicator<N
+public class ForecastIndicator implements Indicator<Num>, IIndicator<Num>, Name {
+	private static final long serialVersionUID = 1L;
+	private Indicator<Num> indicator;
+	private String name;
+	
+	public ForecastIndicator(IForecast forecast, Date endDate) throws Exception{
+		HistoricValues hv = forecast.forecast(endDate);
+		this.indicator = new IndicatorFromData(hv.getName(),hv.list());
+	}
+
+	public ForecastIndicator(IForecast forecast, int numberOfPeriods) throws Exception{
+		HistoricValues hv = forecast.forecast(numberOfPeriods);
+		indicator = new IndicatorFromData(hv.getName(),hv.list());
+	}
+
+	
+	@Override
+	public Num getValue(int index) {
+		return indicator.getValue(index);
+	}
+
+	@Override
+	public BarSeries getBarSeries() {
+		return indicator.getBarSeries();
+	}
+
+	@Override
+	public Num numOf(Number value) {
+		return Context.number(value);
+	}
+
+	@Override
+	public String getName() {
+		return ((Name)indicator).getName();
+	}
+}
