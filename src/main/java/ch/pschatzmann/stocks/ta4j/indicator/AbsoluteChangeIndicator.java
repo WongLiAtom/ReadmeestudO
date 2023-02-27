@@ -40,4 +40,21 @@ public class AbsoluteChangeIndicator extends CachedIndicator<Num> implements IIn
 	protected Num calculate(int index) {
 		try {
 			if (prices1 == null) {
-				if (index >= 1 && index <= prices.getBarSeries().g
+				if (index >= 1 && index <= prices.getBarSeries().getBarCount()) {
+					// calculate the difference to the prior period
+					Double value0 = prices.getValue(index - 1).doubleValue();
+					Double value = prices.getValue(index).doubleValue();
+					return numOf(((value.doubleValue() - value0.doubleValue())));
+				}
+			} else {
+				// Calculate the difference to the base indicator
+				Double value0 = prices.getValue(index).doubleValue();
+				Double value = prices1.getValue(index).doubleValue();
+				return numOf((value.doubleValue() - value0.doubleValue()));
+			}
+		} catch (Exception ex) {}
+		
+		return this.na;
+	}
+
+}
