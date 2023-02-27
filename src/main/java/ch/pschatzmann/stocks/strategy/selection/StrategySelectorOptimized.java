@@ -49,4 +49,62 @@ public class StrategySelectorOptimized implements IStategySelector, Serializable
 	}
 
 	public StrategySelectorOptimized(IAccount account, Collection<String> strategies, DateRange optimizationPeriod,
-			DateRange evaluationPeriod, IOptimizer optimizer, Predic
+			DateRange evaluationPeriod, IOptimizer optimizer, Predicate<SelectionState> predicate) {
+		this.account = account;
+		this.strategies = strategies;
+		this.optimizationPeriod = optimizationPeriod;
+		this.evaluationPeriod = evaluationPeriod;
+		this.optimizer = optimizer;
+		if (predicate!=null) {
+			this.predicate = predicate;
+		}
+	}
+
+	public Stream<SelectionState> evaluate(IStockData stockData) {
+		List<SelectionState> result = new ArrayList();
+		for (String strategyName : strategies) {
+			try {
+				ITradingStrategy strategy = TradingStrategyFactory.create(strategyName, stockData);
+				if (stockData.getHistory().size() > 1) {
+					StrategySelector.updateAccount(account,stockData);
+					State state = new SimulatedFitness(account).getFitness(strategy, evaluationPeriod);
+					SelectionState ss = new SelectionState(state, stockData.getStockID(), strategyName, false); 
+					if (predicate.test(ss)) {
+						result.add(ss);
+					}
+
+					if (optimizer != null && strategy instanceof IOptimizableTradingStrategy) {
+						ITradingStrategy optimizedStrategy = new OptimizedStrategy(
+								(IOptimizableTradingStrategy) strategy, optimizer, optimizationPeriod);
+						State stateOptimized = new SimulatedFitness(account).getFitness(optimizedStrategy,
+								evaluationPeriod);
+						SelectionState ssOpt = new SelectionState(stateOptimized, stockData.getStockID(), strategyName, true);
+						if (predicate.test(ssOpt)) {
+							result.add(ssOpt);
+						}
+					}
+				}
+			} catch (Exception ex) {
+				LOG.error("Error for " + stockData.getStockID() + "/" + strategyName + ": " + ex.getMessage());
+			}
+		}
+
+		return result.stream();
+	}
+
+	@Override
+	public SelectionState getMax(IStockData stockData) {
+		Optional<SelectionState> result = evaluate(stockData).max(new StateComparator(this.getOptimizationParameter()));
+		return result.isPresent() ? result.get() : new SelectionState(stockData.getStockID());
+	}
+
+	@Override
+	public KPI getOptimizationParameter() {
+		return this.optimizer.getOptimizationParameter();
+	}
+
+	protected Double getValue(State state) {
+		return state.getResult().getDouble(this.getOptimizationParameter());
+	}
+
+}
