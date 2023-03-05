@@ -39,4 +39,36 @@ public class Range<N extends Number> implements Serializable {
 	}
 
 	public Double random() {
-		Random r 
+		Random r = new Random();
+		double randomValue = min.doubleValue() + (max.doubleValue() - min.doubleValue()) * r.nextDouble();
+		return randomValue;
+	}
+	
+	public Double avg() {
+		return new Double((max.doubleValue() + min.doubleValue()) / 2.0);
+	}
+		
+	public Double randomDiff() {
+		return  new Double(random().doubleValue()-this.avg().doubleValue());
+	}
+
+	public Double randomDiff(double scale) {
+		return (this.avg().doubleValue() - random().doubleValue()) * scale;
+	}
+
+	public Double diff() {
+		return this.max.doubleValue() - this.min.doubleValue();
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("[");
+		sb.append(Context.format(min));
+		sb.append("-");
+		sb.append(Context.format(max));
+		sb.append("] ");
+		return sb.toString();
+	}
+
+}
