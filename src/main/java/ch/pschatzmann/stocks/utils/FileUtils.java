@@ -60,4 +60,36 @@ public class FileUtils implements Serializable {
 
 	public static String read(URL url, Charset encoding) throws IOException {
 		InputStream in = url.openStream();
-		String r
+		String result = "";
+		try {
+			result = IOUtils.toString(in, encoding);
+		} finally {
+			IOUtils.closeQuietly(in);
+		}
+		return result;
+	}
+	
+	/**
+	 * Loads the properties from the indicated file
+	 * @param properties
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public static Properties getProperties(File properties) throws FileNotFoundException, IOException {
+		InputStream input = new FileInputStream(properties);
+		Properties prop = null;
+		// load a properties file
+		try {
+			if (input!=null) {
+				prop = new Properties();
+				prop.load(input);
+			}
+		} finally {
+			if (input!=null)
+				input.close();
+		}
+		return prop;
+	}
+
+}
