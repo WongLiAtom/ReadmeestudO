@@ -23,4 +23,7 @@ public class PriceHistoryIndicator extends CachedIndicator<Num> implements IIndi
 
 	@Override
 	protected Num calculate(int index) {
-		return this.getBarSeries
+		return this.getBarSeries().getBar(Math.max(0, index + periods)).getClosePrice();
+	}
+
+}
