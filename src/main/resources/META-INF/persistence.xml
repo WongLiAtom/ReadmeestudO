@@ -15,3 +15,5 @@
 			<property name="eclipselink.jdbc.native-sql" value="false"/>
 			<property name="javax.persistence.jdbc.password" value="sabrina1"/>
 		</properties>
+	</persistence-unit>
+</persistence>
