@@ -9,4 +9,6 @@ import java.io.Serializable;
  *
  */
 public interface Name extends Serializable {
-	public String getName
+	public String getName();
+
+}
