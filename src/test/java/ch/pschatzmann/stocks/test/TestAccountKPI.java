@@ -57,4 +57,44 @@ public class TestAccountKPI {
 		BasicAccount account = new BasicAccount("Simulation","USD", 10000.00, Context.date("2015-01-01"),new PerTradeFees(10.0));	
 		Account  ta = new Account(account);
 		
-		account.setCloseDate(Context.date("20
+		account.setCloseDate(Context.date("2016-04-04"));
+		StockID apple = new StockID("AAPL","NASDAQ");
+	
+		account.addTransaction(new Transaction(Context.date("2015-02-01"), apple, 100));
+		
+		PaperTrader pt = new PaperTrader(account);
+		pt.setPrice(new RandomPrice());
+
+		pt.execute();
+		
+		// calculate the kpis
+		List<KPIValue> result = ta.getKPIValues();
+		for (KPIValue v : result) {
+			LOG.info("*** "+v+" "+v.getKpi()); 
+		}
+		
+	}
+	
+	
+	@Test
+	public void testKPIAppleQuandl() {
+		BasicAccount account = new BasicAccount("Simulation","USD", 10000.00, Context.date("2015-01-01"),new PerTradeFees(10.0));	
+		Account  ta = new Account(account);
+		
+		account.setCloseDate(Context.date("2016-04-04"));
+		StockID apple = new StockID("AAPL","NASDAQ");
+		ta.putReader(apple, new QuandlWIKIReader());
+	
+		account.addTransaction(new Transaction(Context.date("2015-02-01"), apple, 100));
+		
+		ITrader pt = new PaperTrader(account);
+		pt.execute();
+		
+		// calculate the kpis
+		List<KPIValue> result = ta.getKPIValues();
+		for (KPIValue v : result) {
+			LOG.info("*** "+v+" "+v.getKpi()); 
+		}
+	}
+	
+}
