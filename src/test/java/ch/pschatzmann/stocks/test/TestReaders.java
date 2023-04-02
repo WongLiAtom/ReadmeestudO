@@ -87,4 +87,111 @@ public class TestReaders {
 
 	@Test
 	public void testReadPrior() {
-		StockID apple
+		StockID apple = new StockID("AAPL", "NASDAQ");
+		IStockData sd = Context.getStockData(apple);
+		IStockRecord sr = sd.getValue(Context.date("2017-02-19"), DateMatching.Prior);
+		Assert.assertEquals(Context.date("2017-02-17"), Context.date(sr.getDate()));
+	}
+
+	@Test
+	public void testReadExactExisting() {
+		StockID apple = new StockID("AAPL", "NASDAQ");
+		IStockData sd = Context.getStockData(apple);
+		IStockRecord sr = sd.getValue(Context.date("2017-02-21"), DateMatching.Exact);
+		Assert.assertNotNull(sr);
+		Assert.assertEquals(Context.date("2017-02-21"), Context.date(sr.getDate()));
+	}
+
+	@Test
+	public void testReadNextExisting() {
+		StockID apple = new StockID("AAPL", "NASDAQ");
+		IStockData sd = Context.getStockData(apple);
+		IStockRecord sr = sd.getValue(Context.date("2017-02-21"), DateMatching.Next);
+		Assert.assertEquals(Context.date("2017-02-21"), Context.date(sr.getDate()));
+	}
+
+	@Test
+	public void testReadPriorExisting() {
+		StockID apple = new StockID("AAPL", "NASDAQ");
+		IStockData sd = Context.getStockData(apple);
+		IStockRecord sr = sd.getValue(Context.date("2017-02-21"), DateMatching.Next);
+		Assert.assertEquals(Context.date("2017-02-21"), Context.date(sr.getDate()));
+	}
+
+
+	@Test
+	public void testIEXApple() {
+		StockID apple = new StockID("AAPL", "");
+		IStockData sd = Context.getStockData(apple, new IEXReader());
+		LOG.info("{}", sd.getHistory().size());
+		Assert.assertTrue(sd.getHistory().size()>100);
+	}
+
+	@Test
+	public void testAlphaVantageApple() {
+		StockID apple = new StockID("AAPL", "");
+		IStockData sd = Context.getStockData(apple, new AlphaVantageReader());
+		LOG.info("{}", sd.getHistory().size());
+		Assert.assertTrue(sd.getHistory().size()>100);
+	}
+
+//	Not working any more
+//	@Test
+//	public void testFinancialContentApple() {
+//		StockID apple = new StockID("AAPL", "");
+//		IStockData sd = Context.getStockData(apple, new FinancialContentReader());
+//		LOG.info("{}", sd.getHistory().size());
+//		Assert.assertTrue(sd.getHistory().size()>100);
+//	}
+	
+//	Not working any more
+//	@Test
+//	public void testInvestopiaReader() {
+//		StockID apple = new StockID("AAPL", "");
+//		IStockData sd = Context.getStockData(apple, new InvestopiaReader());
+//		LOG.info("{}", sd.getHistory().size());
+//		Assert.assertTrue(sd.getHistory().size()>100);
+//	}
+
+	@Test
+	public void testMacroTrendsReader() {
+		StockID apple = new StockID("AAPL", "");
+		IStockData sd = Context.getStockData(apple, new MacroTrendsReader());
+		LOG.info("{}", sd.getHistory().size());
+		Assert.assertTrue(sd.getHistory().size()>100);
+	}
+
+	@Test
+	public void testTiingoReader() {
+		StockID apple = new StockID("AAPL", "");
+		IStockData sd = Context.getStockData(apple, new TiingoReader());
+		LOG.info("{}", sd.getHistory().size());
+		Assert.assertTrue(sd.getHistory().size()>100);
+	}
+	
+	@Test
+	public void testWallstreetJournalReader() {
+		StockID apple = new StockID("AAPL", "");
+		IStockData sd = Context.getStockData(apple, new WallstreetJournalReader());
+		LOG.info("{}", sd.getHistory().size());
+		Assert.assertTrue(sd.getHistory().size()>100);
+	}
+	
+	@Test
+	public void testQuoteMediaReader() {
+		StockID apple = new StockID("AAPL", "");
+		IStockData sd = Context.getStockData(apple, new QuoteMediaReader());
+		LOG.info("{}", sd.getHistory().size());
+		Assert.assertTrue(sd.getHistory().size()>100);
+	}
+	
+	@Test
+	public void testGenericReader() {
+		StockID apple = new StockID("AAPL", "");
+		IStockData sd = Context.getStockData(apple, new DefaultReader());
+		LOG.info("{}", sd.getHistory().size());
+		 sd = Context.getStockData(apple, new DefaultReader());
+		Assert.assertTrue(sd.getHistory().size()>100);
+	}
+
+}
