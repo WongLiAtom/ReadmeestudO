@@ -130,4 +130,114 @@ public class TestUniverse {
 
 	@Test
 	public void testSixUniverse() throws Exception {
-		QuandlSixUnive
+		QuandlSixUniverse fu = new QuandlSixUniverse();	
+		List<IStockID> result = fu.list();
+		LOG.info("size: "+result.size());
+		LOG.info("testExchangesFromFile: "+result);
+		Assert.assertFalse(result.isEmpty());
+		IStockData sd = Context.getStockData(result.get(0), fu.getReader());
+		LOG.info("{}",sd);
+		Assert.assertFalse(sd.isEmpty());
+		
+	}
+
+	@Test
+	public void testBombayUniverse() throws Exception {
+		QuandlBSEUniverse fu = new QuandlBSEUniverse();	
+		List<IStockID> result = fu.stream().collect(Collectors.toList());
+		LOG.info("size: "+result.size());
+		LOG.info("testExchangesFromFile: "+result);
+		Assert.assertFalse(result.isEmpty());
+		IStockData sd = Context.getStockData(result.get(0),fu.getReader());
+		LOG.info("{}",sd);
+		Assert.assertFalse(sd.isEmpty());
+	}
+	
+	@Test
+	public void testEuronextUniverse() throws Exception {
+		QuandlEuronextUniverse fu = new QuandlEuronextUniverse();	
+		List<IStockID> result = fu.list();
+		LOG.info("size: "+result.size());
+		LOG.info("testExchangesFromFile: "+result);
+		Assert.assertFalse(result.isEmpty());
+		IStockData sd = Context.getStockData(result.get(0), fu.getReader());
+		LOG.info("{}",sd);
+		Assert.assertFalse(sd.isEmpty());
+	}
+	
+	
+	@Test
+	public void testMappings() throws IOException {
+		LOG.info("testMappings");
+		ExchangesMappings em = new ExchangesMappings();
+		Assert.assertEquals("SA", em.fromLocalNamespace("BRU", ExchangeNameSpace.MarketExchange));
+		Assert.assertEquals("NASDAQ", em.toLocalNamespace("NASDAQ", ExchangeNameSpace.MarketExchange));
+	}
+
+	@Test
+	public void testEdgar() throws IOException, UniverseException {
+		EdgarUniverse result = new EdgarUniverse();
+		LOG.info("size: "+result.size());
+		LOG.info("testEdgar: "+result.list());
+		Assert.assertFalse(result.isEmpty());
+
+	}
+	
+	@Test
+	public void testEdgar1() throws IOException, UniverseException {
+		EdgarUniverse result = new EdgarUniverse(2017,Arrays.asList("NetIncomeLoss"));
+		LOG.info("size: "+result.size());
+		LOG.info("testEdgar: "+result.list(10));
+		Assert.assertFalse(result.isEmpty());
+
+	}
+
+	@Test
+	public void testEdgarRD() throws IOException, UniverseException {
+		EdgarUniverse result = new EdgarUniverse(2017,Arrays.asList("ResearchAndDevelopmentExpense"));
+		//EdgarUniverse result = new EdgarUniverse(2017,20,Arrays.asList("ResearchAndDevelopmentExpense","ExplorationAndResearchExpenses","ResearchDevelopmentAndEngineeringExpenses"));
+		LOG.info("size: "+result.size());
+		LOG.info("testEdgar: "+result.list(10));
+		Assert.assertFalse(result.isEmpty());
+	}
+
+	@Test
+	public void testEdgarRDMultiYears() throws IOException, UniverseException {
+		EdgarUniverse result = new EdgarUniverse(2017,Arrays.asList(0.5,0.6,0.8,1.0),Arrays.asList("ResearchAndDevelopmentExpense"),true);
+		//EdgarUniverse result = new EdgarUniverse(2017,20,Arrays.asList("ResearchAndDevelopmentExpense","ExplorationAndResearchExpenses","ResearchDevelopmentAndEngineeringExpenses"));
+		LOG.info("size: "+result.size());
+		LOG.info("testEdgar: "+result.list(10));
+		Assert.assertFalse(result.isEmpty());
+
+	}
+	
+	@Test
+	public void testEdgarMultiYearsPercent() throws IOException, UniverseException {
+		EdgarUniverse result = new EdgarUniverse(2017,Arrays.asList(0.5,0.6,0.8,1.0),Arrays.asList("NetIncomeLoss"),true);
+		result.setCalculatePercentChange(true);
+		//EdgarUniverse result = new EdgarUniverse(2017,20,Arrays.asList("ResearchAndDevelopmentExpense","ExplorationAndResearchExpenses","ResearchDevelopmentAndEngineeringExpenses"));
+		LOG.info("size: "+result.size());
+		LOG.info("testEdgar: "+result.list(10));
+		Assert.assertFalse(result.isEmpty());
+
+	}
+	
+	@Ignore
+	@Test
+	public void testNASDQ() throws IOException, UniverseException {
+		IUniverse result = new NasdaqUniverse();
+		LOG.info("size: "+result.size());
+		LOG.info("testNASDQ: "+result.list());
+		Assert.assertFalse(result.isEmpty());
+	}
+
+	@Ignore
+	@Test
+	public void testNYSE() throws IOException, UniverseException {
+		IUniverse result = new NyseUniverse();
+		LOG.info("size: "+result.size());
+		LOG.info("testNYSE: "+result.list());
+		Assert.assertFalse(result.isEmpty());
+	}
+	
+}
