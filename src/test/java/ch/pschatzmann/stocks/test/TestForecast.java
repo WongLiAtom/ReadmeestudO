@@ -31,4 +31,31 @@ public class TestForecast {
 	@Test
 	public void ForecasterFromSimulationOnHistory() throws Exception {
 		StockID apple = new StockID("AAPL", "NASDAQ");
-		IStockData stockdata
+		IStockData stockdata = Context.getStockData(apple);
+		StockTimeSeries series = new StockTimeSeries(stockdata);
+		Indicator<Num> cp = new ClosePriceIndicator(series);
+
+		IForecast f = new SimulationOnHistoryForecast(cp, Context.date("2008-01-01"));
+		HistoricValues result = f.forecast(20);
+		
+		result.stream().forEach(r -> System.out.println(r));
+
+	}
+	
+	@Test
+	public void testForecastARIMA() throws Exception {
+		StockID apple = new StockID("AAPL", "NASDAQ");
+		
+		IStockData stockdata = Context.getStockData(apple);
+		StockTimeSeries series = new StockTimeSeries(stockdata);
+		Indicator<Num> ind = new ClosePriceIndicator(series);
+
+		ARIMAForecast f = new ARIMAForecast(HistoricValues.create(ind));
+		HistoricValues  result = f.forecast(new Date());
+		
+		result.stream().forEach(r -> System.out.println(r));
+
+	}
+	
+
+}
